@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="io.tanjundang.study.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <Button
+        android:id="@+id/btnAnimation"
+        android:layout_width="100dp"
+        android:layout_height="44dp"
+        android:background="#1abc9c"
+        android:text="动画"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/btnToggle"
+        android:layout_width="100dp"
+        android:layout_height="44dp"
+        android:layout_alignBottom="@+id/btnAnimation"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/btnAnimation"
+        android:background="#1abc9c"
+        android:text="Toggle"
+        android:textColor="#fff" />
+
+</RelativeLayout>
