@@ -24,9 +24,9 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
-import io.tanjundang.study.test.AnimationActivity;
-import io.tanjundang.study.test.DateItemBean;
-import io.tanjundang.study.test.ToggleAct;
+import io.tanjundang.study.test.animation.AnimationActivity;
+import io.tanjundang.study.test.drawerlayout.DrawerLayoutActivity;
+import io.tanjundang.study.test.shape.ShapeActivity;
 
 public class MainActivity extends AppCompatActivity implements Initial, NavigationView.OnNavigationItemSelectedListener {
 
@@ -160,7 +160,9 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                     if (item.getType().equals(DateItemBean.Type.ANIMATION)) {
                         StartActivity(AnimationActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.DRAWERLAYOUT)) {
-                        StartActivity(ToggleAct.class);
+                        StartActivity(DrawerLayoutActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.SHAPE)) {
+                        StartActivity(ShapeActivity.class);
                     }
                 }
             });

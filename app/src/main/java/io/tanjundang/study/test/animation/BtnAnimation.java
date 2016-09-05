@@ -1,4 +1,4 @@
-package io.tanjundang.study.test;
+package io.tanjundang.study.test.animation;
 
 import android.view.View;
 import android.view.animation.Animation;

@@ -49,8 +49,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".test.AnimationActivity" />
-        <activity android:name=".test.ToggleAct"></activity>
+        <activity android:name=".test.animation.AnimationActivity" />
+        <activity android:name=".test.drawerlayout.DrawerLayoutActivity" />
+        <activity android:name=".test.shape.ShapeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package io.tanjundang.study.test;
+package io.tanjundang.study.test.drawerlayout;
 
 import android.content.res.Configuration;
 import android.support.v4.widget.DrawerLayout;
@@ -10,7 +10,7 @@ import android.view.View;
 
 import io.tanjundang.study.R;
 
-public class ToggleAct extends AppCompatActivity {
+public class DrawerLayoutActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toogle;
