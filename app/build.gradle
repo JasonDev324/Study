@@ -30,6 +30,6 @@ dependencies {
     compile group: 'com.nostra13.universalimageloader', name: 'universal-image-loader', version: '1.9.5'
 //ImageLoader
     compile 'com.jpardogo.googleprogressbar:library:1.2.0' //加载进度条
-
+    compile 'com.android.support:recyclerview-v7:23.1.1'//RecyclerView
 
 }

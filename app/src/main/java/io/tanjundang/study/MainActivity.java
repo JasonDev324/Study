@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,22 +17,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
+import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.test.AnimationActivity;
+import io.tanjundang.study.test.DateItemBean;
 import io.tanjundang.study.test.ToggleAct;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements Initial, NavigationView.OnNavigationItemSelectedListener {
 
-    private Button btnAnimation;
-    private Button btnToggle;
-    ActionBarDrawerToggle toggle;
+    private ActionBarDrawerToggle toggle;
+    private ArrayList<DateItemBean> data = new ArrayList<>();
+    private MainContentAdapter mAdapter;
+    private RecyclerView recyclerview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+        initData();
+    }
+
+    @Override
+    public void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,11 +63,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        btnAnimation = (Button) findViewById(R.id.btnAnimation);
-        btnAnimation.setOnClickListener(this);
+        recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
+        mAdapter = new MainContentAdapter();
+        LinearLayoutManager manager = new GridLayoutManager(this, 3);
+        recyclerview.setLayoutManager(manager);
+        recyclerview.setFocusable(false);
+        recyclerview.setFocusableInTouchMode(false);
+        recyclerview.setAdapter(mAdapter);
+    }
 
-        btnToggle = (Button) findViewById(R.id.btnToggle);
-        btnToggle.setOnClickListener(this);
+    @Override
+    public void initData() {
+        data.add(new DateItemBean(R.string.main_text_study_animation, DateItemBean.Type.ANIMATION));
+        data.add(new DateItemBean(R.string.main_text_study_drawerlayout, DateItemBean.Type.DRAWERLAYOUT));
+        data.add(new DateItemBean(R.string.main_text_study_shape, DateItemBean.Type.SHAPE));
+//        data.add(new DateItemBean(R.string.main_text_study_shape, DateItemBean.Type.SHAPE));
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -118,14 +145,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view.equals(btnAnimation)) {
-            Intent intent = new Intent(this, AnimationActivity.class);
-            startActivity(intent);
-        } else if (view.equals(btnToggle)) {
-            Intent intent = new Intent(this, ToggleAct.class);
-            startActivity(intent);
+
+    class MainContentAdapter extends RecyclerView.Adapter<MainContentAdapter.ContentHolder> {
+
+        int DATA_TAG = R.layout.common_list_item_textview;
+
+        @Override
+        public ContentHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.common_list_item_textview, parent, false);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DateItemBean item = (DateItemBean) v.getTag(DATA_TAG);
+                    if (item.getType().equals(DateItemBean.Type.ANIMATION)) {
+                        StartActivity(AnimationActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.DRAWERLAYOUT)) {
+                        StartActivity(ToggleAct.class);
+                    }
+                }
+            });
+            return new ContentHolder(view);
         }
+
+        @Override
+        public void onBindViewHolder(ContentHolder holder, int position) {
+            DateItemBean item = data.get(position);
+            holder.btnValue.setText(item.getTitle());
+            holder.rootview.setTag(DATA_TAG, item);
+        }
+
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+
+        class ContentHolder extends RecyclerView.ViewHolder {
+
+            View rootview;
+            Button btnValue;
+
+            public ContentHolder(View itemView) {
+                super(itemView);
+                rootview = itemView;
+                btnValue = (Button) rootview.findViewById(R.id.btnValue);
+            }
+        }
+
     }
+
+    private void StartActivity(Class cls) {
+        Intent intent = new Intent(MainActivity.this, cls);
+        startActivity(intent);
+    }
+
 }
