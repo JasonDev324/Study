@@ -13,7 +13,8 @@ public class DateItemBean {
     public enum Type {
         ANIMATION,
         DRAWERLAYOUT,
-        SHAPE;
+        SHAPE,
+        SELECTOR
     }
 
     public DateItemBean(int title, Type type) {

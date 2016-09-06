@@ -12,27 +12,6 @@
     tools:context="io.tanjundang.study.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <Button
-        android:id="@+id/btnAnimation"
-        android:layout_width="100dp"
-        android:layout_height="44dp"
-        android:background="#1abc9c"
-        android:text="动画"
-        android:textColor="#fff"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/btnToggle"
-        android:layout_width="100dp"
-        android:layout_height="44dp"
-        android:layout_alignBottom="@+id/btnAnimation"
-        android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/btnAnimation"
-        android:background="#1abc9c"
-        android:text="Toggle"
-        android:textColor="#fff"
-        android:visibility="gone" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"

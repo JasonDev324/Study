@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
+import io.tanjundang.study.test.SelectorActivity.SelectorActivity;
 import io.tanjundang.study.test.animation.AnimationActivity;
 import io.tanjundang.study.test.drawerlayout.DrawerLayoutActivity;
 import io.tanjundang.study.test.shape.ShapeActivity;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         data.add(new DateItemBean(R.string.main_text_study_animation, DateItemBean.Type.ANIMATION));
         data.add(new DateItemBean(R.string.main_text_study_drawerlayout, DateItemBean.Type.DRAWERLAYOUT));
         data.add(new DateItemBean(R.string.main_text_study_shape, DateItemBean.Type.SHAPE));
+        data.add(new DateItemBean(R.string.main_text_study_selector, DateItemBean.Type.SELECTOR));
 //        data.add(new DateItemBean(R.string.main_text_study_shape, DateItemBean.Type.SHAPE));
         mAdapter.notifyDataSetChanged();
     }
@@ -152,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
 
         @Override
         public ContentHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            //由于item里面是一个Button，会拦截RecyclerView的点击事件，所以需要设置Button的clickable属性
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.common_list_item_textview, parent, false);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -163,6 +166,8 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                         StartActivity(DrawerLayoutActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.SHAPE)) {
                         StartActivity(ShapeActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.SELECTOR)) {
+                        StartActivity(SelectorActivity.class);
                     }
                 }
             });

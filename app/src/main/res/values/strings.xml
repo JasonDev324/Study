@@ -8,4 +8,5 @@
     <string name="main_text_study_animation">Animation</string>
     <string name="main_text_study_drawerlayout">Drawerlayout</string>
     <string name="main_text_study_shape">Shape</string>
+    <string name="main_text_study_selector">Selector</string>
 </resources>
