@@ -113,6 +113,34 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/right_green"
+                android:text="ring"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15dp"
+                android:background="@drawable/shape_study_ring" />
+
+            <ProgressBar
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:indeterminateDrawable="@drawable/shape_study_ring" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>
