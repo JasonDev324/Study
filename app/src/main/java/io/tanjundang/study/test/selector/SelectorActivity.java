@@ -1,4 +1,4 @@
-package io.tanjundang.study.test.SelectorActivity;
+package io.tanjundang.study.test.selector;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.widget.RadioGroup;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.Initial;
-import io.tanjundang.study.common.tools.Functions;
 
 public class SelectorActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, Initial {
 

@@ -9,4 +9,5 @@
     <string name="main_text_study_drawerlayout">Drawerlayout</string>
     <string name="main_text_study_shape">Shape</string>
     <string name="main_text_study_selector">Selector</string>
+    <string name="main_text_study_preference">Preference</string>
 </resources>

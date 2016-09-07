@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
-import io.tanjundang.study.test.SelectorActivity.SelectorActivity;
+import io.tanjundang.study.test.selector.SelectorActivity;
 import io.tanjundang.study.test.animation.AnimationActivity;
 import io.tanjundang.study.test.drawerlayout.DrawerLayoutActivity;
 import io.tanjundang.study.test.shape.ShapeActivity;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         data.add(new DateItemBean(R.string.main_text_study_drawerlayout, DateItemBean.Type.DRAWERLAYOUT));
         data.add(new DateItemBean(R.string.main_text_study_shape, DateItemBean.Type.SHAPE));
         data.add(new DateItemBean(R.string.main_text_study_selector, DateItemBean.Type.SELECTOR));
-//        data.add(new DateItemBean(R.string.main_text_study_shape, DateItemBean.Type.SHAPE));
+        data.add(new DateItemBean(R.string.main_text_study_preference, DateItemBean.Type.PREFERENCE));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -167,6 +167,8 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                     } else if (item.getType().equals(DateItemBean.Type.SHAPE)) {
                         StartActivity(ShapeActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.SELECTOR)) {
+                        StartActivity(SelectorActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.PREFERENCE)) {
                         StartActivity(SelectorActivity.class);
                     }
                 }

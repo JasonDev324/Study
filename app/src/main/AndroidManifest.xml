@@ -52,7 +52,7 @@
         <activity android:name=".test.animation.AnimationActivity" />
         <activity android:name=".test.drawerlayout.DrawerLayoutActivity" />
         <activity android:name=".test.shape.ShapeActivity" />
-        <activity android:name=".test.SelectorActivity.SelectorActivity"></activity>
+        <activity android:name=".test.selector.SelectorActivity"></activity>
     </application>
 
 </manifest>
