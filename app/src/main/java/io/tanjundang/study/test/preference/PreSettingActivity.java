@@ -16,12 +16,6 @@ import io.tanjundang.study.R;
 public class PreSettingActivity extends PreferenceActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
-    }
-
-    @Override
     public void onBuildHeaders(List<Header> target) {
         super.onBuildHeaders(target);
         loadHeadersFromResource(R.xml.preference_headers, target);
