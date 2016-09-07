@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="常用设置">
+
+        <Preference
+            android:key="clearCache"
+            android:summary="66666.6MB"
+            android:title="清除缓存"></Preference>
+
+        <Preference
+            android:key="network"
+            android:title="网络设置"></Preference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="开发者设置">
+
+        <Preference
+            android:key="usbDebug"
+            android:title="打开USB调试"></Preference>
+
+        <Preference
+            android:key="usbDebug"
+            android:title="相机设置"></Preference>
+
+        <SwitchPreference
+            android:key="usbDebug"
+            android:title="禁止输出log"></SwitchPreference>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
