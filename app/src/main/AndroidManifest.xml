@@ -54,6 +54,8 @@
         <activity android:name=".test.shape.ShapeActivity" />
         <activity android:name=".test.selector.SelectorActivity" />
         <activity android:name=".test.preference.SettingActivity"></activity>
+        <activity android:name=".test.preference.PreSettingActivity"></activity>
+
     </application>
 
 </manifest>

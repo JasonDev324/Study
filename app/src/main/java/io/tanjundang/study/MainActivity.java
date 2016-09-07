@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
+import io.tanjundang.study.test.preference.PreSettingActivity;
 import io.tanjundang.study.test.preference.SettingActivity;
 import io.tanjundang.study.test.selector.SelectorActivity;
 import io.tanjundang.study.test.animation.AnimationActivity;
@@ -170,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                     } else if (item.getType().equals(DateItemBean.Type.SELECTOR)) {
                         StartActivity(SelectorActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.PREFERENCE)) {
-                        StartActivity(SettingActivity.class);
+                        StartActivity(PreSettingActivity.class);
                     }
                 }
             });

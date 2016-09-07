@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="clearCache"
+        android:summary="66666.6MB"
+        android:title="清除缓存"></Preference>
+
+    <Preference
+        android:key="network"
+        android:title="网络设置"></Preference>
+
+</PreferenceScreen>
