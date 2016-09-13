@@ -15,7 +15,8 @@ public class DateItemBean {
         DRAWERLAYOUT,
         SHAPE,
         SELECTOR,
-        PREFERENCE
+        PREFERENCE,
+        ACTIONBAR
     }
 
     public DateItemBean(int title, Type type) {
