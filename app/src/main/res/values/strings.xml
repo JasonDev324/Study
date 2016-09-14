@@ -11,4 +11,5 @@
     <string name="main_text_study_selector">Selector</string>
     <string name="main_text_study_preference">Preference</string>
     <string name="main_text_study_actionbar">ActionBar</string>
+    <string name="action_send">Send Msg</string>
 </resources>
