@@ -6,7 +6,8 @@
         android:id="@+id/action_send"
         android:icon="@drawable/ic_menu_send"
         android:title="发送"
-        app:showAsAction="always"></item>
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="ifRoom"></item>
 
     <item
         android:id="@+id/action_setting"
