@@ -23,7 +23,7 @@ public class LogTool {
         return LOG_ENABLE;
     }
 
-    public static String LOG_RESOURCE = "NBA";//判断是否本程序输出
+    public static String LOG_RESOURCE = "NBA_";//判断是否本程序输出
 
     /**
      * @param priority 优先级 LOG.DEBUG VERBORSE等
