@@ -45,6 +45,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -58,7 +59,31 @@
             android:name=".test.actionbar.MActionBarActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".test.intent.IntentActivity"></activity>
+        <activity android:name=".test.intent.IntentActivity" />
+        <activity android:name=".test.launchmode.LaunchModeActivity" />
+        <activity
+            android:name=".test.launchmode.StandardActivity"
+            android:launchMode="standard" />
+        <activity
+            android:name=".test.launchmode.SingleTaskActivity"
+            android:label="SingleTask测试" />
+        <activity
+            android:name=".test.launchmode.OneActivity"
+            android:label="One"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".test.launchmode.TwoActivity"
+            android:label="Two" />
+        <activity
+            android:name=".test.launchmode.ThreeActivity"
+            android:label="Three"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".test.launchmode.FourActivity"
+            android:label="Four" />
+        <activity
+            android:name=".test.launchmode.SingleTopActivity"
+            android:label="SingleTop测试"></activity>
     </application>
 
 </manifest>

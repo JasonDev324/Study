@@ -1,5 +1,6 @@
 package io.tanjundang.study;
 
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.test.actionbar.MActionBarActivity;
 import io.tanjundang.study.test.intent.IntentActivity;
+import io.tanjundang.study.test.launchmode.LaunchModeActivity;
 import io.tanjundang.study.test.preference.PreSettingActivity;
 import io.tanjundang.study.test.preference.SettingActivity;
 import io.tanjundang.study.test.selector.SelectorActivity;
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         data.add(new DateItemBean(R.string.main_text_study_preference, DateItemBean.Type.PREFERENCE));
         data.add(new DateItemBean(R.string.main_text_study_actionbar, DateItemBean.Type.ACTIONBAR));
         data.add(new DateItemBean(R.string.main_text_study_intent, DateItemBean.Type.INTENT));
+        data.add(new DateItemBean(R.string.main_text_study_launchmode, DateItemBean.Type.LAUNCHMODE));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -180,6 +183,8 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                         StartActivity(MActionBarActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.INTENT)) {
                         StartActivity(IntentActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.LAUNCHMODE)) {
+                        StartActivity(LaunchModeActivity.class);
                     }
                 }
             });

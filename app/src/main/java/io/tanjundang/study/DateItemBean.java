@@ -17,7 +17,8 @@ public class DateItemBean {
         SELECTOR,
         PREFERENCE,
         ACTIONBAR,
-        INTENT
+        INTENT,
+        LAUNCHMODE
     }
 
     public DateItemBean(int title, Type type) {
