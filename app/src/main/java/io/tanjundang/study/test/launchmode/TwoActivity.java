@@ -25,7 +25,7 @@ public class TwoActivity extends AppCompatActivity {
     }
 
     public void SkipToThree(View v) {
-        SkipToActivityThree(this, type);
+        ThreeActivity.SkipToActivityThree(this, type);
     }
 
     public static void SkipToActivityTwo(Context context, String type) {

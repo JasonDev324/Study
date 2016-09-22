@@ -28,6 +28,7 @@ public class ThreeActivity extends AppCompatActivity {
                 rootview.getChildAt(i).setVisibility(View.GONE);
             }
             rootview.getChildAt(1).setVisibility(View.VISIBLE);
+            rootview.getChildAt(2).setVisibility(View.VISIBLE);
         }
     }
 
@@ -39,9 +40,8 @@ public class ThreeActivity extends AppCompatActivity {
 
 
     public void SkipToThree(View v) {
-//        SkipToActivity(this, type);
-//        Intent intent = new Intent(this, ThreeActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, ThreeActivity.class);
+        startActivity(intent);
     }
 
     public void SkipToFour(View v) {

@@ -16,12 +16,17 @@
         android:layout_height="44dp"
         android:layout_marginBottom="15dp"
         android:background="@color/red"
-        android:onClick="SkipToThree"
+        android:onClick="SkipToOne"
         android:text="跳到界面One"
         android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/tvTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="OneActivity设置了SingleTask模式：\n跳转到该Activity时，不会创建Activity实例，而是复用旧实例。\n由于在相同栈中，所以会把OneActivity之上的Activity弹出。"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

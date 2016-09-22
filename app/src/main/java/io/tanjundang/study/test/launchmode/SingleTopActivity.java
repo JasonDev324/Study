@@ -14,9 +14,9 @@ public class SingleTopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_top);
     }
+
     public void SkipToOne(View v) {
-        Intent intent = new Intent(this, OneActivity.class);
-        startActivity(intent);
+        OneActivity.SkipToActivityOne(this, LaunchModeActivity.SINGLETOP);
     }
 
 }

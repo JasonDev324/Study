@@ -1,5 +1,7 @@
 package io.tanjundang.study.test.launchmode;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,12 +23,17 @@ public class OneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_top_one);
         TextView tvTest = (TextView) findViewById(R.id.tvTest);
         tvTest.setText("当前Activity实例：" + this);
-//        type
+        type = getIntent().getStringExtra("type");
     }
 
     public void SkipToTwo(View v) {
-        SkipToActivityTwo(this, SINGLETASK);
+        SkipToActivityTwo(this, type);
     }
 
+    public static void SkipToActivityOne(Context context, String type) {
+        Intent intent = new Intent(context, OneActivity.class);
+        intent.putExtra("type", type);
+        context.startActivity(intent);
+    }
 
 }

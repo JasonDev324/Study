@@ -16,7 +16,6 @@ public class SingleTaskActivity extends AppCompatActivity {
     }
 
     public void SkipToOne(View v) {
-        Intent intent = new Intent(this, OneActivity.class);
-        startActivity(intent);
+        OneActivity.SkipToActivityOne(this, LaunchModeActivity.SINGLETASK);
     }
 }
