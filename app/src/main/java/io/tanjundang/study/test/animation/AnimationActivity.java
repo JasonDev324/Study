@@ -14,7 +14,7 @@ public class AnimationActivity extends Activity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_animation);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setOnClickListener(this);
     }
