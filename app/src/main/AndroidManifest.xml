@@ -70,8 +70,7 @@
         <activity
             android:name=".test.launchmode.OneActivity"
             android:label="One"
-            android:launchMode="singleTask"
-            android:taskAffinity="TanJunDang" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".test.launchmode.TwoActivity"
             android:label="Two" />
