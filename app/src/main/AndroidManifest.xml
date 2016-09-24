@@ -83,7 +83,8 @@
             android:label="Four" />
         <activity
             android:name=".test.launchmode.SingleTopActivity"
-            android:label="SingleTop测试"></activity>
+            android:label="SingleTop测试" />
+        <activity android:name=".GuideActivity"></activity>
     </application>
 
 </manifest>

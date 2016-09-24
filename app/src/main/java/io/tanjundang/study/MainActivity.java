@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         data.add(new DateItemBean(R.string.main_text_study_actionbar, DateItemBean.Type.ACTIONBAR));
         data.add(new DateItemBean(R.string.main_text_study_intent, DateItemBean.Type.INTENT));
         data.add(new DateItemBean(R.string.main_text_study_launchmode, DateItemBean.Type.LAUNCHMODE));
+        data.add(new DateItemBean(R.string.main_text_study_guide, DateItemBean.Type.GUIDE));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -185,6 +186,8 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                         StartActivity(IntentActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.LAUNCHMODE)) {
                         StartActivity(LaunchModeActivity.class);
+                    }else if (item.getType().equals(DateItemBean.Type.GUIDE)) {
+                        StartActivity(GuideActivity.class);
                     }
                 }
             });
