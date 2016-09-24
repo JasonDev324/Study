@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
+import io.tanjundang.study.test.TestActivity;
 import io.tanjundang.study.test.actionbar.MActionBarActivity;
 import io.tanjundang.study.test.intent.IntentActivity;
 import io.tanjundang.study.test.launchmode.LaunchModeActivity;
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            StartActivity(TestActivity.class);
             return true;
         }
 
@@ -186,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                         StartActivity(IntentActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.LAUNCHMODE)) {
                         StartActivity(LaunchModeActivity.class);
-                    }else if (item.getType().equals(DateItemBean.Type.GUIDE)) {
+                    } else if (item.getType().equals(DateItemBean.Type.GUIDE)) {
                         StartActivity(GuideActivity.class);
                     }
                 }
