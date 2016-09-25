@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_test2"
     android:layout_width="match_parent"
@@ -10,9 +11,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="io.tanjundang.study.test.TestActivity">
 
-    <io.tanjundang.study.test.TestCustomView
+    <io.tanjundang.study.test.MoodView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        app:moodColor="@color/red" />
 
 </RelativeLayout>
