@@ -19,6 +19,7 @@ public class DateItemBean {
         ACTIONBAR,
         INTENT,
         LAUNCHMODE,
+        BROADCAST,
         GUIDE
     }
 

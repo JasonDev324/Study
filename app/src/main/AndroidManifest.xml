@@ -39,6 +39,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".test.broadcast.NetworkReceiver">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action>-->
+            <!--</intent-filter>-->
+        </receiver>
+        <receiver android:name=".test.broadcast.NotifyReceiver">
+            <intent-filter>
+                <action android:name="io.tanjundang.study.NotifyReceiver"></action>
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

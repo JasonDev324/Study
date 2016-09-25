@@ -13,6 +13,7 @@
     <string name="main_text_study_actionbar">ActionBar</string>
     <string name="main_text_study_intent">Intent</string>
     <string name="main_text_study_launchmode">LaunchMode</string>
+    <string name="main_text_study_broadcast">Broadcast</string>
     <string name="main_text_study_guide">Guide</string>
     <string name="action_send">Send Msg</string>
 

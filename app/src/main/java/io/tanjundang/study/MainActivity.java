@@ -2,9 +2,12 @@ package io.tanjundang.study;
 
 import android.app.LauncherActivity;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,32 +30,39 @@ import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.test.TestActivity;
 import io.tanjundang.study.test.actionbar.MActionBarActivity;
+import io.tanjundang.study.test.broadcast.NetworkReceiver;
+import io.tanjundang.study.test.broadcast.NotifyReceiver;
 import io.tanjundang.study.test.intent.IntentActivity;
 import io.tanjundang.study.test.launchmode.LaunchModeActivity;
 import io.tanjundang.study.test.preference.PreSettingActivity;
-import io.tanjundang.study.test.preference.SettingActivity;
 import io.tanjundang.study.test.selector.SelectorActivity;
 import io.tanjundang.study.test.animation.AnimationActivity;
 import io.tanjundang.study.test.drawerlayout.DrawerLayoutActivity;
 import io.tanjundang.study.test.shape.ShapeActivity;
 
-public class MainActivity extends AppCompatActivity implements Initial, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements Initial, NavigationView.OnNavigationItemSelectedListener, NotifyReceiver.NotifyCallback {
 
     private ActionBarDrawerToggle toggle;
     private ArrayList<DateItemBean> data = new ArrayList<>();
     private MainContentAdapter mAdapter;
     private RecyclerView recyclerview;
+    private NotifyReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         initView();
         initData();
     }
 
+
     @Override
     public void initView() {
+        receiver = new NotifyReceiver(this);
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter(NotifyReceiver.NOTIFY_ACTION));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -90,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         data.add(new DateItemBean(R.string.main_text_study_actionbar, DateItemBean.Type.ACTIONBAR));
         data.add(new DateItemBean(R.string.main_text_study_intent, DateItemBean.Type.INTENT));
         data.add(new DateItemBean(R.string.main_text_study_launchmode, DateItemBean.Type.LAUNCHMODE));
+        data.add(new DateItemBean(R.string.main_text_study_broadcast, DateItemBean.Type.BROADCAST));
         data.add(new DateItemBean(R.string.main_text_study_guide, DateItemBean.Type.GUIDE));
         mAdapter.notifyDataSetChanged();
     }
@@ -141,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -188,6 +199,9 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                         StartActivity(IntentActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.LAUNCHMODE)) {
                         StartActivity(LaunchModeActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.BROADCAST)) {
+                        Intent intent = new Intent(NotifyReceiver.NOTIFY_ACTION);
+                        LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
                     } else if (item.getType().equals(DateItemBean.Type.GUIDE)) {
                         StartActivity(GuideActivity.class);
                     }
@@ -227,4 +241,14 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         startActivity(intent);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+    }
+
+    @Override
+    public void refresh() {
+        Functions.toast("成功收到了你发送的广播");
+    }
 }
