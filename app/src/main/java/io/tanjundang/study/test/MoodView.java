@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import io.tanjundang.study.R;
@@ -26,7 +27,9 @@ public class MoodView extends View {
     private int mHeight;
     private static int DEFAULT_COLOR = R.color.red;
     private int defaultColor;
-    int someColor;
+    private float mX;
+    private float mY;
+    private int DEFAULT_SIZE;
 
     public MoodView(Context context) {
         this(context, null);
@@ -41,6 +44,7 @@ public class MoodView extends View {
 
     public MoodView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        DEFAULT_SIZE = context.getResources().getDimensionPixelSize(R.dimen.default_size);
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.MoodView);
         defaultColor = array.getColor(R.styleable.MoodView_moodColor, ContextCompat.getColor(context, DEFAULT_COLOR));
         paint = new Paint(); //在这里设置颜色 无效
@@ -52,15 +56,18 @@ public class MoodView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         //这里获取的View的实际大小，如果View的宽高设置为warp_content，则为屏幕宽高
+        //初始化宽高
         mWidth = w;
         mHeight = h;
+        mX = mWidth / 2;
+        mY = mHeight / 2;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         paint.setColor(defaultColor);
-        canvas.translate(mWidth / 2, mHeight / 2); //将画布原点移到中间
+        canvas.translate(mX, mY); //将画布原点移到中间
 
 //        paint.setColor(Color.BLACK);
 //        paint.setStrokeWidth(10.0f);
@@ -93,5 +100,32 @@ public class MoodView extends View {
 //        paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawArc(rect, 0, 180, false, paint);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //获取点击的坐标、并且重绘，设置为画布原点的XY即可。
+        mX = event.getX();
+        mY = event.getY();
+        invalidate();
+        return true;
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//        setMeasuredDimension(getSize(widthMeasureSpec), getSize(heightMeasureSpec));
+    }
+
+    public int getSize(int measureSpec) {
+        int result = DEFAULT_SIZE;
+        int mode = MeasureSpec.getMode(measureSpec);
+        int size = MeasureSpec.getSize(measureSpec);
+        if (mode == MeasureSpec.EXACTLY) {
+            result = size;
+        } else if (mode == MeasureSpec.AT_MOST) {
+            result = Math.min(DEFAULT_SIZE, size);
+        }
+        return result;
     }
 }

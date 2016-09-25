@@ -14,7 +14,10 @@
     <io.tanjundang.study.test.MoodView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:moodColor="@color/red" />
+        app:moodColor="@color/red"
+        android:id="@+id/moodView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
