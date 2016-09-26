@@ -20,6 +20,7 @@ public class DateItemBean {
         INTENT,
         LAUNCHMODE,
         BROADCAST,
+        SERVICE,
         GUIDE
     }
 

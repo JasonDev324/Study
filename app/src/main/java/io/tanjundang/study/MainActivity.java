@@ -38,6 +38,8 @@ import io.tanjundang.study.test.preference.PreSettingActivity;
 import io.tanjundang.study.test.selector.SelectorActivity;
 import io.tanjundang.study.test.animation.AnimationActivity;
 import io.tanjundang.study.test.drawerlayout.DrawerLayoutActivity;
+import io.tanjundang.study.test.service.CalcService;
+import io.tanjundang.study.test.service.ServiceActivity;
 import io.tanjundang.study.test.shape.ShapeActivity;
 
 public class MainActivity extends AppCompatActivity implements Initial, NavigationView.OnNavigationItemSelectedListener, NotifyReceiver.NotifyCallback {
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         data.add(new DateItemBean(R.string.main_text_study_intent, DateItemBean.Type.INTENT));
         data.add(new DateItemBean(R.string.main_text_study_launchmode, DateItemBean.Type.LAUNCHMODE));
         data.add(new DateItemBean(R.string.main_text_study_broadcast, DateItemBean.Type.BROADCAST));
+        data.add(new DateItemBean(R.string.main_text_study_service, DateItemBean.Type.SERVICE));
         data.add(new DateItemBean(R.string.main_text_study_guide, DateItemBean.Type.GUIDE));
         mAdapter.notifyDataSetChanged();
     }
@@ -152,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -202,6 +204,8 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                     } else if (item.getType().equals(DateItemBean.Type.BROADCAST)) {
                         Intent intent = new Intent(NotifyReceiver.NOTIFY_ACTION);
                         LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
+                    } else if (item.getType().equals(DateItemBean.Type.SERVICE)) {
+                        StartActivity(ServiceActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.GUIDE)) {
                         StartActivity(GuideActivity.class);
                     }

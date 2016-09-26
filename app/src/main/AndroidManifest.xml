@@ -39,14 +39,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name=".test.service.CalcService" />
+
         <receiver android:name=".test.broadcast.NetworkReceiver">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action>-->
-            <!--</intent-filter>-->
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action> -->
+            <!-- </intent-filter> -->
         </receiver>
         <receiver android:name=".test.broadcast.NotifyReceiver">
             <intent-filter>
-                <action android:name="io.tanjundang.study.NotifyReceiver"></action>
+                <action android:name="io.tanjundang.study.NotifyReceiver" />
             </intent-filter>
         </receiver>
 
@@ -96,7 +99,8 @@
             android:name=".test.launchmode.SingleTopActivity"
             android:label="SingleTop测试" />
         <activity android:name=".GuideActivity" />
-        <activity android:name=".test.TestActivity"></activity>
+        <activity android:name=".test.TestActivity" />
+        <activity android:name=".test.service.ServiceActivity"></activity>
     </application>
 
 </manifest>
