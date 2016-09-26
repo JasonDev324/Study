@@ -39,14 +39,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".test.service.CalcService" />
+        <service
+            android:name=".test.service.CalcService"
+            android:process=":romote" />
+        <service
+            android:name=".test.service.BindService"
+            android:enabled="true"
+            android:exported="true"></service>
 
-        <receiver android:name=".test.broadcast.NetworkReceiver">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE"></action> -->
-            <!-- </intent-filter> -->
-        </receiver>
+        <receiver android:name=".test.broadcast.NetworkReceiver"></receiver>
         <receiver android:name=".test.broadcast.NotifyReceiver">
             <intent-filter>
                 <action android:name="io.tanjundang.study.NotifyReceiver" />
@@ -100,7 +101,10 @@
             android:label="SingleTop测试" />
         <activity android:name=".GuideActivity" />
         <activity android:name=".test.TestActivity" />
-        <activity android:name=".test.service.ServiceActivity"></activity>
+        <activity android:name=".test.service.ServiceActivity" />
+        <activity android:name=".test.service.BindActivity" />
+
+
     </application>
 
 </manifest>
