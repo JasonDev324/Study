@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
+import java.io.Serializable;
+
 import io.tanjundang.study.R;
 
 
@@ -27,6 +29,7 @@ import io.tanjundang.study.R;
  * 需要翻转的地方，需要在onCreate中再次调用方法
  * 遇到的问题？
  * 如何封装一个DialogTool，在其屏幕翻转时，利用旧Fragment重构界面？
+ * 为什么不推荐使用构造函数传参。
  */
 public class DialogTool {
 
@@ -67,7 +70,7 @@ public class DialogTool {
          * 方法二 旋转屏幕不消失，建议使用
          */
 
-        dialog = new DialogToolFragment(title, msg, positiveListener, negativeListener);
+        dialog = DialogToolFragment.newInstance(title, msg).setPositiveListener(positiveListener).setNegativeListener(negativeListener);
         dialog.setCancelable(false);
         dialog.setRetainInstance(false);//Fragment忽略重建，true设置旋转屏幕后消失。
         dialog.show(context.getSupportFragmentManager(), DIALOG_TAG);
@@ -93,29 +96,49 @@ public class DialogTool {
 
     public static class DialogToolFragment extends DialogFragment {
 
+        private static String TITLE = "TITLE";
+        private static String MSG = "MSG";
         String title;
         String msg;
         DialogInterface.OnClickListener positiveListener;
         DialogInterface.OnClickListener negativeListener;
-
+        private String[] items = new String[]{"1", "2", "3"};
 
         public DialogToolFragment() {
         }
 
-        public DialogToolFragment(String title, String msg, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener) {
-            this.title = title;
-            this.msg = msg;
+
+        public static DialogToolFragment newInstance(String title, String msg) {
+            DialogToolFragment fragment = new DialogToolFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString(TITLE, title);
+            bundle.putString(MSG, msg);
+            fragment.setArguments(bundle);
+            return fragment;
+        }
+
+
+        public DialogToolFragment setPositiveListener(DialogInterface.OnClickListener positiveListener) {
             this.positiveListener = positiveListener;
+            return this;
+        }
+
+        public DialogToolFragment setNegativeListener(DialogInterface.OnClickListener negativeListener) {
             this.negativeListener = negativeListener;
+            return this;
         }
 
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Bundle bundle = getArguments();
+            title = bundle.getString(TITLE);
+            msg = bundle.getString(MSG);
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 //            builder.setIcon(R.mipmap.ic_launcher);
             builder.setTitle(title);
             builder.setMessage(msg);
+
             builder.setPositiveButton("确定", positiveListener);
             builder.setNegativeButton("取消", negativeListener);
             return builder.create();
@@ -137,21 +160,6 @@ public class DialogTool {
             this.msg = msg;
         }
 
-        public DialogInterface.OnClickListener getPositiveListener() {
-            return positiveListener;
-        }
-
-        public void setPositiveListener(DialogInterface.OnClickListener positiveListener) {
-            this.positiveListener = positiveListener;
-        }
-
-        public DialogInterface.OnClickListener getNegativeListener() {
-            return negativeListener;
-        }
-
-        public void setNegativeListener(DialogInterface.OnClickListener negativeListener) {
-            this.negativeListener = negativeListener;
-        }
     }
 
 }
