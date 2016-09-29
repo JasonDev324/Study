@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.os.PersistableBundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -14,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import java.io.Serializable;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.common.tools.DialogTool;
@@ -24,23 +27,48 @@ import io.tanjundang.study.common.tools.PermissionTool;
 public class TestActivity extends AppCompatActivity {
 
     TextView tvMsg;
+    private String title;
+    private String msg;
+    private DialogInterface.OnClickListener positilistener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-
         tvMsg = (TextView) findViewById(R.id.tvMsg);
+        if (savedInstanceState != null) {
+            title = savedInstanceState.getString("title");
+            msg = savedInstanceState.getString("msg");
+            DialogTool.getInstance().setRetainBundle(this, title, msg, positilistener, null);
+        }
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("title", title);
+        outState.putString("msg", msg);
     }
 
     public void checkPermission(View view) {
 //        getPermissiton();
-        if (!PermissionTool.getInstance(this).needRequestPermission("", Manifest.permission.WRITE_CONTACTS)) {
-            dothing();
-        }
+//        if (!PermissionTool.getInstance(this).needRequestPermission("", Manifest.permission.WRITE_CONTACTS)) {
+//            dothing();
+//        }
+        title = "顶你肺";
+        msg = "6666";
+        positilistener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Functions.toast("可以哇");
+            }
+        };
+        DialogTool.getInstance().showDialog(this, title, msg, positilistener, null);
     }
 
+    //
     public void getPermissiton() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.WRITE_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
@@ -51,7 +79,7 @@ public class TestActivity extends AppCompatActivity {
                 LogTool.e("permission", "" + ActivityCompat.shouldShowRequestPermissionRationale(TestActivity.this, Manifest.permission.WRITE_CONTACTS));
                 LogTool.e("permission", "" + shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CONTACTS));
                 if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CONTACTS)) {
-                    DialogTool.showDialog(this, null, "获取必要的权限", new DialogInterface.OnClickListener() {
+                    DialogTool.getInstance().showDialog(this, null, "获取必要的权限", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             requestPermissions(new String[]{Manifest.permission.WRITE_CONTACTS}, 666);
