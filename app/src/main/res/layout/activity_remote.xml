@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_service"
+    android:id="@+id/activity_bind"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,15 +9,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="io.tanjundang.study.test.service.ServiceActivity">
+    tools:context="io.tanjundang.study.test.service.BindActivity">
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_marginBottom="15dp"
         android:background="@color/action_bar_color"
-        android:onClick="StartService"
-        android:text="启动型服务 - StartService"
+        android:onClick="StartRemoteService"
+        android:text="StartRemoteService"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 
@@ -26,18 +26,8 @@
         android:layout_height="44dp"
         android:layout_marginBottom="15dp"
         android:background="@color/action_bar_color"
-        android:onClick="BindService"
-        android:text="绑定型服务 - BindService"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginBottom="15dp"
-        android:background="@color/action_bar_color"
-        android:onClick="RemoteService"
-        android:text="绑定型服务 - RemoteService"
+        android:onClick="UnbindRemoteService"
+        android:text="UnbindRemoteService"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 

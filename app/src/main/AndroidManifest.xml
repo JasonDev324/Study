@@ -43,15 +43,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".test.service.CalcService"
-            android:process=":romote" />
+        <service android:name=".test.service.CalcService" />
         <service
             android:name=".test.service.BindService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
-        <receiver android:name=".test.broadcast.NetworkReceiver"></receiver>
+        <receiver android:name=".test.broadcast.NetworkReceiver" />
         <receiver android:name=".test.broadcast.NotifyReceiver">
             <intent-filter>
                 <action android:name="io.tanjundang.study.NotifyReceiver" />
@@ -108,7 +106,11 @@
         <activity android:name=".test.service.ServiceActivity" />
         <activity android:name=".test.service.BindActivity" />
 
+        <service
+            android:name=".test.service.RemoteService"
+            android:process=":remote" />
 
+        <activity android:name=".test.service.RemoteActivity"></activity>
     </application>
 
 </manifest>

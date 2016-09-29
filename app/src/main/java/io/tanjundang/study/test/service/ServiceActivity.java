@@ -31,4 +31,9 @@ public class ServiceActivity extends AppCompatActivity {
         Intent intent = new Intent(ServiceActivity.this, BindActivity.class);
         startActivity(intent);
     }
+
+    public void RemoteService(View v) {
+        Intent intent = new Intent(ServiceActivity.this, RemoteActivity.class);
+        startActivity(intent);
+    }
 }

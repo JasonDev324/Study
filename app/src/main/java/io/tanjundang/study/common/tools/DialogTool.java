@@ -144,16 +144,8 @@ public class DialogTool {
             return builder.create();
         }
 
-        public String getTitle() {
-            return title;
-        }
-
         public void setTitle(String title) {
             this.title = title;
-        }
-
-        public String getMsg() {
-            return msg;
         }
 
         public void setMsg(String msg) {
