@@ -12,12 +12,25 @@
     tools:context="io.tanjundang.study.test.TestActivity">
 
     <io.tanjundang.study.test.MoodView
+        android:id="@+id/moodView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:moodColor="@color/red"
-        android:id="@+id/moodView"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"
+        app:moodColor="@color/red" />
+
+    <Button
+        android:id="@+id/btnTest"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:onClick="checkPermission" />
+
+    <TextView
+        android:id="@+id/tvMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnTest" />
 
 </RelativeLayout>
