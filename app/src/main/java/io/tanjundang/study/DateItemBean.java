@@ -21,7 +21,8 @@ public class DateItemBean {
         LAUNCHMODE,
         BROADCAST,
         SERVICE,
-        GUIDE
+        GUIDE,
+        CUSTOMVIEW
     }
 
     public DateItemBean(int title, Type type) {

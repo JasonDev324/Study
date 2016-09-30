@@ -32,6 +32,7 @@ import io.tanjundang.study.test.TestActivity;
 import io.tanjundang.study.test.actionbar.MActionBarActivity;
 import io.tanjundang.study.test.broadcast.NetworkReceiver;
 import io.tanjundang.study.test.broadcast.NotifyReceiver;
+import io.tanjundang.study.test.customview.CustomViewActivity;
 import io.tanjundang.study.test.intent.IntentActivity;
 import io.tanjundang.study.test.launchmode.LaunchModeActivity;
 import io.tanjundang.study.test.preference.PreSettingActivity;
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         data.add(new DateItemBean(R.string.main_text_study_broadcast, DateItemBean.Type.BROADCAST));
         data.add(new DateItemBean(R.string.main_text_study_service, DateItemBean.Type.SERVICE));
         data.add(new DateItemBean(R.string.main_text_study_guide, DateItemBean.Type.GUIDE));
+        data.add(new DateItemBean(R.string.main_text_study_customview, DateItemBean.Type.CUSTOMVIEW));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -208,6 +210,8 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                         StartActivity(ServiceActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.GUIDE)) {
                         StartActivity(GuideActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.CUSTOMVIEW)) {
+                        StartActivity(CustomViewActivity.class);
                     }
                 }
             });

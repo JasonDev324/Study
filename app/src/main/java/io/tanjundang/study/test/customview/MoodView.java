@@ -1,4 +1,4 @@
-package io.tanjundang.study.test;
+package io.tanjundang.study.test.customview;
 
 import android.content.Context;
 import android.content.res.TypedArray;

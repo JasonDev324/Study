@@ -3,4 +3,11 @@
     <declare-styleable name="MoodView">
         <attr name="moodColor" format="reference|color"></attr>
     </declare-styleable>
+
+    <declare-styleable name="CustomImageView">
+        <attr name="textColor" format="reference|color"></attr>
+        <attr name="text" format="reference|string"></attr>
+        <attr name="imageSrc" format="reference"></attr>
+        <attr name="textSize" format="reference|dimension"></attr>
+    </declare-styleable>
 </resources>

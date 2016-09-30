@@ -31,10 +31,10 @@
     <!-- 【可选】 信鸽SDK所需权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BATTERY_STATS" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"></uses-permission>
-    <uses-permission android:name="android.permission.READ_USER_DICTIONARY"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY"></uses-permission>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY" />
+    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY" />
 
     <application
         android:name=".base.BaseApplication"
@@ -105,6 +105,7 @@
         <activity android:name=".test.TestActivity" />
         <activity android:name=".test.service.ServiceActivity" />
         <activity android:name=".test.service.BindActivity" />
+        <activity android:name=".test.customview.CustomViewActivity"></activity>
 
         <service
             android:name=".test.service.RemoteService"

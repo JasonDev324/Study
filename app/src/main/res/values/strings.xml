@@ -16,6 +16,8 @@
     <string name="main_text_study_broadcast">Broadcast</string>
     <string name="main_text_study_service">Service</string>
     <string name="main_text_study_guide">Guide</string>
+    <string name="main_text_study_customview">CutomView</string>
+
     <string name="action_send">Send Msg</string>
 
     <!-- TODO: Remove or change this placeholder text -->
