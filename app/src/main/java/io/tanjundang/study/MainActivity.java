@@ -1,9 +1,7 @@
 package io.tanjundang.study;
 
-import android.app.LauncherActivity;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -28,20 +26,18 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
-import io.tanjundang.study.test.TestActivity;
-import io.tanjundang.study.test.actionbar.MActionBarActivity;
-import io.tanjundang.study.test.broadcast.NetworkReceiver;
-import io.tanjundang.study.test.broadcast.NotifyReceiver;
-import io.tanjundang.study.test.customview.CustomViewActivity;
-import io.tanjundang.study.test.intent.IntentActivity;
-import io.tanjundang.study.test.launchmode.LaunchModeActivity;
-import io.tanjundang.study.test.preference.PreSettingActivity;
-import io.tanjundang.study.test.selector.SelectorActivity;
-import io.tanjundang.study.test.animation.AnimationActivity;
-import io.tanjundang.study.test.drawerlayout.DrawerLayoutActivity;
-import io.tanjundang.study.test.service.CalcService;
-import io.tanjundang.study.test.service.ServiceActivity;
-import io.tanjundang.study.test.shape.ShapeActivity;
+import io.tanjundang.study.knowledge.TestActivity;
+import io.tanjundang.study.knowledge.actionbar.MActionBarActivity;
+import io.tanjundang.study.knowledge.broadcast.NotifyReceiver;
+import io.tanjundang.study.knowledge.customview.CustomViewActivity;
+import io.tanjundang.study.knowledge.intent.IntentActivity;
+import io.tanjundang.study.knowledge.launchmode.LaunchModeActivity;
+import io.tanjundang.study.knowledge.preference.PreSettingActivity;
+import io.tanjundang.study.knowledge.selector.SelectorActivity;
+import io.tanjundang.study.knowledge.animation.AnimationActivity;
+import io.tanjundang.study.knowledge.drawerlayout.DrawerLayoutActivity;
+import io.tanjundang.study.knowledge.service.ServiceActivity;
+import io.tanjundang.study.knowledge.shape.ShapeActivity;
 
 public class MainActivity extends AppCompatActivity implements Initial, NavigationView.OnNavigationItemSelectedListener, NotifyReceiver.NotifyCallback {
 

@@ -4,7 +4,7 @@
     android:id="@+id/activity_toggle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.tanjundang.study.test.drawerlayout.DrawerLayoutActivity">
+    tools:context="io.tanjundang.study.knowledge.drawerlayout.DrawerLayoutActivity">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawerLayout"

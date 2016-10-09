@@ -43,14 +43,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".test.service.CalcService" />
+        <service android:name=".knowledge.service.CalcService" />
         <service
-            android:name=".test.service.BindService"
+            android:name=".knowledge.service.BindService"
             android:enabled="true"
             android:exported="true" />
 
-        <receiver android:name=".test.broadcast.NetworkReceiver" />
-        <receiver android:name=".test.broadcast.NotifyReceiver">
+        <receiver android:name=".knowledge.broadcast.NetworkReceiver" />
+        <receiver android:name=".knowledge.broadcast.NotifyReceiver">
             <intent-filter>
                 <action android:name="io.tanjundang.study.NotifyReceiver" />
             </intent-filter>
@@ -66,52 +66,52 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".test.animation.AnimationActivity" />
-        <activity android:name=".test.drawerlayout.DrawerLayoutActivity" />
-        <activity android:name=".test.shape.ShapeActivity" />
-        <activity android:name=".test.selector.SelectorActivity" />
-        <activity android:name=".test.preference.SettingActivity" />
-        <activity android:name=".test.preference.PreSettingActivity" />
+        <activity android:name=".knowledge.animation.AnimationActivity" />
+        <activity android:name=".knowledge.drawerlayout.DrawerLayoutActivity" />
+        <activity android:name=".knowledge.shape.ShapeActivity" />
+        <activity android:name=".knowledge.selector.SelectorActivity" />
+        <activity android:name=".knowledge.preference.SettingActivity" />
+        <activity android:name=".knowledge.preference.PreSettingActivity" />
         <activity
-            android:name=".test.actionbar.MActionBarActivity"
+            android:name=".knowledge.actionbar.MActionBarActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".test.intent.IntentActivity" />
-        <activity android:name=".test.launchmode.LaunchModeActivity" />
+        <activity android:name=".knowledge.intent.IntentActivity" />
+        <activity android:name=".knowledge.launchmode.LaunchModeActivity" />
         <activity
-            android:name=".test.launchmode.StandardActivity"
+            android:name=".knowledge.launchmode.StandardActivity"
             android:launchMode="standard" />
         <activity
-            android:name=".test.launchmode.SingleTaskActivity"
+            android:name=".knowledge.launchmode.SingleTaskActivity"
             android:label="SingleTask测试" />
         <activity
-            android:name=".test.launchmode.OneActivity"
+            android:name=".knowledge.launchmode.OneActivity"
             android:label="One"
             android:launchMode="singleTask" />
         <activity
-            android:name=".test.launchmode.TwoActivity"
+            android:name=".knowledge.launchmode.TwoActivity"
             android:label="Two" />
         <activity
-            android:name=".test.launchmode.ThreeActivity"
+            android:name=".knowledge.launchmode.ThreeActivity"
             android:label="Three"
             android:launchMode="singleTop" />
         <activity
-            android:name=".test.launchmode.FourActivity"
+            android:name=".knowledge.launchmode.FourActivity"
             android:label="Four" />
         <activity
-            android:name=".test.launchmode.SingleTopActivity"
+            android:name=".knowledge.launchmode.SingleTopActivity"
             android:label="SingleTop测试" />
         <activity android:name=".GuideActivity" />
-        <activity android:name=".test.TestActivity" />
-        <activity android:name=".test.service.ServiceActivity" />
-        <activity android:name=".test.service.BindActivity" />
-        <activity android:name=".test.customview.CustomViewActivity"></activity>
+        <activity android:name=".knowledge.TestActivity" />
+        <activity android:name=".knowledge.service.ServiceActivity" />
+        <activity android:name=".knowledge.service.BindActivity" />
+        <activity android:name=".knowledge.customview.CustomViewActivity"></activity>
 
         <service
-            android:name=".test.service.RemoteService"
+            android:name=".knowledge.service.RemoteService"
             android:process=":remote" />
 
-        <activity android:name=".test.service.RemoteActivity"></activity>
+        <activity android:name=".knowledge.service.RemoteActivity"></activity>
     </application>
 
 </manifest>

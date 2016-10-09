@@ -9,9 +9,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="io.tanjundang.study.test.TestActivity">
+    tools:context="io.tanjundang.study.knowledge.TestActivity">
 
-    <io.tanjundang.study.test.customview.MoodView
+    <io.tanjundang.study.knowledge.customview.MoodView
         android:id="@+id/moodView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

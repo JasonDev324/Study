@@ -2,7 +2,7 @@
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
 
     <header
-        android:fragment="io.tanjundang.study.test.preference.UsuallyFragment"
+        android:fragment="io.tanjundang.study.knowledge.preference.UsuallyFragment"
         android:title="常用设置"></header>
 
 </preference-headers>
