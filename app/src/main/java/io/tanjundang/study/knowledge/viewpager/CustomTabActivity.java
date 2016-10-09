@@ -5,11 +5,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +42,7 @@ public class CustomTabActivity extends AppCompatActivity {
     private PageThreeFragment pageThreeFragment;
     private CustomFragment customFragment;
     private CustomTabAdapter mAdapter;
+    final Animation logoAnimation = new ScaleAnimation(1.0F, 1.3F, 1.0F, 1.3F, 1, 0.5F, 1, 0.5F);//选中放大的动画
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +61,17 @@ public class CustomTabActivity extends AppCompatActivity {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(mAdapter.getTabView(i));
         }
+
         updateSelected(0);
-        tabLayout.setSelectedTabIndicatorColor(getColor(R.color.transparent));
+        logoAnimation.setDuration(100L);
+        logoAnimation.setFillAfter(true);
+
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.transparent));
         /**
          * 当tab是自定义View的时候，需要设置监听器Tab选中的监听器，从而修改选中文本的颜色
          * 当tab是普通文本的时候，可以通过setTabTextColors方法设置选中以及普通情况下tab文本的颜色，需要初始化选中项
          */
+
 
         /**
          * tabLayout选中监听器
@@ -73,12 +82,14 @@ public class CustomTabActivity extends AppCompatActivity {
                 TextView tvTitle = (TextView) tab.getCustomView().findViewById(R.id.tvTitle);
                 tvTitle.setTextColor(Color.BLUE);
                 viewPager.setCurrentItem(tab.getPosition());
+                tab.getCustomView().startAnimation(logoAnimation);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 TextView tvTitle = (TextView) tab.getCustomView().findViewById(R.id.tvTitle);
                 tvTitle.setTextColor(Color.GRAY);
+                tab.getCustomView().clearAnimation();
             }
 
             @Override
@@ -100,6 +111,10 @@ public class CustomTabActivity extends AppCompatActivity {
             if (tab != null) {
                 TextView textView = (TextView) tab.getCustomView().findViewById(R.id.tvTitle);
                 textView.setTextColor(i == position ? Color.BLUE : Color.GRAY);
+                if (i == position) {
+                    tab.getCustomView().startAnimation(logoAnimation);
+                }
+
             }
         }
     }
