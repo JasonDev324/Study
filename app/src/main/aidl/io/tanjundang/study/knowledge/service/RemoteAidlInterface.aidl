@@ -1,5 +1,5 @@
 // RemoteAidlInterface.aidl
-package io.tanjundang.study.test.service;
+package io.tanjundang.study.knowledge.service;
 
 // Declare any non-default types here with import statements
 
