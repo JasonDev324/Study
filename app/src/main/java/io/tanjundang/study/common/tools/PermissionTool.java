@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.view.View;
 
 import io.tanjundang.study.R;
 
@@ -20,26 +21,25 @@ import io.tanjundang.study.R;
  * 使用：
  * 1.在activity中调用needRequestPermission，在已获取权限时，做相应的处理
  * 2.在activity中重写onRequestPermissionsResult方法。
- *    @Override
- *   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
- *      if (requestCode == PermissionTool.requestCode) {
- *      if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
- *      dothing();
- *      } else {
- *      if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CONTACTS)) {
- *      //当点击拒绝且不再询问的时候执行该处代码
- *      Functions.toast("请重新打开设置->应用进行权限分配");
- *      }
- *      }
- *      return;
- *      } else {
- *      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
- *      }
- *   }
+ *
+ * @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+ * if (requestCode == PermissionTool.requestCode) {
+ * if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+ * dothing();
+ * } else {
+ * if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CONTACTS)) {
+ * //当点击拒绝且不再询问的时候执行该处代码
+ * Functions.toast("请重新打开设置->应用进行权限分配");
+ * }
+ * }
+ * return;
+ * } else {
+ * super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+ * }
+ * }
  */
 
 public class PermissionTool {
-    public static int requestCode = 0xFFF;
     private static Context appContext;
 
     //静态内部类内部类里面实例化
@@ -63,23 +63,44 @@ public class PermissionTool {
      * @return
      */
     @TargetApi(Build.VERSION_CODES.M)
-    public boolean needRequestPermission(String msg, String permission) {
+    public void needRequestPermission(String msg, String permission, int requestCode) {
         if (TextUtils.isEmpty(msg)) {
             msg = "需要分配相关的权限才能正常使用该功能";
         }
         if (!hasPermission(permission)) {
             if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) appContext, permission)) {
-                showExplainDialog(msg, permission);
+                showExplainDialog(msg, permission, requestCode);
             } else {
                 ActivityCompat.requestPermissions((Activity) appContext, new String[]{permission}, requestCode);
             }
-            return true;
         } else {
-            return false;
+            listener.onClick(new View(appContext));
         }
     }
 
-    public void showExplainDialog(String message, final String permission) {
+    View.OnClickListener listener;
+
+    /**
+     * 不需要权限时，直接调用方法
+     *
+     * @param listener
+     * @return
+     */
+    public PermissionTool NoNeedPermission(View.OnClickListener listener) {
+        this.listener = listener;
+        return Holder.INSTANCE;
+    }
+
+    public boolean PermissionGrant(int requestCode, String[] permissions, int[] grantResults) {
+        for (int result : grantResults) {
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void showExplainDialog(String message, final String permission, final int requestCode) {
         AlertDialog.Builder builder = new AlertDialog.Builder(appContext);
         builder.setMessage(message);
         builder.setIcon(R.drawable.ic_menu_gallery);

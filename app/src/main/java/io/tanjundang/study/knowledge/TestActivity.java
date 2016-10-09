@@ -34,11 +34,11 @@ public class TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         tvMsg = (TextView) findViewById(R.id.tvMsg);
-        if (savedInstanceState != null) {
-            title = savedInstanceState.getString("title");
-            msg = savedInstanceState.getString("msg");
-            DialogTool.getInstance().setRetainBundle(this, title, msg, positilistener, null);
-        }
+//        if (savedInstanceState != null) {
+//            title = savedInstanceState.getString("title");
+//            msg = savedInstanceState.getString("msg");
+//            DialogTool.getInstance().setRetainBundle(this, title, msg, positilistener, null);
+//        }
 
     }
 
@@ -54,15 +54,21 @@ public class TestActivity extends AppCompatActivity {
 //        if (!PermissionTool.getInstance(this).needRequestPermission("", Manifest.permission.WRITE_CONTACTS)) {
 //            dothing();
 //        }
-        title = "顶你肺";
-        msg = "6666";
-        positilistener = new DialogInterface.OnClickListener() {
+        PermissionTool.getInstance(this).NoNeedPermission(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Functions.toast("可以哇");
+            public void onClick(View v) {
+                dothing();
             }
-        };
-        DialogTool.getInstance().showDialog(this, title, msg, positilistener, null);
+        }).needRequestPermission("", Manifest.permission.WRITE_CONTACTS, 600);
+//        title = "顶你肺";
+//        msg = "6666";
+//        positilistener = new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Functions.toast("可以哇");
+//            }
+//        };
+//        DialogTool.getInstance().showDialog(this, title, msg, positilistener, null);
     }
 
     //
@@ -112,19 +118,24 @@ public class TestActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PermissionTool.requestCode) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                dothing();
-            } else {
-                if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CONTACTS)) {
-                    //当点击拒绝且不再询问的时候执行该处代码
-                    Functions.toast("请重新打开设置->应用进行权限分配");
-                }
-            }
-            return;
+        if (PermissionTool.getInstance(this).PermissionGrant(requestCode, permissions, grantResults)) {
+            dothing();
         } else {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            Functions.toast("请重新打开设置->应用进行权限分配");
         }
+//        if (requestCode == 600) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                dothing();
+//            } else {
+//                if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CONTACTS)) {
+//                    //当点击拒绝且不再询问的时候执行该处代码
+//                    Functions.toast("请重新打开设置->应用进行权限分配");
+//                }
+//            }
+//            return;
+//        } else {
+//            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        }
     }
 }
 
