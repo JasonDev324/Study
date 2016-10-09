@@ -22,7 +22,8 @@ public class DateItemBean {
         BROADCAST,
         SERVICE,
         GUIDE,
-        CUSTOMVIEW
+        CUSTOMVIEW,
+        TABLAYOUT
     }
 
     public DateItemBean(int title, Type type) {

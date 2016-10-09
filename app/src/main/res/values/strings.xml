@@ -17,9 +17,11 @@
     <string name="main_text_study_service">Service</string>
     <string name="main_text_study_guide">Guide</string>
     <string name="main_text_study_customview">CutomView</string>
+    <string name="main_text_study_tablayout">TabLayout</string>
 
     <string name="action_send">Send Msg</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_tab">TabActivity</string>
 </resources>

@@ -38,6 +38,7 @@ import io.tanjundang.study.knowledge.animation.AnimationActivity;
 import io.tanjundang.study.knowledge.drawerlayout.DrawerLayoutActivity;
 import io.tanjundang.study.knowledge.service.ServiceActivity;
 import io.tanjundang.study.knowledge.shape.ShapeActivity;
+import io.tanjundang.study.knowledge.viewpager.TabActivity;
 
 public class MainActivity extends AppCompatActivity implements Initial, NavigationView.OnNavigationItemSelectedListener, NotifyReceiver.NotifyCallback {
 
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         data.add(new DateItemBean(R.string.main_text_study_service, DateItemBean.Type.SERVICE));
         data.add(new DateItemBean(R.string.main_text_study_guide, DateItemBean.Type.GUIDE));
         data.add(new DateItemBean(R.string.main_text_study_customview, DateItemBean.Type.CUSTOMVIEW));
+        data.add(new DateItemBean(R.string.main_text_study_tablayout, DateItemBean.Type.TABLAYOUT));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -208,6 +210,8 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                         StartActivity(GuideActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.CUSTOMVIEW)) {
                         StartActivity(CustomViewActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.TABLAYOUT)) {
+                        StartActivity(TabActivity.class);
                     }
                 }
             });
@@ -240,7 +244,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
 
     }
 
-    private void StartActivity(Class cls) {
+    public void StartActivity(Class cls) {
         Intent intent = new Intent(MainActivity.this, cls);
         startActivity(intent);
     }

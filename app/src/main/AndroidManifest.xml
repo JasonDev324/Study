@@ -105,13 +105,16 @@
         <activity android:name=".knowledge.TestActivity" />
         <activity android:name=".knowledge.service.ServiceActivity" />
         <activity android:name=".knowledge.service.BindActivity" />
-        <activity android:name=".knowledge.customview.CustomViewActivity"></activity>
+        <activity android:name=".knowledge.customview.CustomViewActivity" />
 
         <service
             android:name=".knowledge.service.RemoteService"
             android:process=":remote" />
 
-        <activity android:name=".knowledge.service.RemoteActivity"></activity>
+        <activity android:name=".knowledge.service.RemoteActivity" />
+        <activity android:name=".knowledge.viewpager.CustomTabActivity" />
+        <activity android:name=".knowledge.viewpager.TabActivity" />
+        <activity android:name=".knowledge.viewpager.SimpleTabActivity"></activity>
     </application>
 
 </manifest>
