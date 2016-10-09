@@ -52,7 +52,6 @@ public class CustomTabActivity extends AppCompatActivity {
         viewPager.setAdapter(mAdapter);
 
         tabLayout.setupWithViewPager(viewPager);//关联起ViewPager
-        tabLayout.setTabsFromPagerAdapter(mAdapter);//从Adapter中设置tab，当tab是自定义View时，必须调用，否则崩溃
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
@@ -88,7 +87,6 @@ public class CustomTabActivity extends AppCompatActivity {
             }
 
         });
-        mAdapter.notifyDataSetChanged();
     }
 
     /**
