@@ -20,14 +20,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile group: 'io.reactivex', name: 'rxjava', version: '1.1.0'
-    compile group: 'io.reactivex', name: 'rxandroid', version: '1.1.0'
-    compile group: 'com.nostra13.universalimageloader', name: 'universal-image-loader', version: '1.9.5'
-//ImageLoader
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    //ImageLoader
     //加载进度条
     //RecyclerView
-
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.google.code.gson:gson:2.2.4'
@@ -36,4 +35,5 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.prolificinteractive:parallaxpager:2.2.1'
     testCompile 'junit:junit:4.12'
+    compile project(':umsocialshare')
 }
