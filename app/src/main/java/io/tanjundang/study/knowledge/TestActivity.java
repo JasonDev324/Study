@@ -3,6 +3,7 @@ package io.tanjundang.study.knowledge;
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -14,6 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.ShareContent;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.common.tools.DialogTool;
@@ -54,12 +61,13 @@ public class TestActivity extends AppCompatActivity {
 //        if (!PermissionTool.getInstance(this).needRequestPermission("", Manifest.permission.WRITE_CONTACTS)) {
 //            dothing();
 //        }
-        PermissionTool.getInstance(this).NoNeedPermission(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dothing();
-            }
-        }).needRequestPermission("", Manifest.permission.WRITE_CONTACTS, 600);
+//        PermissionTool.getInstance(this).NoNeedPermission(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dothing();
+//            }
+//        }).needRequestPermission("", Manifest.permission.WRITE_CONTACTS, 600);
+
 //        title = "顶你肺";
 //        msg = "6666";
 //        positilistener = new DialogInterface.OnClickListener() {
@@ -69,6 +77,34 @@ public class TestActivity extends AppCompatActivity {
 //            }
 //        };
 //        DialogTool.getInstance().showDialog(this, title, msg, positilistener, null);
+        ShareContent content = new ShareContent();
+        content.mTitle = "TanJunDang's Blog";
+        content.mText = "Android 开发笔记";
+        content.mTargetUrl = "https://tanjundang.github.io";
+        new ShareAction(this).withText("hello").setShareContent(content)
+                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setCallback(new UMShareListener() {
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+                        LogTool.e("TestActivity", "success");
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+                        LogTool.e("TestActivity", "success");
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+
+                    }
+                }).open();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     //
