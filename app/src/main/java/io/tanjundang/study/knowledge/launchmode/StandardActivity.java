@@ -7,16 +7,25 @@ import android.view.View;
 import android.widget.TextView;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 
-public class StandardActivity extends AppCompatActivity {
+public class StandardActivity extends BaseActivity {
 
     TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView() {
         setContentView(R.layout.activity_standard);
         textView = (TextView) findViewById(R.id.textView);
+    }
+
+    @Override
+    protected void initData() {
         textView.setText(this + "");
     }
 

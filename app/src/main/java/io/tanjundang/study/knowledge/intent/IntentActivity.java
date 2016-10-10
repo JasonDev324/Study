@@ -15,10 +15,11 @@ import android.widget.ImageView;
 import java.io.FileNotFoundException;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.LogTool;
 
-public class IntentActivity extends AppCompatActivity {
+public class IntentActivity extends BaseActivity {
 
     private int IMAGE_CODE = 666;
     private int CONTACT_CODE = 667;
@@ -27,7 +28,15 @@ public class IntentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView() {
         setContentView(R.layout.activity_intent);
+    }
+
+    @Override
+    protected void initData() {
     }
 
     public void sendToQQ(View v) {

@@ -6,9 +6,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import io.tanjundang.study.R;
-import io.tanjundang.study.base.Initial;
+import io.tanjundang.study.base.BaseActivity;
 
-public class SelectorActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener, Initial {
+public class SelectorActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
     RadioButton rbOne;
     RadioButton rbTwo;
@@ -18,14 +18,12 @@ public class SelectorActivity extends AppCompatActivity implements RadioGroup.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selector);
-        initView();
-        initData();
     }
 
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_selector);
         rbOne = (RadioButton) findViewById(R.id.rbOne);
         rbTwo = (RadioButton) findViewById(R.id.rbTwo);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);

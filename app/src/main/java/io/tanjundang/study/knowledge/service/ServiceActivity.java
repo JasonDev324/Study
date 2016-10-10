@@ -1,21 +1,30 @@
 package io.tanjundang.study.knowledge.service;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 
 /**
  * 两种启动Service的实例
  */
-public class ServiceActivity extends AppCompatActivity {
+public class ServiceActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView() {
         setContentView(R.layout.activity_service);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     public void StartService(View v) {

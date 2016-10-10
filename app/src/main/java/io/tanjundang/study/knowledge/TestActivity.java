@@ -23,12 +23,13 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.DialogTool;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.LogTool;
 import io.tanjundang.study.common.tools.PermissionTool;
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends BaseActivity {
 
     TextView tvMsg;
     private String title;
@@ -39,14 +40,24 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+    }
+
+    @Override
+    protected void initView() {
         setContentView(R.layout.activity_test);
         tvMsg = (TextView) findViewById(R.id.tvMsg);
+    }
+
+    @Override
+    protected void initData() {
+
 //        if (savedInstanceState != null) {
 //            title = savedInstanceState.getString("title");
 //            msg = savedInstanceState.getString("msg");
 //            DialogTool.getInstance().setRetainBundle(this, title, msg, positilistener, null);
 //        }
-
     }
 
     @Override

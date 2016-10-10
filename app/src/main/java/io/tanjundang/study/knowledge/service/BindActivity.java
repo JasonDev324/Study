@@ -10,10 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.LogTool;
 
-public class BindActivity extends AppCompatActivity {
+public class BindActivity extends BaseActivity {
 
 
     private BindService.TestBinder binder;
@@ -21,7 +22,15 @@ public class BindActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView() {
         setContentView(R.layout.activity_bind);
+    }
+
+    @Override
+    protected void initData() {
 
     }
 

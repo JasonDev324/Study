@@ -9,8 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 
-public class DrawerLayoutActivity extends AppCompatActivity {
+public class DrawerLayoutActivity extends BaseActivity {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toogle;
@@ -18,8 +19,15 @@ public class DrawerLayoutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_toggle);
+    }
 
+    @Override
+    protected void initView() {
+        setContentView(R.layout.activity_toggle);
+    }
+
+    @Override
+    protected void initData() {
         getSupportActionBar().setTitle("TanJunDang");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);// 给左上角图标的左边加上一个返回的图标
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);

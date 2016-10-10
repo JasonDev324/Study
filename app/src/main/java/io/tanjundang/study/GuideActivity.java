@@ -9,12 +9,22 @@ import com.prolificinteractive.parallaxpager.ParallaxContainer;
 import com.prolificinteractive.parallaxpager.ParallaxContextWrapper;
 import com.prolificinteractive.parallaxpager.ParallaxPagerAdapter;
 
-public class GuideActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+import io.tanjundang.study.base.BaseActivity;
+
+public class GuideActivity extends BaseActivity implements ViewPager.OnPageChangeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView() {
         setContentView(R.layout.activity_guide);
+    }
+
+    @Override
+    protected void initData() {
         getSupportFragmentManager().beginTransaction().add(R.id.layout_guide, new ParallaxFragment()).commit();
     }
 

@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 
-public class LaunchModeActivity extends AppCompatActivity {
+public class LaunchModeActivity extends BaseActivity {
 
     public static String STANDARD = "STANDARD";
     public static String SINGLETOP = "SINGLETOP";
@@ -18,7 +19,16 @@ public class LaunchModeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView() {
         setContentView(R.layout.activity_launch_mode);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     public void Standard(View v) {

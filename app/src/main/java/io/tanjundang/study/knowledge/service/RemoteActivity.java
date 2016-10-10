@@ -10,8 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 
-public class RemoteActivity extends AppCompatActivity {
+public class RemoteActivity extends BaseActivity {
 
     private RemoteAidlInterface mBinder;
     private ServiceConnection connection = new ServiceConnection() {
@@ -34,7 +35,16 @@ public class RemoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView() {
         setContentView(R.layout.activity_remote);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     public void StartRemoteService(View v) {

@@ -15,7 +15,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,17 +22,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.ArrayList;
 
 import io.tanjundang.study.base.BaseActivity;
-import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.ShareTool;
 import io.tanjundang.study.knowledge.TestActivity;
-import io.tanjundang.study.knowledge.actionbar.MActionBarActivity;
+import io.tanjundang.study.knowledge.actionbar.ActionBarStudyActivity;
 import io.tanjundang.study.knowledge.broadcast.NotifyReceiver;
 import io.tanjundang.study.knowledge.customview.CustomViewActivity;
 import io.tanjundang.study.knowledge.intent.IntentActivity;
@@ -199,7 +195,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     } else if (item.getType().equals(DateItemBean.Type.PREFERENCE)) {
                         StartActivity(PreSettingActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.ACTIONBAR)) {
-                        StartActivity(MActionBarActivity.class);
+                        StartActivity(ActionBarStudyActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.INTENT)) {
                         StartActivity(IntentActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.LAUNCHMODE)) {

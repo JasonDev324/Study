@@ -2,7 +2,6 @@ package io.tanjundang.study.knowledge.actionbar;
 
 import android.graphics.Color;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -10,17 +9,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.Functions;
 
-public class MActionBarActivity extends AppCompatActivity {
+public class ActionBarStudyActivity extends BaseActivity {
 
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maction_bar);
+    }
+
+    @Override
+    protected void initView() {
+        setContentView(R.layout.activity_action_bar_study);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+    }
+
+    @Override
+    protected void initData() {
         toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

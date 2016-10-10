@@ -73,7 +73,7 @@
         <activity android:name=".knowledge.preference.SettingActivity" />
         <activity android:name=".knowledge.preference.PreSettingActivity" />
         <activity
-            android:name=".knowledge.actionbar.MActionBarActivity"
+            android:name=".knowledge.actionbar.ActionBarStudyActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".knowledge.intent.IntentActivity" />

@@ -6,8 +6,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 
-public class AnimationActivity extends Activity implements View.OnClickListener {
+public class AnimationActivity extends BaseActivity implements View.OnClickListener {
 
     Toolbar toolbar;
 
@@ -15,8 +16,17 @@ public class AnimationActivity extends Activity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animation);
+    }
+
+    @Override
+    protected void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setOnClickListener(this);
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     @Override

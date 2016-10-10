@@ -8,16 +8,26 @@ import android.view.View;
 import android.widget.TextView;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseActivity;
 
-public class TwoActivity extends AppCompatActivity {
+public class TwoActivity extends BaseActivity {
 
     private String type = "";
+    TextView tvTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void initView() {
         setContentView(R.layout.activity_single_top_two);
-        TextView tvTest = (TextView) findViewById(R.id.tvTest);
+        tvTest = (TextView) findViewById(R.id.tvTest);
+    }
+
+    @Override
+    protected void initData() {
         tvTest.setText("当前Activity实例：" + this);
         type = getIntent().getStringExtra("type");
     }
