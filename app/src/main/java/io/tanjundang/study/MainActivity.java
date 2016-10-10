@@ -28,6 +28,7 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import java.util.ArrayList;
 
+import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.ShareTool;
@@ -45,7 +46,7 @@ import io.tanjundang.study.knowledge.service.ServiceActivity;
 import io.tanjundang.study.knowledge.shape.ShapeActivity;
 import io.tanjundang.study.knowledge.viewpager.TabActivity;
 
-public class MainActivity extends AppCompatActivity implements Initial, NavigationView.OnNavigationItemSelectedListener, NotifyReceiver.NotifyCallback {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, NotifyReceiver.NotifyCallback {
 
     private ActionBarDrawerToggle toggle;
     private ArrayList<DateItemBean> data = new ArrayList<>();
@@ -56,15 +57,11 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        initView();
-        initData();
     }
-
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_main);
         receiver = new NotifyReceiver(this);
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter(NotifyReceiver.NOTIFY_ACTION));
 
