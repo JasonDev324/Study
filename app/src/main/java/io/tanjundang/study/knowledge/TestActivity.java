@@ -77,28 +77,7 @@ public class TestActivity extends AppCompatActivity {
 //            }
 //        };
 //        DialogTool.getInstance().showDialog(this, title, msg, positilistener, null);
-        ShareContent content = new ShareContent();
-        content.mTitle = "TanJunDang's Blog";
-        content.mText = "Android 开发笔记";
-        content.mTargetUrl = "https://tanjundang.github.io";
-        new ShareAction(this).withText("hello").setShareContent(content)
-                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
-                .setCallback(new UMShareListener() {
-                    @Override
-                    public void onResult(SHARE_MEDIA share_media) {
-                        LogTool.e("TestActivity", "success");
-                    }
 
-                    @Override
-                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-                        LogTool.e("TestActivity", "success");
-                    }
-
-                    @Override
-                    public void onCancel(SHARE_MEDIA share_media) {
-
-                    }
-                }).open();
     }
 
     @Override

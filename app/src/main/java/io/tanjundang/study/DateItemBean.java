@@ -23,7 +23,8 @@ public class DateItemBean {
         SERVICE,
         GUIDE,
         CUSTOMVIEW,
-        TABLAYOUT
+        TABLAYOUT,
+        UM_SHARE
     }
 
     public DateItemBean(int title, Type type) {

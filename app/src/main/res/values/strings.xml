@@ -18,6 +18,7 @@
     <string name="main_text_study_guide">Guide</string>
     <string name="main_text_study_customview">CutomView</string>
     <string name="main_text_study_tablayout">TabLayout</string>
+    <string name="main_text_study_umshare">UMShare</string>
 
     <string name="action_send">Send Msg</string>
 

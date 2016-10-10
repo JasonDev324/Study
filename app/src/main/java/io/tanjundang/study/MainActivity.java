@@ -22,10 +22,15 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
 import java.util.ArrayList;
 
 import io.tanjundang.study.base.Initial;
 import io.tanjundang.study.common.tools.Functions;
+import io.tanjundang.study.common.tools.ShareTool;
 import io.tanjundang.study.knowledge.TestActivity;
 import io.tanjundang.study.knowledge.actionbar.MActionBarActivity;
 import io.tanjundang.study.knowledge.broadcast.NotifyReceiver;
@@ -105,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
         data.add(new DateItemBean(R.string.main_text_study_guide, DateItemBean.Type.GUIDE));
         data.add(new DateItemBean(R.string.main_text_study_customview, DateItemBean.Type.CUSTOMVIEW));
         data.add(new DateItemBean(R.string.main_text_study_tablayout, DateItemBean.Type.TABLAYOUT));
+        data.add(new DateItemBean(R.string.main_text_study_umshare, DateItemBean.Type.UM_SHARE));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -212,6 +218,8 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
                         StartActivity(CustomViewActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.TABLAYOUT)) {
                         StartActivity(TabActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.UM_SHARE)) {
+                        ShareTool.getInstance().SendMessage(MainActivity.this);
                     }
                 }
             });
@@ -247,6 +255,12 @@ public class MainActivity extends AppCompatActivity implements Initial, Navigati
     public void StartActivity(Class cls) {
         Intent intent = new Intent(MainActivity.this, cls);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
