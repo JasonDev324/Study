@@ -40,8 +40,6 @@ public class TestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -53,11 +51,6 @@ public class TestActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-//        if (savedInstanceState != null) {
-//            title = savedInstanceState.getString("title");
-//            msg = savedInstanceState.getString("msg");
-//            DialogTool.getInstance().setRetainBundle(this, title, msg, positilistener, null);
-//        }
     }
 
     @Override
@@ -69,25 +62,14 @@ public class TestActivity extends BaseActivity {
 
     public void checkPermission(View view) {
 //        getPermissiton();
-//        if (!PermissionTool.getInstance(this).needRequestPermission("", Manifest.permission.WRITE_CONTACTS)) {
-//            dothing();
-//        }
-//        PermissionTool.getInstance(this).NoNeedPermission(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dothing();
-//            }
-//        }).needRequestPermission("", Manifest.permission.WRITE_CONTACTS, 600);
 
-//        title = "顶你肺";
-//        msg = "6666";
-//        positilistener = new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Functions.toast("可以哇");
-//            }
-//        };
-//        DialogTool.getInstance().showDialog(this, title, msg, positilistener, null);
+        PermissionTool.getInstance(this).NoNeedPermission(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dothing();
+            }
+        }).needRequestPermission("", Manifest.permission.WRITE_CONTACTS, 600);
+
 
     }
 
@@ -144,11 +126,14 @@ public class TestActivity extends BaseActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (PermissionTool.getInstance(this).PermissionGrant(requestCode, permissions, grantResults)) {
-            dothing();
-        } else {
-            Functions.toast("请重新打开设置->应用进行权限分配");
-        }
+        PermissionTool.getInstance(this).PermissionGrant(requestCode, permissions, grantResults).setNoLongerDisplayListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Functions.toast("请重新打开设置->应用进行权限分配");
+            }
+        }, permissions[0]);
+
+
 //        if (requestCode == 600) {
 //            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 //                dothing();

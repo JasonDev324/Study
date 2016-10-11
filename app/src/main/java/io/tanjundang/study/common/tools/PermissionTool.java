@@ -41,6 +41,9 @@ import io.tanjundang.study.R;
 
 public class PermissionTool {
     private static Context appContext;
+    private static boolean permissionGrant = false;
+    private View.OnClickListener listener;
+    private View.OnClickListener noLongerDisplay;
 
     //静态内部类内部类里面实例化
     private static class Holder {
@@ -67,6 +70,7 @@ public class PermissionTool {
         if (TextUtils.isEmpty(msg)) {
             msg = "需要分配相关的权限才能正常使用该功能";
         }
+
         if (!hasPermission(permission)) {
             if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) appContext, permission)) {
                 showExplainDialog(msg, permission, requestCode);
@@ -78,7 +82,6 @@ public class PermissionTool {
         }
     }
 
-    View.OnClickListener listener;
 
     /**
      * 不需要权限时，直接调用方法
@@ -91,18 +94,31 @@ public class PermissionTool {
         return Holder.INSTANCE;
     }
 
-    public boolean PermissionGrant(int requestCode, String[] permissions, int[] grantResults) {
+    public PermissionTool PermissionGrant(int requestCode, String[] permissions, int[] grantResults) {
+        permissionGrant = true;
         for (int result : grantResults) {
-            if (result != PackageManager.PERMISSION_GRANTED) {
-                return false;
+            if (result == PackageManager.PERMISSION_DENIED) {
+                permissionGrant = false;
             }
         }
-        return true;
+        return Holder.INSTANCE;
+    }
+
+    public void setNoLongerDisplayListener(View.OnClickListener listener, String permission) {
+        this.noLongerDisplay = listener;
+        if (permissionGrant) {
+            listener.onClick(new View(appContext));
+        } else {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) appContext, permission)) {
+                noLongerDisplay.onClick(new View(appContext));
+            }
+        }
     }
 
     public void showExplainDialog(String message, final String permission, final int requestCode) {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(appContext);
-        builder.setMessage(message);
+        builder.setTitle(message);
         builder.setIcon(R.drawable.ic_menu_gallery);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
