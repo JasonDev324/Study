@@ -14,6 +14,8 @@ import com.umeng.socialize.UMShareAPI;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    private static String TAG = "TanJunDang.github.io";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

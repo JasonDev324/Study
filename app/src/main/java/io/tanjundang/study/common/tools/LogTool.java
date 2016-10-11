@@ -15,9 +15,7 @@ import io.tanjundang.study.BuildConfig;
 public class LogTool {
 
     public static boolean LOG_ENABLE = BuildConfig.DEBUG;//用于判断是否打开日志输出
-    private static String TAG = "TanJunDang.github.io";
     private static String CRASH_FILE = "crash.txt";//保存崩溃日志的文件
-
 
     public static boolean isLogEnable() {
         return LOG_ENABLE;
