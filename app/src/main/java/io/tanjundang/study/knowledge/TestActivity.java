@@ -11,6 +11,7 @@ import android.os.Build;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.umeng.socialize.ShareContent;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.ArrayList;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
@@ -35,7 +38,8 @@ public class TestActivity extends BaseActivity {
     private String title;
     private String msg;
     private DialogInterface.OnClickListener positilistener;
-
+    private int REQ_CODE = 0xff;
+    private ArrayList permissionList = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,8 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        permissionList.add(Manifest.permission.WRITE_CONTACTS);
     }
 
     @Override
@@ -62,15 +67,8 @@ public class TestActivity extends BaseActivity {
 
     public void checkPermission(View view) {
 //        getPermissiton();
-
-        PermissionTool.getInstance(this).NoNeedPermission(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dothing();
-            }
-        }).needRequestPermission("", Manifest.permission.WRITE_CONTACTS, 600);
-
-
+        String[] list = new String[permissionList.size()];
+        ActivityCompat.requestPermissions(this, (String[]) permissionList.toArray(list), REQ_CODE);
     }
 
     @Override
@@ -124,14 +122,38 @@ public class TestActivity extends BaseActivity {
         Functions.toast("Success");
     }
 
+    /**
+     * 返回拒绝的权限
+     *
+     * @param permissions
+     * @param grantResults
+     * @return
+     */
+    private ArrayList isPermissionGrant(String[] permissions, int[] grantResults) {
+        ArrayList permissionDeny = new ArrayList();
+        for (int i = 0; i < permissions.length; i++) {
+            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                permissionDeny.add(permissions[i]);
+            }
+        }
+        return permissionDeny;
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        PermissionTool.getInstance(this).PermissionGrant(requestCode, permissions, grantResults).setNoLongerDisplayListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Functions.toast("请重新打开设置->应用进行权限分配");
+        if (requestCode == REQ_CODE) {
+            if (isPermissionGrant(permissions, grantResults).size() == 0) {
+                dothing();
+            } else {
+                permissionList.addAll(isPermissionGrant(permissions, grantResults));
             }
-        }, permissions[0]);
+        }
+//        PermissionTool.getInstance(this).PermissionGrant(requestCode, permissions, grantResults).setNoLongerDisplayListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Functions.toast("请重新打开设置->应用进行权限分配");
+//            }
+//        }, permissions[0]);
 
 
 //        if (requestCode == 600) {
