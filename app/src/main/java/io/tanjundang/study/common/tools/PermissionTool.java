@@ -1,22 +1,14 @@
 package io.tanjundang.study.common.tools;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 
 import java.util.ArrayList;
-
-import io.tanjundang.study.R;
 
 /**
  * Developer: TanJunDang
@@ -26,14 +18,9 @@ import io.tanjundang.study.R;
 
 public class PermissionTool {
     private static Context appContext;
-    private static boolean permissionGrant = false;
-    private View.OnClickListener listener;
-    private View.OnClickListener noLongerDisplay;
     public static int REQ_CODE = 0xff;
 
-
     private View.OnClickListener dealSuccess;
-
 
     //静态内部类内部类里面实例化
     private static class Holder {
