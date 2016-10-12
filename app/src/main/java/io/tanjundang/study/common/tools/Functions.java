@@ -3,6 +3,7 @@ package io.tanjundang.study.common.tools;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -466,5 +468,13 @@ public class Functions {
 //        }
         versionCode = BuildConfig.VERSION_CODE;
         return versionCode;
+    }
+
+    public static void SkipToAppDetail() {
+        //跳转到当前应用详情页面
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setData(Uri.fromParts("package", appContext.getPackageName(), null));
+        appContext.startActivity(intent);
     }
 }

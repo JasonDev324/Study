@@ -58,22 +58,21 @@ public class DialogTool {
         /**
          * 方法一 旋转屏幕消失
          */
-//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//        builder.setIcon(R.mipmap.ic_launcher);
-//        builder.setCancelable(false);
-//        builder.setTitle(title);
-//        builder.setMessage(msg);
-//        builder.setPositiveButton("确定", positiveListener);
-//        builder.setNegativeButton("取消", negativeListener);
-//        builder.create().show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setPositiveButton("确定", positiveListener);
+        builder.setNegativeButton("取消", negativeListener);
+        builder.create().show();
         /**
-         * 方法二 旋转屏幕不消失，建议使用
+         * 方法二 旋转屏幕不消失，建议使用 跟PermissionTool有冲突
          */
 
-        dialog = DialogToolFragment.newInstance(title, msg).setPositiveListener(positiveListener).setNegativeListener(negativeListener);
-        dialog.setCancelable(false);
-        dialog.setRetainInstance(false);//Fragment忽略重建，true设置旋转屏幕后消失。
-        dialog.show(context.getSupportFragmentManager(), DIALOG_TAG);
+//        dialog = DialogToolFragment.newInstance(title, msg).setPositiveListener(positiveListener).setNegativeListener(negativeListener);
+//        dialog.setCancelable(false);
+////        dialog.setRetainInstance(false);//Fragment忽略重建，true设置旋转屏幕后消失。
+//        dialog.show(context.getSupportFragmentManager(), DIALOG_TAG);
     }
 
     /**

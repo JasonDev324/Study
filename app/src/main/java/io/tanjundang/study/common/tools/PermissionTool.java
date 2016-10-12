@@ -3,14 +3,18 @@ package io.tanjundang.study.common.tools;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+
+import java.util.ArrayList;
 
 import io.tanjundang.study.R;
 
@@ -18,25 +22,6 @@ import io.tanjundang.study.R;
  * Developer: TanJunDang
  * Email: TanJunDang324@gmail.com
  * Date: 2016/9/28
- * 使用：
- * 1.在activity中调用needRequestPermission，在已获取权限时，做相应的处理
- * 2.在activity中重写onRequestPermissionsResult方法。
- *
- * @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
- * if (requestCode == PermissionTool.requestCode) {
- * if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
- * dothing();
- * } else {
- * if (!shouldShowRequestPermissionRationale(Manifest.permission.WRITE_CONTACTS)) {
- * //当点击拒绝且不再询问的时候执行该处代码
- * Functions.toast("请重新打开设置->应用进行权限分配");
- * }
- * }
- * return;
- * } else {
- * super.onRequestPermissionsResult(requestCode, permissions, grantResults);
- * }
- * }
  */
 
 public class PermissionTool {
@@ -44,6 +29,11 @@ public class PermissionTool {
     private static boolean permissionGrant = false;
     private View.OnClickListener listener;
     private View.OnClickListener noLongerDisplay;
+    public static int REQ_CODE = 0xff;
+
+
+    private View.OnClickListener dealSuccess;
+
 
     //静态内部类内部类里面实例化
     private static class Holder {
@@ -55,79 +45,110 @@ public class PermissionTool {
         return Holder.INSTANCE;
     }
 
-
-    private boolean hasPermission(String permission) {
-        return ContextCompat.checkSelfPermission(appContext, permission) == PackageManager.PERMISSION_GRANTED;
-    }
-
     /**
-     * @param msg        要求该权限的描述
-     * @param permission
-     * @return
+     * @param permissionList 权限集合
+     * @param dealSuccess    成功获取所有权限后的处理
      */
-    @TargetApi(Build.VERSION_CODES.M)
-    public void needRequestPermission(String msg, String permission, int requestCode) {
-        if (TextUtils.isEmpty(msg)) {
-            msg = "需要分配相关的权限才能正常使用该功能";
-        }
-
-        if (!hasPermission(permission)) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale((Activity) appContext, permission)) {
-                showExplainDialog(msg, permission, requestCode);
-            } else {
-                ActivityCompat.requestPermissions((Activity) appContext, new String[]{permission}, requestCode);
-            }
+    public void requestPermissions(ArrayList<String> permissionList, View.OnClickListener dealSuccess) {
+        this.dealSuccess = dealSuccess;
+        if (checkPermissions(permissionList).isEmpty()) {
+            dealSuccess.onClick(new View(appContext));
         } else {
-            listener.onClick(new View(appContext));
+            ActivityCompat.requestPermissions((Activity) appContext, (String[]) permissionList.toArray(new String[permissionList.size()]), REQ_CODE);
         }
     }
 
-
     /**
-     * 不需要权限时，直接调用方法
+     * 检测需要请求的权限
      *
-     * @param listener
+     * @param permissionList
      * @return
      */
-    public PermissionTool NoNeedPermission(View.OnClickListener listener) {
-        this.listener = listener;
-        return Holder.INSTANCE;
-    }
-
-    public PermissionTool PermissionGrant(int requestCode, String[] permissions, int[] grantResults) {
-        permissionGrant = true;
-        for (int result : grantResults) {
-            if (result == PackageManager.PERMISSION_DENIED) {
-                permissionGrant = false;
+    public ArrayList<String> checkPermissions(ArrayList<String> permissionList) {
+        ArrayList<String> requestPermissions = new ArrayList<>();
+        for (int i = 0; i < permissionList.size(); i++) {
+            if (ActivityCompat.checkSelfPermission(appContext, permissionList.get(i)) == PackageManager.PERMISSION_DENIED) {
+                requestPermissions.add(permissionList.get(i));
             }
         }
-        return Holder.INSTANCE;
+        return requestPermissions;
     }
 
-    public void setNoLongerDisplayListener(View.OnClickListener listener, String permission) {
-        this.noLongerDisplay = listener;
-        if (permissionGrant) {
-            listener.onClick(new View(appContext));
+    /**
+     * 返回拒绝的权限
+     *
+     * @param permissions
+     * @param grantResults
+     * @return
+     */
+    private ArrayList permissionDenyList(String[] permissions, int[] grantResults) {
+        ArrayList permissionDeny = new ArrayList();
+        for (int i = 0; i < permissions.length; i++) {
+            if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                permissionDeny.add(permissions[i]);
+            }
+        }
+        return permissionDeny;
+    }
+
+    /**
+     * 处理多个权限
+     *
+     * @param permissionList
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    public void onRequestPermissionsResult(final ArrayList<String> permissionList, final int requestCode, final String[] permissions, int[] grantResults) {
+        permissionList.clear();
+        if (requestCode == PermissionTool.REQ_CODE) {
+            if (permissionDenyList(permissions, grantResults).isEmpty()) {
+                dealSuccess.onClick(new View(appContext));
+            } else {
+                permissionList.addAll(permissionDenyList(permissions, grantResults));
+                if (isAllPermissionNoLongerDisplay(permissionList)) {
+                    DialogTool.getInstance().showDialog((AppCompatActivity) appContext, "", "需要给予相关的权限才能使用该功能", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Functions.SkipToAppDetail();
+                        }
+                    }, null);
+
+                } else if (permissions.length == 1 && !permissionList.isEmpty()) {
+                    DialogTool.getInstance().showDialog((AppCompatActivity) appContext, "必须设置权限才能正常使用该功能", null, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions((Activity) appContext, new String[]{permissions[0]}, requestCode);
+                        }
+                    }, null);
+                } else {
+                    Functions.toast("必须给予相关的权限才能使用该功能");
+                }
+            }
+        }
+    }
+
+    /**
+     * 通过判断不再显示权限集合长度跟被拒绝集合长度是否一致来决定是否执行跳去设置页面
+     *
+     * @param permissions
+     * @return
+     */
+    public boolean isAllPermissionNoLongerDisplay(ArrayList<String> permissions) {
+        //获取所有点击了不再显示的权限
+        ArrayList<String> noLongerDisplayList = new ArrayList<>();
+        for (int i = 0; i < permissions.size(); i++) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) appContext, permissions.get(i))) {
+                noLongerDisplayList.add(permissions.get(i));
+            }
+        }
+        //判断是否所有权限都不再显示
+        if (noLongerDisplayList.size() == permissions.size()) {
+            return true;
         } else {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) appContext, permission)) {
-                noLongerDisplay.onClick(new View(appContext));
-            }
+            return false;
         }
-    }
-
-    public void showExplainDialog(String message, final String permission, final int requestCode) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(appContext);
-        builder.setTitle(message);
-        builder.setIcon(R.drawable.ic_menu_gallery);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ActivityCompat.requestPermissions((Activity) appContext, new String[]{permission}, requestCode);
-            }
-        });
-        builder.setNegativeButton("取消", null);
-        builder.show();
     }
 
 }
+
