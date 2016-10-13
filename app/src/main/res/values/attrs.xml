@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <declare-styleable name="PopView">
+        <attr name="popColor" format="reference|color"></attr>
+    </declare-styleable>
+
     <declare-styleable name="MoodView">
         <attr name="moodColor" format="reference|color"></attr>
     </declare-styleable>
