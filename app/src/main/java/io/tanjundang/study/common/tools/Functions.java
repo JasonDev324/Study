@@ -477,4 +477,70 @@ public class Functions {
         intent.setData(Uri.fromParts("package", appContext.getPackageName(), null));
         appContext.startActivity(intent);
     }
+
+    /**
+     * 获取文件夹的大小
+     * 单位是M
+     *
+     * @param file
+     * @return 清除缓存功能的实现
+     * 1.编写计算文件夹大小的方法
+     * 2.计算内部存储（getCacheDir、getFileDir）、外部存储(getExtralCacheDir、getExtralFileDIr)、SharePreference、数据库的文件夹大小
+     * 3.删除这些文件
+     * 数据库路径： "/data/data/"+getActivity().getPackageName() + "/databases"
+     * SharePrefence路径："/data/data/"getActivity().getPackageName() + "/shared_prefs"
+     */
+    public static double getFileDirSize(File file) {
+        double size = 0;
+        //如果文件不存在，则直接返回
+        if (file.exists()) {
+            //如果是文件，则直接返回其大小
+            if (!file.isDirectory()) {
+                size = (double) file.length() / 1024 / 1024;
+            } else {
+                //如果是文件夹，则遍历递归该文件夹
+                File[] dir = file.listFiles();
+                for (File childFile : dir) {
+                    size += getFileDirSize(childFile);
+                }
+            }
+        } else {
+            return size;
+        }
+        return size;
+    }
+
+    public static double getCacheSize() {
+        return getFileDirSize(appContext.getFilesDir())
+                + getFileDirSize(appContext.getCacheDir())
+                + getFileDirSize(new File("/data/data/" + appContext.getPackageName() + "/shared_prefs"))
+                + getFileDirSize(new File("/data/data/" + appContext.getPackageName() + "/databases"));
+    }
+
+
+    private static void deleteAllFile(File dir) {
+        if (dir.exists()) {
+            if (dir.isDirectory()) {
+                File[] files = dir.listFiles();
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        deleteAllFile(file.getAbsoluteFile());
+                    } else {
+                        file.delete();
+                    }
+                }
+            } else {
+                dir.delete();
+            }
+        }
+    }
+
+    public static void clearCache() {
+        deleteAllFile(appContext.getFilesDir());
+        deleteAllFile(appContext.getCacheDir());
+        deleteAllFile(new File("/data/data/" + appContext.getPackageName() + "/shared_prefs"));
+        deleteAllFile(new File("/data/data/" + appContext.getPackageName() + "/databases"));
+    }
+
+
 }
