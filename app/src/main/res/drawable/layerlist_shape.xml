@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <!--layer-list是用于层叠Drawable，每个item为一个shape-->
+
+    <!--进度条背景shape 需要指定背景id-->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="#5566ff" />
+            <corners android:radius="50dp" />
+        </shape>
+    </item>
+
+    <!--进度条进度Shape 需要指定进度id-->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <solid android:color="#BCDA73" />
+                <corners android:radius="50dp" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>
