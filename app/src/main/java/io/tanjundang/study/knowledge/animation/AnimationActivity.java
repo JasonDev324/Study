@@ -1,40 +1,96 @@
 package io.tanjundang.study.knowledge.animation;
 
-import android.app.Activity;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
 
+/**
+ * 加载Animation的两种方式 java、xml
+ * xml：利用AnimationUtils的loadAnimation方法，加载anim目录下的动画
+ * java：创建Animation对象，指明属性
+ */
 public class AnimationActivity extends BaseActivity implements View.OnClickListener {
 
-    Toolbar toolbar;
+    private Toolbar toolbar;
+    private Button alphaBtn;
+    private Button translateBtn;
+    private Button scaleBtn;
+    private Button rotateBtn;
+    private Button AnimSetBtn;
+    private Button AnimListBtn;
+    private ImageView ivAnimation;
+    private AnimationDrawable frameDrawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_animation);
     }
 
     @Override
     protected void initView() {
+        setContentView(R.layout.activity_animation);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        alphaBtn = (Button) findViewById(R.id.alphaBtn);
+        translateBtn = (Button) findViewById(R.id.translateBtn);
+        scaleBtn = (Button) findViewById(R.id.scaleBtn);
+        rotateBtn = (Button) findViewById(R.id.rotateBtn);
+        AnimSetBtn = (Button) findViewById(R.id.AnimSetBtn);
+        AnimListBtn = (Button) findViewById(R.id.AnimListBtn);
+        ivAnimation = (ImageView) findViewById(R.id.ivAnimation);
+        AnimListBtn.setOnClickListener(this);
         toolbar.setOnClickListener(this);
+        alphaBtn.setOnClickListener(this);
+        translateBtn.setOnClickListener(this);
+        scaleBtn.setOnClickListener(this);
+        rotateBtn.setOnClickListener(this);
+        AnimSetBtn.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
-
+        frameDrawable = (AnimationDrawable) ivAnimation.getBackground();
     }
 
     @Override
     public void onClick(View view) {
         if (view.equals(toolbar)) {
             BtnAnimation animation = new BtnAnimation(toolbar);
-            animation.setDuration(200);
+            animation.setDuration(1000);
             toolbar.startAnimation(animation);
+        } else if (view.equals(alphaBtn)) {
+//            Java方式加载：
+//            AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+//            alphaAnimation.setDuration(300);
+
+//            XML方式加载：
+            Animation alphaAnimation = AnimationUtils.loadAnimation(this, R.anim.alpha_anim);
+            ivAnimation.startAnimation(alphaAnimation);
+        } else if (view.equals(translateBtn)) {
+            Animation translateAnimation = AnimationUtils.loadAnimation(this, R.anim.translate_anim);
+            ivAnimation.startAnimation(translateAnimation);
+        } else if (view.equals(scaleBtn)) {
+            Animation scaleAnimation = AnimationUtils.loadAnimation(this, R.anim.scale_anim);
+            ivAnimation.startAnimation(scaleAnimation);
+        } else if (view.equals(rotateBtn)) {
+            Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate_anim);
+            ivAnimation.startAnimation(rotateAnimation);
+        } else if (view.equals(AnimSetBtn)) {
+            Animation rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.set_anim);
+            ivAnimation.startAnimation(rotateAnimation);
+        } else if (view.equals(AnimListBtn)) {
+            if (frameDrawable.isRunning()) {
+                frameDrawable.stop();
+            } else {
+                frameDrawable.start();
+            }
         }
     }
 }

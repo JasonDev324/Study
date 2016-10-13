@@ -1,20 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:toolbar="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_test"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".knowledge.animation.AnimationActivity">
+    xmlns:toolbar="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:animateLayoutChanges="true"
-        android:background="@drawable/background_shape"
-        toolbar:title="EDC"
-        toolbar:titleTextColor="#fff"></android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/activity_test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context=".knowledge.animation.AnimationActivity">
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/alphaBtn"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/action_bar_color"
+            android:text="透明Alpha-Animation"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/translateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/action_bar_color"
+            android:text="平移Translate-Animation"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/scaleBtn"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/action_bar_color"
+            android:text="缩放Scale-Animation"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/rotateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/action_bar_color"
+            android:text="旋转Rotate-Animation"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/AnimSetBtn"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/action_bar_color"
+            android:text="动画集合Set-Animation"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/AnimListBtn"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/action_bar_color"
+            android:text="帧动画Animation-List"
+            android:textColor="@color/white" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            toolbar:title="TJD"
+            toolbar:titleTextColor="#fff"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/background_shape"></android.support.v7.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/ivAnimation"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="15dp"
+            android:background="@drawable/animation_meituan" />
+
+
+    </LinearLayout>
+
+</ScrollView>
