@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-   android:weightSum="1"
-    tools:context="io.tanjundang.study.test.customview.CustomViewActivity">
+    android:weightSum="1"
+    tools:context="io.tanjundang.study.knowledge.customview.CustomViewActivity">
 
     <io.tanjundang.study.knowledge.customview.CustomImageView
         android:id="@+id/customImageView"
@@ -21,6 +21,10 @@
 
     <io.tanjundang.study.test.customview.PopView
         android:id="@+id/popView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <io.tanjundang.study.knowledge.customview.PointView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
