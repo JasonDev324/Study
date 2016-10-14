@@ -1,5 +1,10 @@
 package io.tanjundang.study.knowledge.animation;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.graphics.Path;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +33,8 @@ public class AnimationActivity extends BaseActivity implements View.OnClickListe
     private Button AnimListBtn;
     private ImageView ivAnimation;
     private AnimationDrawable frameDrawable;
+    private Button objectAnimatorBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,7 @@ public class AnimationActivity extends BaseActivity implements View.OnClickListe
         AnimSetBtn = (Button) findViewById(R.id.AnimSetBtn);
         AnimListBtn = (Button) findViewById(R.id.AnimListBtn);
         ivAnimation = (ImageView) findViewById(R.id.ivAnimation);
+        objectAnimatorBtn = (Button) findViewById(R.id.objectAnimatorBtn);
         AnimListBtn.setOnClickListener(this);
         toolbar.setOnClickListener(this);
         alphaBtn.setOnClickListener(this);
@@ -52,11 +60,13 @@ public class AnimationActivity extends BaseActivity implements View.OnClickListe
         scaleBtn.setOnClickListener(this);
         rotateBtn.setOnClickListener(this);
         AnimSetBtn.setOnClickListener(this);
+        objectAnimatorBtn.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
         frameDrawable = (AnimationDrawable) ivAnimation.getBackground();
+
     }
 
     @Override
@@ -91,6 +101,17 @@ public class AnimationActivity extends BaseActivity implements View.OnClickListe
             } else {
                 frameDrawable.start();
             }
+        } else if (view.equals(objectAnimatorBtn)) {
+//            XML方式加载：
+//            Animator animator = AnimatorInflater.loadAnimator(this, R.animator.objectanimator_anim);
+//            animator.setTarget(ivAnimation);
+//            animator.start();
+
+            ObjectAnimator xAnim = ObjectAnimator.ofFloat(ivAnimation, "scaleX", 1, 1.5f);
+            ObjectAnimator yAnim = ObjectAnimator.ofFloat(ivAnimation, "scaleY", 1, 1.5f);
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.play(xAnim).with(yAnim);
+            animatorSet.start();
         }
     }
 }

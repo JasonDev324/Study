@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toolbar="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:toolbar="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/activity_test"
@@ -69,13 +69,13 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            toolbar:title="TJD"
-            toolbar:titleTextColor="#fff"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginTop="10dp"
             android:animateLayoutChanges="true"
-            android:background="@drawable/background_shape"></android.support.v7.widget.Toolbar>
+            android:background="@drawable/background_shape"
+            toolbar:title="TJD"
+            toolbar:titleTextColor="#fff"></android.support.v7.widget.Toolbar>
 
         <ImageView
             android:id="@+id/ivAnimation"
@@ -84,6 +84,15 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="15dp"
             android:background="@drawable/animation_meituan" />
+
+        <Button
+            android:id="@+id/objectAnimatorBtn"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/action_bar_color"
+            android:text="属性动画ObjectAnimator"
+            android:textColor="@color/white" />
 
 
     </LinearLayout>
