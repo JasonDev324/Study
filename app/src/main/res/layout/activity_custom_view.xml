@@ -19,7 +19,7 @@
         tjd:textColor="@color/red"
         tjd:textSize="14dp" />
 
-    <io.tanjundang.study.test.customview.PopView
+    <io.tanjundang.study.knowledge.customview.PopView
         android:id="@+id/popView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
