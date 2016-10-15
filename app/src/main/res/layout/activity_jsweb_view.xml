@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context="io.tanjundang.study.knowledge.webview.WebViewActivity">
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/green"
+        android:onClick="callJS"
+        android:text="传递数据给JS,JS调用Android中方法并显示该值"
+        android:textColor="@color/white" />
+
     <WebView
         android:id="@+id/webView"
         android:layout_width="match_parent"

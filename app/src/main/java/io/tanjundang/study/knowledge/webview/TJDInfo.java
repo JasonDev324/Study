@@ -31,4 +31,11 @@ public class TJDInfo {
             }
         }, null);
     }
+
+    @JavascriptInterface
+    public void getMessageFromJS(String msg) {
+        Functions.toast(msg);
+    }
+
+
 }

@@ -5,5 +5,15 @@
 
 <body>
 <input type="button" value="启动对话框" onclick="tjd.showTJDMsg();"/>
+<script language="javascript">
+
+//在android代码中调用此方法
+function showInfoFromJava(msg){
+window.tjd.getMessageFromJS(msg);
+}
+
+
+
+</script>
 </body>
 </html>
