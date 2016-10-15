@@ -5,19 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context="io.tanjundang.study.knowledge.webview.WebViewActivity">
 
-    <TextView
-        android:id="@+id/tvProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="#1abc9c"
-        android:padding="5dp" />
-
-    <WebView
-        android:id="@+id/webView"
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_height="44dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/action_bar_color"
+        android:onClick="NormalWebView"
+        android:text="WebView简单使用"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/action_bar_color"
+        android:onClick="JSWebView"
+        android:text="WebView与JS交互"
+        android:textColor="@color/white" />
 
 </LinearLayout>

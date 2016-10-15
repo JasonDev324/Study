@@ -30,6 +30,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 
 import io.tanjundang.study.BuildConfig;
+import io.tanjundang.study.MainActivity;
 import io.tanjundang.study.R;
 
 
@@ -542,5 +543,10 @@ public class Functions {
         deleteAllFile(new File("/data/data/" + appContext.getPackageName() + "/databases"));
     }
 
+    public static void startActivity(Class cls) {
+        Intent intent = new Intent(appContext, cls);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        appContext.startActivity(intent);
+    }
 
 }

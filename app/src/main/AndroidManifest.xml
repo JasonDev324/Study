@@ -116,7 +116,9 @@
         <activity android:name=".knowledge.viewpager.TabActivity" />
         <activity android:name=".knowledge.viewpager.SimpleTabActivity" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".knowledge.webview.WebViewActivity"></activity>
+        <activity android:name=".knowledge.webview.WebViewActivity" />
+        <activity android:name=".knowledge.webview.NormalWebViewActivity" />
+        <activity android:name=".knowledge.webview.JSWebViewActivity"></activity>
     </application>
 
 </manifest>
