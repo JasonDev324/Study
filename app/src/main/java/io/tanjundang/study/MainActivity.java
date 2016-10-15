@@ -41,6 +41,7 @@ import io.tanjundang.study.knowledge.drawerlayout.DrawerLayoutActivity;
 import io.tanjundang.study.knowledge.service.ServiceActivity;
 import io.tanjundang.study.knowledge.shape.ShapeActivity;
 import io.tanjundang.study.knowledge.viewpager.TabActivity;
+import io.tanjundang.study.knowledge.webview.WebViewActivity;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, NotifyReceiver.NotifyCallback {
 
@@ -104,6 +105,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         data.add(new DateItemBean(R.string.main_text_study_customview, DateItemBean.Type.CUSTOMVIEW));
         data.add(new DateItemBean(R.string.main_text_study_tablayout, DateItemBean.Type.TABLAYOUT));
         data.add(new DateItemBean(R.string.main_text_study_umshare, DateItemBean.Type.UM_SHARE));
+        data.add(new DateItemBean(R.string.main_text_study_webview, DateItemBean.Type.WEBVIEW));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -213,6 +215,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         StartActivity(TabActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.UM_SHARE)) {
                         ShareTool.getInstance().SendMessage(MainActivity.this);
+                    } else if (item.getType().equals(DateItemBean.Type.WEBVIEW)) {
+                        StartActivity(WebViewActivity.class);
                     }
                 }
             });

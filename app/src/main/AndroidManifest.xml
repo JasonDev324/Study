@@ -114,8 +114,9 @@
         <activity android:name=".knowledge.service.RemoteActivity" />
         <activity android:name=".knowledge.viewpager.CustomTabActivity" />
         <activity android:name=".knowledge.viewpager.TabActivity" />
-        <activity android:name=".knowledge.viewpager.SimpleTabActivity"></activity>
-        <activity android:name=".base.BaseActivity"></activity>
+        <activity android:name=".knowledge.viewpager.SimpleTabActivity" />
+        <activity android:name=".base.BaseActivity" />
+        <activity android:name=".knowledge.webview.WebViewActivity"></activity>
     </application>
 
 </manifest>

@@ -24,7 +24,8 @@ public class DateItemBean {
         GUIDE,
         CUSTOMVIEW,
         TABLAYOUT,
-        UM_SHARE
+        UM_SHARE,
+        WEBVIEW
     }
 
     public DateItemBean(int title, Type type) {
