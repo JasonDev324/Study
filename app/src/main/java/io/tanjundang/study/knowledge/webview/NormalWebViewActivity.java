@@ -33,6 +33,14 @@ public class NormalWebViewActivity extends BaseActivity {
         tvProgress = (TextView) findViewById(R.id.tvProgress);
     }
 
+    public void reload(View v) {
+        webView.reload();
+    }
+
+    public void clearCache(View v) {
+        webView.clearCache(true);
+    }
+
     @Override
     protected void initData() {
         webView.loadUrl(LOAD_URL);
@@ -71,6 +79,16 @@ public class NormalWebViewActivity extends BaseActivity {
         settings.setBuiltInZoomControls(true);//设定支持缩放
         settings.setDisplayZoomControls(true);//是否显示缩放按钮 true为显示
 //        settings.setSupportZoom(true);//这方法没什么用，但是如果设置为false 则上述setBuiltInZoomControls无效
+
+
+        // 开启DOM storage API 功能
+        settings.setDomStorageEnabled(true);
+        // 开启database storage API功能
+        settings.setDatabaseEnabled(true);
+
+        settings.setAppCacheEnabled(true);
+        settings.setAppCachePath(getCacheDir().getAbsolutePath() + "/webCache");
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
     }
 
     @Override
