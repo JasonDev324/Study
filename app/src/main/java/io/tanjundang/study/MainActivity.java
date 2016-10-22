@@ -35,6 +35,7 @@ import io.tanjundang.study.knowledge.customview.CustomViewActivity;
 import io.tanjundang.study.knowledge.intent.IntentActivity;
 import io.tanjundang.study.knowledge.launchmode.LaunchModeActivity;
 import io.tanjundang.study.knowledge.preference.PreSettingActivity;
+import io.tanjundang.study.knowledge.scrollconflict.ScrollConflictActivity;
 import io.tanjundang.study.knowledge.selector.SelectorActivity;
 import io.tanjundang.study.knowledge.animation.AnimationActivity;
 import io.tanjundang.study.knowledge.drawerlayout.DrawerLayoutActivity;
@@ -89,6 +90,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         recyclerview.setAdapter(mAdapter);
     }
 
+    public void Test(View v) {
+
+    }
+
     @Override
     public void initData() {
         data.add(new DateItemBean(R.string.main_text_study_animation, DateItemBean.Type.ANIMATION));
@@ -106,6 +111,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         data.add(new DateItemBean(R.string.main_text_study_tablayout, DateItemBean.Type.TABLAYOUT));
         data.add(new DateItemBean(R.string.main_text_study_umshare, DateItemBean.Type.UM_SHARE));
         data.add(new DateItemBean(R.string.main_text_study_webview, DateItemBean.Type.WEBVIEW));
+        data.add(new DateItemBean(R.string.main_text_study_conflict, DateItemBean.Type.SCROLLCONFLICT));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -217,6 +223,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         ShareTool.getInstance().SendMessage(MainActivity.this);
                     } else if (item.getType().equals(DateItemBean.Type.WEBVIEW)) {
                         StartActivity(WebViewActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.SCROLLCONFLICT)) {
+                        StartActivity(ScrollConflictActivity.class);
                     }
                 }
             });

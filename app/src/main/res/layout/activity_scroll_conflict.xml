@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.tanjundang.study.knowledge.scrollconflict.NestScrollview xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:overScrollMode="ifContentScrolls"
+    android:scrollbars="vertical"
+    tools:context="io.tanjundang.study.knowledge.scrollconflict.ScrollConflictActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="15dp"></android.support.v7.widget.RecyclerView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/action_bar_color"
+            android:text="Test"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</io.tanjundang.study.knowledge.scrollconflict.NestScrollview>

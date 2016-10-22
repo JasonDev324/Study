@@ -20,6 +20,7 @@
     <string name="main_text_study_tablayout">TabLayout</string>
     <string name="main_text_study_umshare">UMShare</string>
     <string name="main_text_study_webview">WebView</string>
+    <string name="main_text_study_conflict">ScrollConflict</string>
 
     <string name="action_send">Send Msg</string>
 

@@ -118,7 +118,8 @@
         <activity android:name=".base.BaseActivity" />
         <activity android:name=".knowledge.webview.WebViewActivity" />
         <activity android:name=".knowledge.webview.NormalWebViewActivity" />
-        <activity android:name=".knowledge.webview.JSWebViewActivity"></activity>
+        <activity android:name=".knowledge.webview.JSWebViewActivity" />
+        <activity android:name=".knowledge.scrollconflict.ScrollConflictActivity"></activity>
     </application>
 
 </manifest>
