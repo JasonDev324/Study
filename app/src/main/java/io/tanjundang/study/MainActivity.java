@@ -41,6 +41,7 @@ import io.tanjundang.study.knowledge.animation.AnimationActivity;
 import io.tanjundang.study.knowledge.drawerlayout.DrawerLayoutActivity;
 import io.tanjundang.study.knowledge.service.ServiceActivity;
 import io.tanjundang.study.knowledge.shape.ShapeActivity;
+import io.tanjundang.study.knowledge.socket.SocketStudyActivity;
 import io.tanjundang.study.knowledge.viewpager.TabActivity;
 import io.tanjundang.study.knowledge.webview.WebViewActivity;
 
@@ -112,6 +113,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         data.add(new DateItemBean(R.string.main_text_study_umshare, DateItemBean.Type.UM_SHARE));
         data.add(new DateItemBean(R.string.main_text_study_webview, DateItemBean.Type.WEBVIEW));
         data.add(new DateItemBean(R.string.main_text_study_conflict, DateItemBean.Type.SCROLLCONFLICT));
+        data.add(new DateItemBean(R.string.main_text_study_socket, DateItemBean.Type.SOCKET));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -225,6 +227,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         StartActivity(WebViewActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.SCROLLCONFLICT)) {
                         StartActivity(ScrollConflictActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.SOCKET)) {
+                        StartActivity(SocketStudyActivity.class);
                     }
                 }
             });

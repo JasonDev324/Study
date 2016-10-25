@@ -26,7 +26,8 @@ public class DateItemBean {
         TABLAYOUT,
         UM_SHARE,
         WEBVIEW,
-        SCROLLCONFLICT
+        SCROLLCONFLICT,
+        SOCKET
     }
 
     public DateItemBean(int title, Type type) {

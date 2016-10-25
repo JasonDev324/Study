@@ -1,7 +1,6 @@
 package io.tanjundang.study.knowledge.shape;
 
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ClipDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
