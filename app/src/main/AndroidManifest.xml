@@ -115,12 +115,13 @@
         <activity android:name=".knowledge.viewpager.CustomTabActivity" />
         <activity android:name=".knowledge.viewpager.TabActivity" />
         <activity android:name=".knowledge.viewpager.SimpleTabActivity" />
-        <activity android:name=".base.BaseActivity" />
         <activity android:name=".knowledge.webview.WebViewActivity" />
         <activity android:name=".knowledge.webview.NormalWebViewActivity" />
         <activity android:name=".knowledge.webview.JSWebViewActivity" />
         <activity android:name=".knowledge.scrollconflict.ScrollConflictActivity" />
-        <activity android:name=".knowledge.socket.SocketStudyActivity"></activity>
+        <activity
+            android:name=".knowledge.socket.SocketStudyActivity"
+            android:windowSoftInputMode="adjustResize|adjustPan"></activity>
     </application>
 
 </manifest>
