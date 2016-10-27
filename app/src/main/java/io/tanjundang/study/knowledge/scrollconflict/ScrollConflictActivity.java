@@ -1,11 +1,9 @@
 package io.tanjundang.study.knowledge.scrollconflict;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
@@ -15,14 +13,13 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
-import io.tanjundang.study.common.tools.Functions;
 
 public class ScrollConflictActivity extends BaseActivity {
 
     RecyclerView recyclerview;
     ArrayList<TestListInfo> data = new ArrayList<>();
     TestAdapter mAdapter;
-    NestScrollview scrollView;
+//    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +29,7 @@ public class ScrollConflictActivity extends BaseActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_scroll_conflict);
-        scrollView = (NestScrollview) findViewById(R.id.scrollView);
+//        scrollView = (ScrollView) findViewById(R.id.scrollView);
 
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         mAdapter = new TestAdapter();
@@ -43,25 +40,25 @@ public class ScrollConflictActivity extends BaseActivity {
 
 //        recyclerview.addItemDecoration(new SpaceItemDecoration(10));
         recyclerview.setAdapter(mAdapter);
-        recyclerview.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView view, int newState) {
-                super.onScrollStateChanged(view, newState);
-                if (isVisBottom(view)) {
-                    scrollView.setScrollEnable(true);
-//                    view.getParent().requestDisallowInterceptTouchEvent(false);//true时，让view的父类不拦截事件
-//                    scrollView.requestDisallowInterceptTouchEvent(false);
-                } else {
-                    scrollView.setScrollEnable(false);
-                    view.getParent().requestDisallowInterceptTouchEvent(true);
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
+//        recyclerview.setOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(RecyclerView view, int newState) {
+//                super.onScrollStateChanged(view, newState);
+//                if (isVisBottom(view)) {
+//                    scrollView.setScrollEnable(true);
+////                    view.getParent().requestDisallowInterceptTouchEvent(false);//true时，让view的父类不拦截事件
+////                    scrollView.requestDisallowInterceptTouchEvent(false);
+//                } else {
+//                    scrollView.setScrollEnable(false);
+//                    view.getParent().requestDisallowInterceptTouchEvent(true);
+//                }
+//            }
+//
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//            }
+//        });
     }
 
 

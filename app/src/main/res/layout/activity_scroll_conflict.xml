@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<io.tanjundang.study.knowledge.scrollconflict.NestScrollview xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:overScrollMode="ifContentScrolls"
-    android:scrollbars="vertical"
+    android:scrollbars="none"
     tools:context="io.tanjundang.study.knowledge.scrollconflict.ScrollConflictActivity">
 
     <LinearLayout
@@ -17,7 +17,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_margin="15dp"></android.support.v7.widget.RecyclerView>
 
         <Button
@@ -134,4 +134,4 @@
 
     </LinearLayout>
 
-</io.tanjundang.study.knowledge.scrollconflict.NestScrollview>
+</ScrollView>
