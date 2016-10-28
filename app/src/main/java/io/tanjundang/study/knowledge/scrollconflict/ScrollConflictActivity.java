@@ -1,5 +1,6 @@
 package io.tanjundang.study.knowledge.scrollconflict;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
+import io.tanjundang.study.common.view.ItemDivider;
 
 public class ScrollConflictActivity extends BaseActivity {
 
@@ -34,11 +36,9 @@ public class ScrollConflictActivity extends BaseActivity {
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         mAdapter = new TestAdapter();
         LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setOrientation(LinearLayoutManager.VERTICAL);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerview.addItemDecoration(new ItemDivider(Color.parseColor("#1abc9c"), ItemDivider.HORIZONTAL, 10));
         recyclerview.setLayoutManager(manager);
-//        recyclerview.setNestedScrollingEnabled(false);
-
-//        recyclerview.addItemDecoration(new SpaceItemDecoration(10));
         recyclerview.setAdapter(mAdapter);
 //        recyclerview.setOnScrollListener(new RecyclerView.OnScrollListener() {
 //            @Override
