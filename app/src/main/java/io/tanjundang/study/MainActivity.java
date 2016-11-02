@@ -91,10 +91,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         recyclerview.setAdapter(mAdapter);
     }
 
-    public void Test(View v) {
-
-    }
-
     @Override
     public void initData() {
         data.add(new DateItemBean(R.string.main_text_study_animation, DateItemBean.Type.ANIMATION));
@@ -164,6 +160,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
