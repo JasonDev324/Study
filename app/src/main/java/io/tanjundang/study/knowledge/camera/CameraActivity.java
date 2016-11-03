@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.view.SurfaceView;
 import android.view.View;
 
 import com.nostra13.universalimageloader.utils.StorageUtils;
@@ -27,6 +28,7 @@ import io.tanjundang.study.common.tools.PermissionTool;
  */
 public class CameraActivity extends BaseActivity {
 
+    SurfaceView surfaceView;
     private final int CAMERA_REQ = 0XFF;
     private ArrayList<String> permissionList = new ArrayList<>();
 
@@ -38,12 +40,17 @@ public class CameraActivity extends BaseActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_camera);
+        surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
     }
 
     @Override
     protected void initData() {
         permissionList.add(Manifest.permission.CAMERA);
         permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    public void customCamera(View v) {
+        Functions.startActivity(CustomCameraActivity.class);
     }
 
     public void Camera(View view) {
@@ -59,6 +66,7 @@ public class CameraActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) return;
         if (requestCode == CAMERA_REQ) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             savePic(bitmap, "DICM", AUTHOR);

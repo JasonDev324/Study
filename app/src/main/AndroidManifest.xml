@@ -123,7 +123,8 @@
             android:name=".knowledge.socket.SocketStudyActivity"
             android:windowSoftInputMode="adjustResize|adjustPan" />
         <activity android:name=".knowledge.datepicker.DatePickerActivity" />
-        <activity android:name=".knowledge.camera.CameraActivity"></activity>
+        <activity android:name=".knowledge.camera.CameraActivity" />
+        <activity android:name=".knowledge.camera.CustomCameraActivity"></activity>
     </application>
 
 </manifest>
