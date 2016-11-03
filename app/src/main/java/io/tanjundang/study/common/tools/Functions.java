@@ -390,27 +390,6 @@ public class Functions {
 //        upload(path, callback);
 //    }
 
-
-    /**
-     * 获取sd卡路径,如果没有sd卡路径,就在/data/data下创建
-     *
-     * @return
-     */
-    public static String getSDPath() {
-        String sdPath = "";
-        if (isSDCardExist()) {
-            sdPath = Environment.getExternalStorageDirectory() + "/TJD_NBA/";
-        } else {
-            sdPath = Environment.getDataDirectory() + "/TJD_NBA/";
-        }
-
-        File file = new File(sdPath); //创建路径
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        return sdPath;
-    }
-
     /**
      * 判断SD卡是否存在
      *
@@ -418,6 +397,29 @@ public class Functions {
      */
     public static boolean isSDCardExist() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+
+    /**
+     * 输入文件夹、文件名，返回一个路径处理好的文件
+     *
+     * @param folder
+     * @param fileName 需要自行添加后缀
+     * @return
+     */
+    public static File getSDCardFile(String folder, String fileName) {
+        String sdPath = "";
+//        获取sd卡路径,如果没有sd卡路径,就在/data/data下创建
+        if (isSDCardExist()) {
+            sdPath = Environment.getExternalStorageDirectory() + "/TJDStudy/";
+        } else {
+            sdPath = Environment.getDataDirectory() + "/TJDStudy/";
+        }
+        File fileDir = new File(sdPath + folder);
+        if (!fileDir.exists()) {
+            fileDir.mkdirs();
+        }
+        File file = new File(fileDir, fileName);
+        return file;
     }
 
     /**
@@ -548,5 +550,6 @@ public class Functions {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         appContext.startActivity(intent);
     }
+
 
 }

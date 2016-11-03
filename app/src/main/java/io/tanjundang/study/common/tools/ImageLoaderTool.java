@@ -54,7 +54,7 @@ public class ImageLoaderTool {
      * @param context 在APP中
      */
     public static void initImageLoader(Context context) {
-        File diskCache = StorageUtils.getOwnCacheDirectory(context, "TJD_NBA/");
+        File diskCache = StorageUtils.getOwnCacheDirectory(context, "TJDStudy/ImageCache/");
         if (configuration == null) {
             configuration = new ImageLoaderConfiguration.Builder(context)
                     .diskCache(new UnlimitedDiskCache(diskCache))

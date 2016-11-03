@@ -15,6 +15,7 @@ import com.umeng.socialize.UMShareAPI;
 public abstract class BaseActivity extends AppCompatActivity {
 
     public String TAG = getClass().getName();
+    public String AUTHOR = "TanJunDang";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

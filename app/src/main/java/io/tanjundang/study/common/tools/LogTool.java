@@ -1,5 +1,6 @@
 package io.tanjundang.study.common.tools;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.File;
@@ -93,11 +94,11 @@ public class LogTool {
      * @param filename 输出文件名
      */
     public static void log2File(String msg, String filename) {
-        if (filename == null || filename.isEmpty()) { //文件名初始化
+        if (TextUtils.isEmpty(filename)) { //文件名初始化
             filename = CRASH_FILE;
         }
 
-        File file = new File(Functions.getSDPath(), filename);
+        File file = Functions.getSDCardFile("Log", filename);
         FileWriter fw = null;
         try {
             if (!file.exists()) {
