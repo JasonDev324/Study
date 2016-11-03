@@ -12,6 +12,7 @@ public class DateItemBean {
 
     public enum Type {
         ANIMATION,
+        CAMERA,
         DRAWERLAYOUT,
         DATEPICKER,
         SHAPE,

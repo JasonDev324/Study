@@ -1,8 +1,13 @@
 package io.tanjundang.study;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.LocalBroadcastManager;
@@ -27,10 +32,12 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.Functions;
+import io.tanjundang.study.common.tools.PermissionTool;
 import io.tanjundang.study.common.tools.ShareTool;
 import io.tanjundang.study.knowledge.TestActivity;
 import io.tanjundang.study.knowledge.actionbar.ActionBarStudyActivity;
 import io.tanjundang.study.knowledge.broadcast.NotifyReceiver;
+import io.tanjundang.study.knowledge.camera.CameraActivity;
 import io.tanjundang.study.knowledge.customview.CustomViewActivity;
 import io.tanjundang.study.knowledge.datepicker.DatePickerActivity;
 import io.tanjundang.study.knowledge.intent.IntentActivity;
@@ -50,6 +57,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     private ActionBarDrawerToggle toggle;
     private ArrayList<DateItemBean> data = new ArrayList<>();
+    private ArrayList<String> permissionList = new ArrayList<>();
     private MainContentAdapter mAdapter;
     private RecyclerView recyclerview;
     private NotifyReceiver receiver;
@@ -94,7 +102,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void initData() {
+        permissionList.add(Manifest.permission.CAMERA);
+        permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
         data.add(new DateItemBean(R.string.main_text_study_animation, DateItemBean.Type.ANIMATION));
+        data.add(new DateItemBean(R.string.main_text_study_camera, DateItemBean.Type.CAMERA));
         data.add(new DateItemBean(R.string.main_text_study_drawerlayout, DateItemBean.Type.DRAWERLAYOUT));
         data.add(new DateItemBean(R.string.main_text_study_datepicker, DateItemBean.Type.DATEPICKER));
         data.add(new DateItemBean(R.string.main_text_study_shape, DateItemBean.Type.SHAPE));
@@ -162,7 +174,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-
+            PermissionTool.getInstance(this).requestPermissions(permissionList, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, 666);
+                }
+            });
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -195,6 +213,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                     DateItemBean item = (DateItemBean) v.getTag(DATA_TAG);
                     if (item.getType().equals(DateItemBean.Type.ANIMATION)) {
                         StartActivity(AnimationActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.CAMERA)) {
+                        StartActivity(CameraActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.DRAWERLAYOUT)) {
                         StartActivity(DrawerLayoutActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.DATEPICKER)) {
@@ -265,6 +285,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void StartActivity(Class cls) {
         Intent intent = new Intent(MainActivity.this, cls);
         startActivity(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        PermissionTool.getInstance(this).onRequestPermissionsResult(permissionList, requestCode, permissions, grantResults);
     }
 
     @Override
