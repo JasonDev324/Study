@@ -32,6 +32,7 @@ import io.tanjundang.study.knowledge.TestActivity;
 import io.tanjundang.study.knowledge.actionbar.ActionBarStudyActivity;
 import io.tanjundang.study.knowledge.broadcast.NotifyReceiver;
 import io.tanjundang.study.knowledge.customview.CustomViewActivity;
+import io.tanjundang.study.knowledge.datepicker.DatePickerActivity;
 import io.tanjundang.study.knowledge.intent.IntentActivity;
 import io.tanjundang.study.knowledge.launchmode.LaunchModeActivity;
 import io.tanjundang.study.knowledge.preference.PreSettingActivity;
@@ -95,6 +96,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void initData() {
         data.add(new DateItemBean(R.string.main_text_study_animation, DateItemBean.Type.ANIMATION));
         data.add(new DateItemBean(R.string.main_text_study_drawerlayout, DateItemBean.Type.DRAWERLAYOUT));
+        data.add(new DateItemBean(R.string.main_text_study_datepicker, DateItemBean.Type.DATEPICKER));
         data.add(new DateItemBean(R.string.main_text_study_shape, DateItemBean.Type.SHAPE));
         data.add(new DateItemBean(R.string.main_text_study_selector, DateItemBean.Type.SELECTOR));
         data.add(new DateItemBean(R.string.main_text_study_preference, DateItemBean.Type.PREFERENCE));
@@ -195,6 +197,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         StartActivity(AnimationActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.DRAWERLAYOUT)) {
                         StartActivity(DrawerLayoutActivity.class);
+                    } else if (item.getType().equals(DateItemBean.Type.DATEPICKER)) {
+                        StartActivity(DatePickerActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.SHAPE)) {
                         StartActivity(ShapeActivity.class);
                     } else if (item.getType().equals(DateItemBean.Type.SELECTOR)) {

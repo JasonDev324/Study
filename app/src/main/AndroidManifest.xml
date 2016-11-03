@@ -121,7 +121,8 @@
         <activity android:name=".knowledge.scrollconflict.ScrollConflictActivity" />
         <activity
             android:name=".knowledge.socket.SocketStudyActivity"
-            android:windowSoftInputMode="adjustResize|adjustPan"></activity>
+            android:windowSoftInputMode="adjustResize|adjustPan" />
+        <activity android:name=".knowledge.datepicker.DatePickerActivity"></activity>
     </application>
 
 </manifest>
