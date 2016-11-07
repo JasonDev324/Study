@@ -7,21 +7,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
+import io.tanjundang.study.common.view.CustomLayoutManager;
 import io.tanjundang.study.common.view.ItemDivider;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 public class ScrollConflictActivity extends BaseActivity {
 
     RecyclerView recyclerview;
     ArrayList<TestListInfo> data = new ArrayList<>();
     TestAdapter mAdapter;
-//    ScrollView scrollView;
+    //    ScrollView scrollView;
+    LinearLayoutManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,63 +39,58 @@ public class ScrollConflictActivity extends BaseActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_scroll_conflict);
-//        scrollView = (ScrollView) findViewById(R.id.scrollView);
+        Button btnTest = (Button) findViewById(R.id.btnTest);
 
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         mAdapter = new TestAdapter();
-        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager = new CustomLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerview.addItemDecoration(new ItemDivider(Color.parseColor("#1abc9c"), ItemDivider.HORIZONTAL, 10));
+
+        recyclerview.addItemDecoration(new ItemDivider(getColor(R.color.transparent), ItemDivider.HORIZONTAL, 35));
         recyclerview.setLayoutManager(manager);
         recyclerview.setAdapter(mAdapter);
-//        recyclerview.setOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrollStateChanged(RecyclerView view, int newState) {
-//                super.onScrollStateChanged(view, newState);
-//                if (isVisBottom(view)) {
-//                    scrollView.setScrollEnable(true);
-////                    view.getParent().requestDisallowInterceptTouchEvent(false);//true时，让view的父类不拦截事件
-////                    scrollView.requestDisallowInterceptTouchEvent(false);
-//                } else {
-//                    scrollView.setScrollEnable(false);
-//                    view.getParent().requestDisallowInterceptTouchEvent(true);
-//                }
-//            }
-//
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//            }
-//        });
+        recyclerview.addOnScrollListener(new StoreShowOnScrollListener());
+
     }
 
+    public class StoreShowOnScrollListener extends RecyclerView.OnScrollListener {
 
-    public static boolean isVisBottom(RecyclerView recyclerView) {
-        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-        //屏幕中最后一个可见子项的position
-        int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-        //当前屏幕所看到的子项个数
-        int visibleItemCount = layoutManager.getChildCount();
-        //当前RecyclerView的所有子项个数
-        int totalItemCount = layoutManager.getItemCount();
-        //RecyclerView的滑动状态
-        int state = recyclerView.getScrollState();
-        if (visibleItemCount > 0 && lastVisibleItemPosition == totalItemCount - 1 && state == recyclerView.SCROLL_STATE_IDLE) {
-            return true;
-        } else {
-            return false;
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            int childCount = recyclerView.getChildCount();
+            for (int j = 0; j < childCount; j++) {
+                View v = recyclerView.getChildAt(j);
+                float offset = (float) Math.abs(recyclerView.getWidth() / 2 - (v.getLeft() + v.getRight()) / 2) / recyclerView.getWidth();
+                offset = Math.min(offset, 0.2f);
+                v.setScaleX(1 - offset);
+                v.setScaleY(1 - offset);
+            }
         }
     }
 
     @Override
     protected void initData() {
+        data.add(new TestListInfo(""));
+        data.add(new TestListInfo(""));
         for (int i = 0; i < 10; i++) {
             data.add(new TestListInfo("DATA_" + i));
         }
+        data.add(new TestListInfo(""));
+        data.add(new TestListInfo(""));
         mAdapter.notifyDataSetChanged();
+        //延迟加载解决偏移出错问题
+        Observable.interval(1, TimeUnit.SECONDS).take(1).observeOn(AndroidSchedulers.mainThread()).subscribe(new Action1<Long>() {
+            @Override
+            public void call(Long aLong) {
+                int scrollToPos = 2;
+                manager.scrollToPosition(scrollToPos);
+            }
+        });
     }
 
     class TestAdapter extends RecyclerView.Adapter<TestAdapter.TestHolder> {
+        int DATA_TAG = R.layout.list_item_scroll_conflict;
+
         @Override
         public TestHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_scroll_conflict, parent, false);
@@ -96,7 +99,11 @@ public class ScrollConflictActivity extends BaseActivity {
 
         @Override
         public void onBindViewHolder(TestHolder holder, int position) {
-            holder.tvTitle.setText(data.get(position).getTitle());
+            TestListInfo info = data.get(position);
+            holder.rootview.setVisibility(info.getTitle().isEmpty() ? View.GONE : View.VISIBLE);
+
+            holder.tvTitle.setText(info.getTitle());
+            holder.rootview.setTag(DATA_TAG, position);
         }
 
         @Override
@@ -108,13 +115,24 @@ public class ScrollConflictActivity extends BaseActivity {
 
             TextView tvTitle;
             View rootview;
+            ImageView ivImage;
 
             public TestHolder(View itemView) {
                 super(itemView);
                 rootview = itemView;
+                ivImage = (ImageView) rootview.findViewById(R.id.ivImage);
                 tvTitle = (TextView) rootview.findViewById(R.id.tvTitle);
+                rootview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = (int) v.getTag(DATA_TAG);
+                        manager.scrollToPosition(position);
+                    }
+                });
             }
         }
+
+
     }
 
 }

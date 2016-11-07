@@ -3,7 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:background="#5566ff"
     android:orientation="vertical">
 
     <TextView
@@ -17,8 +16,9 @@
         android:textColor="@color/white" />
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/ivImage"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvTitle"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/ic_launcher" />
