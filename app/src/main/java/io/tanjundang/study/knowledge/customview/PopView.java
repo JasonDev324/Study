@@ -48,7 +48,7 @@ public class PopView extends View {
     public PopView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         //        将屏幕宽的80%作为矩形的宽，屏幕高的40%作为矩形的高
-        mWidth = (int) (0.8 * Functions.getScreenWidth(context));
+        mWidth = (int) (0.8 * Functions.getScreenWidth());
         mHeight = (int) (0.4 * Functions.getScreenHeight());
 //        DisplayMetrics metric = new DisplayMetrics();
 //        WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

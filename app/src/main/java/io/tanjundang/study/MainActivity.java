@@ -3,9 +3,7 @@ package io.tanjundang.study;
 import android.Manifest;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -34,6 +32,9 @@ import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.PermissionTool;
 import io.tanjundang.study.common.tools.ShareTool;
+import io.tanjundang.study.common.view.photopick.ImageInfo;
+import io.tanjundang.study.common.view.photopick.PhotoPickActivity;
+import io.tanjundang.study.common.view.photopick.PhotoPickDetailActivity;
 import io.tanjundang.study.knowledge.TestActivity;
 import io.tanjundang.study.knowledge.actionbar.ActionBarStudyActivity;
 import io.tanjundang.study.knowledge.broadcast.NotifyReceiver;
@@ -61,6 +62,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private MainContentAdapter mAdapter;
     private RecyclerView recyclerview;
     private NotifyReceiver receiver;
+    private ArrayList<ImageInfo> mPickPhotos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +127,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         data.add(new DateItemBean(R.string.main_text_study_conflict, DateItemBean.Type.SCROLLCONFLICT));
         data.add(new DateItemBean(R.string.main_text_study_socket, DateItemBean.Type.SOCKET));
         mAdapter.notifyDataSetChanged();
+
+        mPickPhotos.add(new ImageInfo("http://a.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=36db4d32cb1349547e1eef626e75f565/63d9f2d3572c11dfc1e84a90632762d0f703c24c.jpg"));
+        mPickPhotos.add(new ImageInfo("http://b.hiphotos.baidu.com/baike/whfpf%3D72%2C72%2C0/sign=6acc9500fa1986184112bcc42cd01941/b64543a98226cffcc7c0afd3bb014a90f703eaed.jpg"));
+
     }
 
     @Override
@@ -182,9 +188,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 }
             });
         } else if (id == R.id.nav_gallery) {
-
+            PhotoPickDetailActivity.SkipToPhotoDetail(this, mPickPhotos, 0);
         } else if (id == R.id.nav_slideshow) {
-
+            PhotoPickActivity.SkipToPhotoPickForResult(this, 6, 60);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -296,6 +302,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 60) {
+            ArrayList<ImageInfo> mPickData = (ArrayList<ImageInfo>) data.getSerializableExtra("data");
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package io.tanjundang.study.common.tools;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -143,7 +146,7 @@ public class Functions {
      *
      * @return
      */
-    public static float getScreenHeight() {
+    public static int getScreenHeight() {
         WindowManager manager = (WindowManager) appContext.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics metrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(metrics);
@@ -155,11 +158,10 @@ public class Functions {
      *
      * @return
      */
-    public static float getScreenWidth(Context context) {
+    public static int getScreenWidth() {
         WindowManager manager = (WindowManager) appContext.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics metrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(metrics);
-//        return ((Activity)context).getWindowManager().getDefaultDisplay().getWidth();//另一种获取屏幕的方式
         return metrics.widthPixels;
     }
 
@@ -184,6 +186,39 @@ public class Functions {
     public static float px2dp(float pxVal) {
         final float scale = appContext.getResources().getDisplayMetrics().density;
         return (pxVal / scale);
+    }
+
+    // 通过文件头来判断是否gif
+    public static boolean isGifByFile(File file) {
+        try {
+            int length = 10;
+            InputStream is = new FileInputStream(file);
+            byte[] data = new byte[length];
+            is.read(data);
+            String type = getType(data);
+            is.close();
+
+            if (type.equals("gif")) {
+                return true;
+            }
+        } catch (Exception e) {
+            LogTool.v("GIF", e.getMessage());
+        }
+
+        return false;
+    }
+
+    private static String getType(byte[] data) {
+        String type = "";
+        if (data[1] == 'P' && data[2] == 'N' && data[3] == 'G') {
+            type = "png";
+        } else if (data[0] == 'G' && data[1] == 'I' && data[2] == 'F') {
+            type = "gif";
+        } else if (data[6] == 'J' && data[7] == 'F' && data[8] == 'I'
+                && data[9] == 'F') {
+            type = "jpg";
+        }
+        return type;
     }
 
     /**

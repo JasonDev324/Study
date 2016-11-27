@@ -20,12 +20,12 @@ public class CustomLayoutManager extends LinearLayoutManager {
 
     public CustomLayoutManager(Context context) {
         super(context);
-        baseWidth = (int) Functions.getScreenWidth(context);
+        baseWidth = Functions.getScreenWidth();
     }
 
     public CustomLayoutManager(Context context, int orientation, boolean reverseLayout) {
         super(context, orientation, reverseLayout);
-        baseWidth = (int) Functions.getScreenWidth(context);
+        baseWidth = Functions.getScreenWidth();
     }
 
     /**

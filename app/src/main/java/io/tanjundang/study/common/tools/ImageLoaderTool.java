@@ -11,6 +11,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import java.io.File;
@@ -33,7 +34,7 @@ import io.tanjundang.study.R;
  */
 public class ImageLoaderTool {
 
-    private static ImageLoader imageLoader; //用于全局初始化
+    public static ImageLoader imageLoader; //用于全局初始化
     private static ImageLoaderConfiguration configuration;//默认的ImageLoader配置
     private final String DRAWABLE_PREFIX = "drawable://";//用于加载drawable图像
 
@@ -86,6 +87,21 @@ public class ImageLoaderTool {
             .considerExifParams(true) //是否考虑JPEG图像EXIF参数（旋转，翻转）
             .build();
 
+    //大图
+    public static DisplayImageOptions imageBigOptions = new DisplayImageOptions
+            .Builder()
+            .showImageOnLoading(R.drawable.photopick_ic_default_image)
+            .showImageForEmptyUri(R.drawable.photopick_ic_default_image)
+            .showImageOnFail(R.drawable.photopick_ic_default_image)
+            .cacheInMemory(false)
+            .cacheOnDisk(true)
+            .resetViewBeforeLoading(true)
+            .considerExifParams(true)
+            .bitmapConfig(Bitmap.Config.RGB_565)
+            .imageScaleType(ImageScaleType.EXACTLY)
+            .build();
+
+
     /**
      * 加载普通图片
      *
@@ -106,4 +122,19 @@ public class ImageLoaderTool {
         imageLoader.displayImage(DRAWABLE_PREFIX + resid, imageView);
     }
 
+    /**
+     * 加载一张图片
+     *
+     * @param imageView
+     * @param url
+     * @param displayImageOptions
+     * @param animate
+     */
+    public void loadImage(ImageView imageView, String url, DisplayImageOptions displayImageOptions, SimpleImageLoadingListener animate) {
+        imageLoader.displayImage(url, imageView, displayImageOptions, animate);
+    }
+
+    public File getDiskFile(String imageUri) {
+        return imageLoader.getDiskCache().get(imageUri);
+    }
 }

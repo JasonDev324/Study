@@ -36,4 +36,8 @@ dependencies {
     compile 'com.prolificinteractive:parallaxpager:2.2.1'
     testCompile 'junit:junit:4.12'
     compile project(':umsocialshare')
+//PhotoPick
+    compile 'com.github.lzyzsd:circleprogress:1.1.0@aar'
+    compile 'com.github.chrisbanes.photoview:library:1.2.2'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
 }
