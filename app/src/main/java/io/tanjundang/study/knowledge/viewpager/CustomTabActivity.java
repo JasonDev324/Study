@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.common.tools.Functions;
+import io.tanjundang.study.common.tools.ThreadManageTool;
 
 /**
  * TabLayout+ViewPager学习
@@ -70,7 +71,6 @@ public class CustomTabActivity extends AppCompatActivity {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setCustomView(mAdapter.getTabView(i));
         }
-
         updateSelected(0);
         logoAnimation.setDuration(100L);
         logoAnimation.setFillAfter(true);
