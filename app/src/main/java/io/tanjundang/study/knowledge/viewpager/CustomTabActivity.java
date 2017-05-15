@@ -1,6 +1,7 @@
 package io.tanjundang.study.knowledge.viewpager;
 
 import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import io.tanjundang.study.R;
+import io.tanjundang.study.common.tools.Functions;
 
 /**
  * TabLayout+ViewPager学习
@@ -43,6 +45,7 @@ public class CustomTabActivity extends AppCompatActivity {
     private CustomFragment customFragment;
     private CustomTabAdapter mAdapter;
     final Animation logoAnimation = new ScaleAnimation(1.0F, 1.3F, 1.0F, 1.3F, 1, 0.5F, 1, 0.5F);//选中放大的动画
+    private FloatingActionButton floatBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,13 @@ public class CustomTabActivity extends AppCompatActivity {
         setContentView(R.layout.activity_custom_tab);
         initFragment();
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-
+        floatBtn = (FloatingActionButton) findViewById(R.id.floatBtn);
+        floatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Functions.toast("interesting");
+            }
+        });
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         mAdapter = new CustomTabAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);

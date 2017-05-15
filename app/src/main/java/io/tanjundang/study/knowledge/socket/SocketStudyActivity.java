@@ -17,10 +17,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.Functions;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.functions.Action1;
+import rx.observers.Observers;
+import rx.observers.Subscribers;
+import rx.schedulers.Schedulers;
 
 public class SocketStudyActivity extends BaseActivity implements View.OnClickListener {
 
@@ -63,6 +71,7 @@ public class SocketStudyActivity extends BaseActivity implements View.OnClickLis
         btnConnect.setOnClickListener(this);
         tvContent = (TextView) findViewById(R.id.tvContent);
         etIP = (EditText) findViewById(R.id.etIP);
+        etIP.setText("192.168.31.211");
         etContent = (EditText) findViewById(R.id.etContent);
     }
 
@@ -93,7 +102,22 @@ public class SocketStudyActivity extends BaseActivity implements View.OnClickLis
         if (v.equals(btnConnect)) {
             connect();
         } else if (v.equals(btnSend)) {
-            send();
+            Observable.empty().subscribeOn(Schedulers.io()).subscribe(new Subscriber<Object>() {
+                @Override
+                public void onCompleted() {
+                    send();
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+
+                @Override
+                public void onNext(Object o) {
+
+                }
+            });
         }
     }
 
@@ -114,6 +138,7 @@ public class SocketStudyActivity extends BaseActivity implements View.OnClickLis
 
         @Override
         protected Void doInBackground(Void... params) {
+
             try {
                 socket = new Socket(ipAddress, PORT);
                 bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
@@ -127,6 +152,7 @@ public class SocketStudyActivity extends BaseActivity implements View.OnClickLis
                 sendErrorMsg(e);
                 e.printStackTrace();
             }
+
             return null;
         }
 
@@ -134,7 +160,7 @@ public class SocketStudyActivity extends BaseActivity implements View.OnClickLis
         @Override
         protected void onProgressUpdate(String... values) {
             if (SUCCESS_MSG.equals(values[0])) {
-                etIP.setText("连接服务器成功");
+//                etIP.setText("连接服务器成功");
                 tvContent.append("开始进行通信\n");
             } else {
                 tvContent.append(values[0] + "\n");
@@ -157,15 +183,13 @@ public class SocketStudyActivity extends BaseActivity implements View.OnClickLis
      * 发送消息到服务器
      */
     public void send() {
+        if (bw == null) return;
         try {
-            if (bw == null) return;
             bw.write(String.format("%s\n", etContent.getText()));
             bw.flush();
             etContent.setText(null);
         } catch (IOException e) {
-            sendErrorMsg(e);
             e.printStackTrace();
         }
     }
-
 }
