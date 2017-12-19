@@ -124,8 +124,7 @@
             android:windowSoftInputMode="adjustResize|adjustPan" />
         <activity android:name=".knowledge.datepicker.DatePickerActivity" />
         <activity android:name=".knowledge.camera.CameraActivity" />
-        <activity android:name=".knowledge.camera.CustomCameraActivity"></activity>
-
+        <activity android:name=".knowledge.camera.CustomCameraActivity" />
         <activity
             android:name=".common.view.photopick.PhotoPickDetailActivity"
             android:screenOrientation="portrait" />
@@ -133,6 +132,7 @@
             android:name=".common.view.photopick.PhotoPickActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+        <activity android:name=".knowledge.databinding.DatabindingActivity"></activity>
     </application>
 
 </manifest>

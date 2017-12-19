@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="io.tanjundang.study.knowledge.databinding.DatabindingActivity">
+
+    <data>
+
+
+        <import type="io.tanjundang.study.knowledge.databinding.DBItemBean" />
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="item"
+            type="io.tanjundang.study.knowledge.databinding.DBItemBean" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="@{name}" />
+
+        <include
+            layout="@layout/item_db_title_value"
+            bind:item="@{item}" />
+
+        <include
+            layout="@layout/item_db_title_value"
+            bind:item="@{item}" />
+    </LinearLayout>
+
+</layout>

@@ -6,7 +6,7 @@ package io.tanjundang.study;
  * Date: 2016/9/5
  */
 
-public class DateItemBean {
+public class DataItemBean {
     private int title;
     Type type;
 
@@ -29,10 +29,11 @@ public class DateItemBean {
         UM_SHARE,
         WEBVIEW,
         SCROLLCONFLICT,
-        SOCKET
+        SOCKET,
+        DATABINDING
     }
 
-    public DateItemBean(int title, Type type) {
+    public DataItemBean(int title, Type type) {
         this.title = title;
         this.type = type;
     }

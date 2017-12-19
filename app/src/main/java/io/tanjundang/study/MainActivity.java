@@ -40,6 +40,7 @@ import io.tanjundang.study.knowledge.actionbar.ActionBarStudyActivity;
 import io.tanjundang.study.knowledge.broadcast.NotifyReceiver;
 import io.tanjundang.study.knowledge.camera.CameraActivity;
 import io.tanjundang.study.knowledge.customview.CustomViewActivity;
+import io.tanjundang.study.knowledge.databinding.DatabindingActivity;
 import io.tanjundang.study.knowledge.datepicker.DatePickerActivity;
 import io.tanjundang.study.knowledge.intent.IntentActivity;
 import io.tanjundang.study.knowledge.launchmode.LaunchModeActivity;
@@ -57,7 +58,7 @@ import io.tanjundang.study.knowledge.webview.WebViewActivity;
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, NotifyReceiver.NotifyCallback {
 
     private ActionBarDrawerToggle toggle;
-    private ArrayList<DateItemBean> data = new ArrayList<>();
+    private ArrayList<DataItemBean> data = new ArrayList<>();
     private ArrayList<String> permissionList = new ArrayList<>();
     private MainContentAdapter mAdapter;
     private RecyclerView recyclerview;
@@ -107,25 +108,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         permissionList.add(Manifest.permission.CAMERA);
         permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        data.add(new DateItemBean(R.string.main_text_study_animation, DateItemBean.Type.ANIMATION));
-        data.add(new DateItemBean(R.string.main_text_study_camera, DateItemBean.Type.CAMERA));
-        data.add(new DateItemBean(R.string.main_text_study_drawerlayout, DateItemBean.Type.DRAWERLAYOUT));
-        data.add(new DateItemBean(R.string.main_text_study_datepicker, DateItemBean.Type.DATEPICKER));
-        data.add(new DateItemBean(R.string.main_text_study_shape, DateItemBean.Type.SHAPE));
-        data.add(new DateItemBean(R.string.main_text_study_selector, DateItemBean.Type.SELECTOR));
-        data.add(new DateItemBean(R.string.main_text_study_preference, DateItemBean.Type.PREFERENCE));
-        data.add(new DateItemBean(R.string.main_text_study_actionbar, DateItemBean.Type.ACTIONBAR));
-        data.add(new DateItemBean(R.string.main_text_study_intent, DateItemBean.Type.INTENT));
-        data.add(new DateItemBean(R.string.main_text_study_launchmode, DateItemBean.Type.LAUNCHMODE));
-        data.add(new DateItemBean(R.string.main_text_study_broadcast, DateItemBean.Type.BROADCAST));
-        data.add(new DateItemBean(R.string.main_text_study_service, DateItemBean.Type.SERVICE));
-        data.add(new DateItemBean(R.string.main_text_study_guide, DateItemBean.Type.GUIDE));
-        data.add(new DateItemBean(R.string.main_text_study_customview, DateItemBean.Type.CUSTOMVIEW));
-        data.add(new DateItemBean(R.string.main_text_study_tablayout, DateItemBean.Type.TABLAYOUT));
-        data.add(new DateItemBean(R.string.main_text_study_umshare, DateItemBean.Type.UM_SHARE));
-        data.add(new DateItemBean(R.string.main_text_study_webview, DateItemBean.Type.WEBVIEW));
-        data.add(new DateItemBean(R.string.main_text_study_conflict, DateItemBean.Type.SCROLLCONFLICT));
-        data.add(new DateItemBean(R.string.main_text_study_socket, DateItemBean.Type.SOCKET));
+        data.add(new DataItemBean(R.string.main_text_study_animation, DataItemBean.Type.ANIMATION));
+        data.add(new DataItemBean(R.string.main_text_study_camera, DataItemBean.Type.CAMERA));
+        data.add(new DataItemBean(R.string.main_text_study_drawerlayout, DataItemBean.Type.DRAWERLAYOUT));
+        data.add(new DataItemBean(R.string.main_text_study_datepicker, DataItemBean.Type.DATEPICKER));
+        data.add(new DataItemBean(R.string.main_text_study_shape, DataItemBean.Type.SHAPE));
+        data.add(new DataItemBean(R.string.main_text_study_selector, DataItemBean.Type.SELECTOR));
+        data.add(new DataItemBean(R.string.main_text_study_preference, DataItemBean.Type.PREFERENCE));
+        data.add(new DataItemBean(R.string.main_text_study_actionbar, DataItemBean.Type.ACTIONBAR));
+        data.add(new DataItemBean(R.string.main_text_study_intent, DataItemBean.Type.INTENT));
+        data.add(new DataItemBean(R.string.main_text_study_launchmode, DataItemBean.Type.LAUNCHMODE));
+        data.add(new DataItemBean(R.string.main_text_study_broadcast, DataItemBean.Type.BROADCAST));
+        data.add(new DataItemBean(R.string.main_text_study_service, DataItemBean.Type.SERVICE));
+        data.add(new DataItemBean(R.string.main_text_study_guide, DataItemBean.Type.GUIDE));
+        data.add(new DataItemBean(R.string.main_text_study_customview, DataItemBean.Type.CUSTOMVIEW));
+        data.add(new DataItemBean(R.string.main_text_study_tablayout, DataItemBean.Type.TABLAYOUT));
+        data.add(new DataItemBean(R.string.main_text_study_umshare, DataItemBean.Type.UM_SHARE));
+        data.add(new DataItemBean(R.string.main_text_study_webview, DataItemBean.Type.WEBVIEW));
+        data.add(new DataItemBean(R.string.main_text_study_conflict, DataItemBean.Type.SCROLLCONFLICT));
+        data.add(new DataItemBean(R.string.main_text_study_socket, DataItemBean.Type.SOCKET));
+        data.add(new DataItemBean(R.string.main_text_study_databinding, DataItemBean.Type.DATABINDING));
         mAdapter.notifyDataSetChanged();
 
         mPickPhotos.add(new ImageInfo("http://a.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=36db4d32cb1349547e1eef626e75f565/63d9f2d3572c11dfc1e84a90632762d0f703c24c.jpg"));
@@ -216,46 +218,48 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DateItemBean item = (DateItemBean) v.getTag(DATA_TAG);
-                    if (item.getType().equals(DateItemBean.Type.ANIMATION)) {
+                    DataItemBean item = (DataItemBean) v.getTag(DATA_TAG);
+                    if (item.getType().equals(DataItemBean.Type.ANIMATION)) {
                         StartActivity(AnimationActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.CAMERA)) {
+                    } else if (item.getType().equals(DataItemBean.Type.CAMERA)) {
                         StartActivity(CameraActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.DRAWERLAYOUT)) {
+                    } else if (item.getType().equals(DataItemBean.Type.DRAWERLAYOUT)) {
                         StartActivity(DrawerLayoutActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.DATEPICKER)) {
+                    } else if (item.getType().equals(DataItemBean.Type.DATEPICKER)) {
                         StartActivity(DatePickerActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.SHAPE)) {
+                    } else if (item.getType().equals(DataItemBean.Type.SHAPE)) {
                         StartActivity(ShapeActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.SELECTOR)) {
+                    } else if (item.getType().equals(DataItemBean.Type.SELECTOR)) {
                         StartActivity(SelectorActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.PREFERENCE)) {
+                    } else if (item.getType().equals(DataItemBean.Type.PREFERENCE)) {
                         StartActivity(PreSettingActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.ACTIONBAR)) {
+                    } else if (item.getType().equals(DataItemBean.Type.ACTIONBAR)) {
                         StartActivity(ActionBarStudyActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.INTENT)) {
+                    } else if (item.getType().equals(DataItemBean.Type.INTENT)) {
                         StartActivity(IntentActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.LAUNCHMODE)) {
+                    } else if (item.getType().equals(DataItemBean.Type.LAUNCHMODE)) {
                         StartActivity(LaunchModeActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.BROADCAST)) {
+                    } else if (item.getType().equals(DataItemBean.Type.BROADCAST)) {
                         Intent intent = new Intent(NotifyReceiver.NOTIFY_ACTION);
                         LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(intent);
-                    } else if (item.getType().equals(DateItemBean.Type.SERVICE)) {
+                    } else if (item.getType().equals(DataItemBean.Type.SERVICE)) {
                         StartActivity(ServiceActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.GUIDE)) {
+                    } else if (item.getType().equals(DataItemBean.Type.GUIDE)) {
                         StartActivity(GuideActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.CUSTOMVIEW)) {
+                    } else if (item.getType().equals(DataItemBean.Type.CUSTOMVIEW)) {
                         StartActivity(CustomViewActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.TABLAYOUT)) {
+                    } else if (item.getType().equals(DataItemBean.Type.TABLAYOUT)) {
                         StartActivity(TabActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.UM_SHARE)) {
+                    } else if (item.getType().equals(DataItemBean.Type.UM_SHARE)) {
                         ShareTool.getInstance().SendMessage(MainActivity.this);
-                    } else if (item.getType().equals(DateItemBean.Type.WEBVIEW)) {
+                    } else if (item.getType().equals(DataItemBean.Type.WEBVIEW)) {
                         StartActivity(WebViewActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.SCROLLCONFLICT)) {
+                    } else if (item.getType().equals(DataItemBean.Type.SCROLLCONFLICT)) {
                         StartActivity(ScrollConflictActivity.class);
-                    } else if (item.getType().equals(DateItemBean.Type.SOCKET)) {
+                    } else if (item.getType().equals(DataItemBean.Type.SOCKET)) {
                         StartActivity(SocketStudyActivity.class);
+                    } else if (item.getType().equals(DataItemBean.Type.DATABINDING)) {
+                        StartActivity(DatabindingActivity.class);
                     }
                 }
             });
@@ -264,7 +268,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         @Override
         public void onBindViewHolder(ContentHolder holder, int position) {
-            DateItemBean item = data.get(position);
+            DataItemBean item = data.get(position);
             holder.btnValue.setText(item.getTitle());
             holder.rootview.setTag(DATA_TAG, item);
         }
