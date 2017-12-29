@@ -12,6 +12,14 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        ndk {
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "arm64-v8a", "x86_64"
+        }
+        dexOptions {
+            incremental true
+            javaMaxHeapSize "4g"
+        }
     }
     buildTypes {
         release {
@@ -45,4 +53,11 @@ dependencies {
     compile 'com.github.lzyzsd:circleprogress:1.1.0@aar'
     compile 'com.github.chrisbanes.photoview:library:1.2.2'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
+
+    //3D地图so及jar
+    compile 'com.amap.api:3dmap:latest.integration'
+    //定位功能
+    compile 'com.amap.api:location:latest.integration'
+    //搜索功能
+    compile 'com.amap.api:search:latest.integration'
 }

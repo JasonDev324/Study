@@ -3,11 +3,11 @@
 
     <data>
 
-        <import type="io.tanjundang.study.knowledge.databinding.DBItemBean" />
+        <import type="io.tanjundang.study.knowledge.databinding.TestModel" />
 
         <variable
             name="item"
-            type="io.tanjundang.study.knowledge.databinding.DBItemBean" />
+            type="io.tanjundang.study.knowledge.databinding.TestModel" />
     </data>
 
 

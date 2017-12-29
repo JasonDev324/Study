@@ -43,6 +43,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="6c7a521fe6310d4900dd31b60f028e36" />
+
         <service android:name=".knowledge.service.CalcService" />
         <service
             android:name=".knowledge.service.BindService"
@@ -132,7 +136,8 @@
             android:name=".common.view.photopick.PhotoPickActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-        <activity android:name=".knowledge.databinding.DatabindingActivity"></activity>
+        <activity android:name=".knowledge.databinding.DatabindingActivity"/>
+        <activity android:name=".knowledge.locate.LocationActivity"/>
     </application>
 
 </manifest>

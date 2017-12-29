@@ -6,17 +6,15 @@
 
     <data>
 
-
-        <import type="io.tanjundang.study.knowledge.databinding.DBItemBean" />
-
-        <variable
-            name="name"
-            type="String" />
+        <import type="io.tanjundang.study.knowledge.databinding.TestModel" />
 
         <variable
-            name="item"
-            type="io.tanjundang.study.knowledge.databinding.DBItemBean" />
+            name="model"
+            type="io.tanjundang.study.knowledge.databinding.TestModel" />
 
+        <variable
+            name="listener"
+            type="io.tanjundang.study.knowledge.databinding.EventListener" />
     </data>
 
     <LinearLayout
@@ -25,18 +23,22 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvName"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:gravity="center"
-            android:text="@{name}" />
+            android:onClick="@{listener::onTitleClick}"
+            android:text="@{model.title}" />
 
-        <include
-            layout="@layout/item_db_title_value"
-            bind:item="@{item}" />
+        <ImageView
+            imageUrl="@{model.value}"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
 
-        <include
-            layout="@layout/item_db_title_value"
-            bind:item="@{item}" />
+        <!--<include-->
+            <!--layout="@layout/item_db_title_value"-->
+            <!--bind:model="@{model}" />-->
+
     </LinearLayout>
 
 </layout>

@@ -30,7 +30,8 @@ public class DataItemBean {
         WEBVIEW,
         SCROLLCONFLICT,
         SOCKET,
-        DATABINDING
+        DATABINDING,
+        GAODE_MAP
     }
 
     public DataItemBean(int title, Type type) {

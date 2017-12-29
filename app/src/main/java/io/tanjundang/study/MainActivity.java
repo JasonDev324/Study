@@ -44,6 +44,7 @@ import io.tanjundang.study.knowledge.databinding.DatabindingActivity;
 import io.tanjundang.study.knowledge.datepicker.DatePickerActivity;
 import io.tanjundang.study.knowledge.intent.IntentActivity;
 import io.tanjundang.study.knowledge.launchmode.LaunchModeActivity;
+import io.tanjundang.study.knowledge.locate.LocationActivity;
 import io.tanjundang.study.knowledge.preference.PreSettingActivity;
 import io.tanjundang.study.knowledge.scrollconflict.ScrollConflictActivity;
 import io.tanjundang.study.knowledge.selector.SelectorActivity;
@@ -128,6 +129,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         data.add(new DataItemBean(R.string.main_text_study_conflict, DataItemBean.Type.SCROLLCONFLICT));
         data.add(new DataItemBean(R.string.main_text_study_socket, DataItemBean.Type.SOCKET));
         data.add(new DataItemBean(R.string.main_text_study_databinding, DataItemBean.Type.DATABINDING));
+        data.add(new DataItemBean(R.string.main_text_study_gaode_map, DataItemBean.Type.GAODE_MAP));
         mAdapter.notifyDataSetChanged();
 
         mPickPhotos.add(new ImageInfo("http://a.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=36db4d32cb1349547e1eef626e75f565/63d9f2d3572c11dfc1e84a90632762d0f703c24c.jpg"));
@@ -260,6 +262,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         StartActivity(SocketStudyActivity.class);
                     } else if (item.getType().equals(DataItemBean.Type.DATABINDING)) {
                         StartActivity(DatabindingActivity.class);
+                    } else if (item.getType().equals(DataItemBean.Type.GAODE_MAP)) {
+                        StartActivity(LocationActivity.class);
                     }
                 }
             });
