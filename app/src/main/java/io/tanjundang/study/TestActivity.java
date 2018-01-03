@@ -1,4 +1,4 @@
-package io.tanjundang.study.knowledge;
+package io.tanjundang.study;
 
 import android.Manifest;
 import android.app.Activity;

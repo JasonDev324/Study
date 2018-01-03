@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--shortcut不能直接写文本需要写在strings文件里-->
+    <!--shortcut需要版本是api25，不是该版本以上，则会报找不到shortcut属性的错误-->
+    <shortcut
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutDisabledMessage="@string/short_cut_error"
+        android:shortcutId="shortcutId1"
+        android:shortcutLongLabel="@string/text_enter_test"
+        android:shortcutShortLabel="@string/text_enter_test">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="io.tanjundang.study.TestActivity"
+            android:targetPackage="io.tanjundang.study" />
+    </shortcut>
+</shortcuts>

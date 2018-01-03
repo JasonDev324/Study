@@ -28,6 +28,8 @@
     <string name="main_text_study_gaode_map">GaoDe_Map</string>
 
     <string name="action_send">Send Msg</string>
+    <string name="text_enter_test">进入测试页面</string>
+    <string name="short_cut_error">功能不可用</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

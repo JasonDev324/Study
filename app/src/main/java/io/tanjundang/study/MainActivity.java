@@ -35,7 +35,6 @@ import io.tanjundang.study.common.tools.ShareTool;
 import io.tanjundang.study.common.view.photopick.ImageInfo;
 import io.tanjundang.study.common.view.photopick.PhotoPickActivity;
 import io.tanjundang.study.common.view.photopick.PhotoPickDetailActivity;
-import io.tanjundang.study.knowledge.TestActivity;
 import io.tanjundang.study.knowledge.actionbar.ActionBarStudyActivity;
 import io.tanjundang.study.knowledge.broadcast.NotifyReceiver;
 import io.tanjundang.study.knowledge.camera.CameraActivity;

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:weightSum="1.5"
-    tools:context="io.tanjundang.study.knowledge.TestActivity">
+    tools:context="io.tanjundang.study.TestActivity">
 
     <io.tanjundang.study.knowledge.customview.MoodView
         android:id="@+id/moodView"

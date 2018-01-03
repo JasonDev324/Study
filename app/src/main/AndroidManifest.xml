@@ -69,6 +69,9 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity android:name=".knowledge.animation.AnimationActivity" />
         <activity android:name=".knowledge.drawerlayout.DrawerLayoutActivity" />
@@ -106,7 +109,7 @@
             android:name=".knowledge.launchmode.SingleTopActivity"
             android:label="SingleTop测试" />
         <activity android:name=".GuideActivity" />
-        <activity android:name=".knowledge.TestActivity" />
+        <activity android:name=".TestActivity" />
         <activity android:name=".knowledge.service.ServiceActivity" />
         <activity android:name=".knowledge.service.BindActivity" />
         <activity android:name=".knowledge.customview.CustomViewActivity" />
@@ -136,8 +139,8 @@
             android:name=".common.view.photopick.PhotoPickActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-        <activity android:name=".knowledge.databinding.DatabindingActivity"/>
-        <activity android:name=".knowledge.locate.LocationActivity"/>
+        <activity android:name=".knowledge.databinding.DatabindingActivity" />
+        <activity android:name=".knowledge.locate.LocationActivity" />
     </application>
 
 </manifest>
