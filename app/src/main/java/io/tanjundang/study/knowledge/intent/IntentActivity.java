@@ -65,6 +65,16 @@ public class IntentActivity extends BaseActivity {
         intent.setAction(Intent.ACTION_DIAL);
         Uri uri = Uri.parse("tel:10000000");
         intent.setData(uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    public void dialPhone120(View v) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_DIAL);
+        Uri uri = Uri.parse("tel:120");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setData(uri);
         startActivity(intent);
     }
 

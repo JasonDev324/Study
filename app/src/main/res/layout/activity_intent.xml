@@ -43,6 +43,15 @@
         android:layout_height="44dp"
         android:layout_marginBottom="15dp"
         android:background="@color/action_bar_color"
+        android:onClick="dialPhone120"
+        android:text="拨打电话"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/action_bar_color"
         android:onClick="webView"
         android:text="浏览网页"
         android:textColor="@color/white" />
