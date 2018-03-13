@@ -1,45 +1,33 @@
 package io.tanjundang.study;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.media.AudioFormat;
+import android.media.AudioRecord;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.ContactsContract;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.ShareContent;
 import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
-import io.tanjundang.study.common.tools.DialogTool;
 import io.tanjundang.study.common.tools.Functions;
-import io.tanjundang.study.common.tools.LogTool;
 import io.tanjundang.study.common.tools.PermissionTool;
 
 public class TestActivity extends BaseActivity {
 
     TextView tvMsg;
-    private String title;
-    private String msg;
-    private DialogInterface.OnClickListener positilistener;
     private ArrayList permissionList = new ArrayList();
 
     @Override
@@ -58,13 +46,6 @@ public class TestActivity extends BaseActivity {
         permissionList.add(Manifest.permission.WRITE_CONTACTS);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("title", title);
-        outState.putString("msg", msg);
-    }
-
     public void checkPermission(View view) {
         PermissionTool.getInstance(this).requestPermissions(permissionList, new View.OnClickListener() {
             @Override
@@ -73,7 +54,6 @@ public class TestActivity extends BaseActivity {
             }
         });
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

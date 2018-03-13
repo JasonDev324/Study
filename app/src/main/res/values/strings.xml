@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TJDStudy</string>
+    <string name="app_name">Study-Master</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -44,4 +44,10 @@
     <string name="photopick_sure_text">确定(%1$d/%2$d)</string>
     <string name="photopick_total_limit_toast">最多只能选择%1$d张</string>
     <string name="photopick_my_photo">我的照片</string>
+
+    <string name="str_audio_btn_normal">按住说话</string>
+    <string name="str_audio_btn_recording">松开结束</string>
+    <string name="str_audio_btn_want_to_cancel">松开手指，取消发送</string>
+    <string name="str_audio_time_short">录音时间太短</string>
+
 </resources>

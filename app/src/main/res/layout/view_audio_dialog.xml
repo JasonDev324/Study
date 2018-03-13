@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/black_transparent">
+
+    <RelativeLayout
+        android:id="@+id/rlVoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <RelativeLayout
+            android:id="@+id/rlRecord"
+            android:layout_width="190dp"
+            android:layout_height="150dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivRecord"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_audio" />
+
+            <ImageView
+                android:id="@+id/ivVoice"
+                android:layout_width="60dp"
+                android:layout_height="100dp"
+                android:layout_alignBottom="@+id/ivRecord"
+                android:layout_marginLeft="-20dp"
+                android:layout_toRightOf="@+id/ivRecord"
+                android:src="@drawable/ic_voice_7" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ivRecall"
+            android:layout_width="190dp"
+            android:layout_height="150dp"
+            android:paddingTop="15dp"
+            android:src="@drawable/ic_audio_recall"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlVoice"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"
+        android:text="按住说话"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

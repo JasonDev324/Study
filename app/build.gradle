@@ -29,8 +29,8 @@ android {
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'io.reactivex:rxjava:1.1.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.5'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //ImageLoader
     //加载进度条

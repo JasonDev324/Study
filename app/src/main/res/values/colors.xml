@@ -55,4 +55,6 @@
     <color name="teach_group_kq_count_bg_color">#638bff</color>
     <color name="chart_frame_line_color">#b9b9b9</color>
     <color name="common_blue">#74d2ff</color>
+
+    <color name="black_transparent">#5e000000</color>
 </resources>
