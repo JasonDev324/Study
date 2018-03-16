@@ -2,4 +2,4 @@
 <clip xmlns:android="http://schemas.android.com/apk/res/android"
     android:clipOrientation="horizontal"
     android:drawable="@drawable/common_divider_shape"
-    android:gravity="left"></clip>
+    android:gravity="left"/>

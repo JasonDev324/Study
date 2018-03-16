@@ -39,7 +39,7 @@ public class DateFormatTool {
      * @param date
      * @return
      */
-    public static String getDefaultDateStrFormat(long date) {
+    public static String getDefaultDate(long date) {
         return dateFormat.format(new Date(date));
     }
 

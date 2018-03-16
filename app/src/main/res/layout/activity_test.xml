@@ -57,5 +57,45 @@
             android:background="@color/white"
             android:gravity="center"
             android:text="@string/str_audio_btn_normal" />
+
     </FrameLayout>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="checkPermission"
+        android:text="start" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="stop"
+        android:text="stop" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="cancel"
+        android:text="cancel" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="play"
+        android:text="play" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:onClick="stopPlayer"
+        android:text="stopPlayer" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:onClick="voice"
+        android:id="@+id/ivVoice"
+        android:src="@drawable/ic_voice_7" />
 </LinearLayout>

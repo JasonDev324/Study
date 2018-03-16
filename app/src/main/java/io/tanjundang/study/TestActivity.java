@@ -13,6 +13,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.umeng.socialize.UMShareAPI;
@@ -23,11 +24,13 @@ import java.util.ArrayList;
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.Functions;
+import io.tanjundang.study.common.tools.LogTool;
 import io.tanjundang.study.common.tools.PermissionTool;
 
 public class TestActivity extends BaseActivity {
 
     TextView tvMsg;
+    ImageView ivVoice;
     private ArrayList permissionList = new ArrayList();
 
     @Override
@@ -39,18 +42,23 @@ public class TestActivity extends BaseActivity {
     protected void initView() {
         setContentView(R.layout.activity_test);
         tvMsg = (TextView) findViewById(R.id.tvMsg);
+        ivVoice = (ImageView) findViewById(R.id.ivVoice);
     }
 
     @Override
     protected void initData() {
         permissionList.add(Manifest.permission.WRITE_CONTACTS);
+        permissionList.add(Manifest.permission.RECORD_AUDIO);
+        permissionList.add(Manifest.permission.INTERNET);
+        permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
-    public void checkPermission(View view) {
+    public void checkPermission(final View view) {
         PermissionTool.getInstance(this).requestPermissions(permissionList, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dothing();
+//                dothing();
+                start(view);
             }
         });
     }
@@ -59,6 +67,37 @@ public class TestActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void start(View v) {
+        AudioRecordTool.getInstance().start();
+    }
+
+    public void voice(View v) {
+    }
+
+
+    public void stop(View v) {
+        AudioRecordTool.getInstance().stop();
+    }
+
+    public void cancel(View v) {
+        AudioRecordTool.getInstance().cancel();
+    }
+
+
+    public void play(View v) {
+        AudioRecordTool.getInstance().play();
+    }
+
+    public void stopPlayer(View v) {
+        AudioRecordTool.getInstance().stopPlayer();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 
     private void dothing() {

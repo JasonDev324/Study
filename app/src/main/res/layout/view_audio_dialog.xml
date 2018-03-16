@@ -29,7 +29,7 @@
                 android:layout_alignBottom="@+id/ivRecord"
                 android:layout_marginLeft="-20dp"
                 android:layout_toRightOf="@+id/ivRecord"
-                android:src="@drawable/ic_voice_7" />
+                android:src="@drawable/ic_voice_1" />
 
         </RelativeLayout>
 

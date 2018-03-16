@@ -8,12 +8,12 @@ import android.view.MotionEvent;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.tanjundang.study.AudioDialogManager;
+import io.tanjundang.study.AudioRecordTool;
 import io.tanjundang.study.R;
-import io.tanjundang.study.common.tools.Functions;
+import io.tanjundang.study.common.tools.LogTool;
 
 
 /**
@@ -21,7 +21,7 @@ import io.tanjundang.study.common.tools.Functions;
  * @Date: 2018/3/9
  * @Description: 仿微信语音按钮
  */
-public class AudioRecordButton extends android.support.v7.widget.AppCompatButton {
+public class AudioRecordButton extends android.support.v7.widget.AppCompatButton implements AudioRecordTool.MicStatusListener {
 
     private static final int STATE_NORMAL = 1;
     private static final int STATE_RECORDING = 2;
@@ -31,6 +31,9 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     private boolean isRecording;
 
     private static final int DEFAULT_MOVE_HEIGHT = 200;
+
+    //    录音最短时间
+    private static final int AUDIO_RECORD_MINIMUM_TIME = 1000;
     Context mContext;
     long currentDate;
 
@@ -45,6 +48,7 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     public AudioRecordButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
+        AudioRecordTool.getInstance().setMicStatusListener(this);
     }
 
     @Override
@@ -54,10 +58,14 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
         int action = event.getAction();
         switch (action) {
             case MotionEvent.ACTION_DOWN:
+                if (isRecording) {
+                    break;
+                }
                 currentDate = System.currentTimeMillis();
                 isRecording = true;
                 changeState(STATE_RECORDING);
                 AudioDialogManager.getInstance(mContext).showRecordingDialog();
+                AudioRecordTool.getInstance().start();
                 break;
             case MotionEvent.ACTION_MOVE:
                 if (isRecording) {
@@ -70,7 +78,7 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
                 break;
             case MotionEvent.ACTION_UP:
 //                录音时间过短
-                if (System.currentTimeMillis() - currentDate < 2000) {
+                if (System.currentTimeMillis() - currentDate < AUDIO_RECORD_MINIMUM_TIME) {
                     AudioDialogManager.getInstance(mContext).modifyText(R.string.str_audio_time_short);
                     Observable.interval(500, TimeUnit.MILLISECONDS)
                             .take(1)
@@ -87,8 +95,10 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
                 AudioDialogManager.getInstance(mContext).dismiss();
                 if (mCurState == STATE_RECORDING) {
 // TODO: 2018/3/9 release
+                    AudioRecordTool.getInstance().stop();
                 } else if (mCurState == STATE_WANT_TO_CANCEL) {
 // TODO: 2018/3/9 cancel
+                    AudioRecordTool.getInstance().cancel();
                 }
                 reset();
                 break;
@@ -144,5 +154,21 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
     @Override
     public boolean isLongClickable() {
         return true;
+    }
+
+    @Override
+    public void update(final int level) {
+        LogTool.v("audio_button", level);
+        if (isRecording) {
+            Observable.interval(1, TimeUnit.MILLISECONDS)
+                    .take(1)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Long>() {
+                        @Override
+                        public void accept(Long aLong) throws Exception {
+                            AudioDialogManager.getInstance(mContext).updateVoiceLevel(level);
+                        }
+                    });
+        }
     }
 }

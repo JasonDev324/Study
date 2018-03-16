@@ -22,6 +22,7 @@ public class AudioDialogManager {
     View rootview;
     TextView tvContent;
     ImageView ivRecall;
+    ImageView ivVoice;
     RelativeLayout rlRecord;
     static volatile AudioDialogManager manager;
 
@@ -31,7 +32,9 @@ public class AudioDialogManager {
         tvContent = (TextView) rootview.findViewById(R.id.tvContent);
         rlRecord = (RelativeLayout) rootview.findViewById(R.id.rlRecord);
         ivRecall = (ImageView) rootview.findViewById(R.id.ivRecall);
+        ivVoice = (ImageView) rootview.findViewById(R.id.ivVoice);
         builder = new AlertDialog.Builder(mContext, R.style.CustomDialog);
+        builder.setCancelable(false);
         builder.setView(rootview);
         mDialog = builder.create();
     }
@@ -53,27 +56,25 @@ public class AudioDialogManager {
         mDialog.show();
     }
 
-    public void showNormalDialog() {
-        tvContent.setText("按住说话");
-        mDialog.show();
-    }
-
-    public void showWantToCancelDialog() {
-        if (mDialog != null) {
-            tvContent.setText(R.string.str_audio_btn_want_to_cancel);
-            mDialog.show();
-        }
+    /**
+     * @param level 1-7
+     */
+    public void updateVoiceLevel(int level) {
+        ivVoice.setImageResource(Functions.getResourceIdByString("ic_voice_" + level, R.drawable.ic_voice_1));
     }
 
     public void modifyText(int resid) {
         switch (resid) {
             case R.string.str_audio_btn_normal:
+
                 break;
             case R.string.str_audio_btn_recording:
+//                停止录音、保存文件
                 rlRecord.setVisibility(View.VISIBLE);
                 ivRecall.setVisibility(View.GONE);
                 break;
             case R.string.str_audio_btn_want_to_cancel:
+//                取消录音
                 rlRecord.setVisibility(View.GONE);
                 ivRecall.setVisibility(View.VISIBLE);
                 ivRecall.setImageResource(R.drawable.ic_audio_recall);

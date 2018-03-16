@@ -28,7 +28,7 @@ public class DatePickerActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_date_picker);
         btnDate = (Button) findViewById(R.id.btnDate);
         btnDate.setOnClickListener(this);
-        btnDate.setText(DateFormatTool.getDefaultDateStrFormat(currentDate.getTimeInMillis())); //默认显示当前日期
+        btnDate.setText(DateFormatTool.getDefaultDate(currentDate.getTimeInMillis())); //默认显示当前日期
     }
 
     @Override
@@ -50,7 +50,7 @@ public class DatePickerActivity extends BaseActivity implements View.OnClickList
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 //                修改日期
                 selectedDate.set(year, monthOfYear, dayOfMonth);
-                btnDate.setText(DateFormatTool.getDefaultDateStrFormat(selectedDate.getTimeInMillis()));
+                btnDate.setText(DateFormatTool.getDefaultDate(selectedDate.getTimeInMillis()));
             }
         };
 

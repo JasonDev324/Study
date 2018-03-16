@@ -35,6 +35,7 @@ import java.util.Iterator;
 import io.tanjundang.study.BuildConfig;
 import io.tanjundang.study.MainActivity;
 import io.tanjundang.study.R;
+import io.tanjundang.study.base.BaseApplication;
 
 
 /**
@@ -120,14 +121,14 @@ public class Functions {
      * @param s
      * @return
      */
-    public static int getResourceIdByString(String s) {
+    public static int getResourceIdByString(String s,int defaultResId) {
         try {
             Field field = R.drawable.class.getField(s);
             return Integer.parseInt(field.get(null).toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return R.drawable.ic_menu_share;
+        return defaultResId;
     }
 
     /**
@@ -445,9 +446,9 @@ public class Functions {
         String sdPath = "";
 //        获取sd卡路径,如果没有sd卡路径,就在/data/data下创建
         if (isSDCardExist()) {
-            sdPath = Environment.getExternalStorageDirectory() + "/TJDStudy/";
+            sdPath = Environment.getExternalStorageDirectory() + "/Study_Master/";
         } else {
-            sdPath = Environment.getDataDirectory() + "/TJDStudy/";
+            sdPath = Environment.getDataDirectory() + "/Study_Master/";
         }
         File fileDir = new File(sdPath + folder);
         if (!fileDir.exists()) {
@@ -455,6 +456,17 @@ public class Functions {
         }
         File file = new File(fileDir, fileName);
         return file;
+    }
+
+    public static String getSDCardPath() {
+        String sdPath = "";
+//        获取sd卡路径,如果没有sd卡路径,就在/data/data下创建
+        if (isSDCardExist()) {
+            sdPath = Environment.getExternalStorageDirectory() + "/Study_Master/";
+        } else {
+            sdPath = Environment.getDataDirectory() + "/Study_Master/";
+        }
+        return sdPath;
     }
 
     /**
