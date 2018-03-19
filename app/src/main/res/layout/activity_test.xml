@@ -93,9 +93,9 @@
         android:text="stopPlayer" />
 
     <ImageView
+        android:id="@+id/ivVoice"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:onClick="voice"
-        android:id="@+id/ivVoice"
-        android:src="@drawable/ic_voice_7" />
+        android:background="@color/colorPrimary"
+        android:onClick="voice" />
 </LinearLayout>

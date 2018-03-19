@@ -60,6 +60,7 @@ public class AudioDialogManager {
      * @param level 1-7
      */
     public void updateVoiceLevel(int level) {
+        if (level == 0) level = 1;
         ivVoice.setImageResource(Functions.getResourceIdByString("ic_voice_" + level, R.drawable.ic_voice_1));
     }
 

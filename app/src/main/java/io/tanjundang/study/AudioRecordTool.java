@@ -3,13 +3,12 @@ package io.tanjundang.study;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.Handler;
+import android.os.Message;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Observable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 import io.tanjundang.study.common.tools.DateFormatTool;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.LogTool;
@@ -24,9 +23,7 @@ public class AudioRecordTool {
     private MediaRecorder mediaRecorder;
     private String curFileName;
     boolean isRecording = false;
-
     private MediaPlayer mediaPlayer;
-
 
     public static AudioRecordTool getInstance() {
         if (recordTool == null) {
@@ -44,7 +41,7 @@ public class AudioRecordTool {
             return;
         }
 
-        curFileName = DateFormatTool.getDateStrFormat(System.currentTimeMillis(), "MM-dd-HH-mm-ss") + ".amr";
+        curFileName = DateFormatTool.getDateStrFormat(System.currentTimeMillis(), "yyyy-MM-dd-HH-mm-ss") + ".amr";
         LogTool.v("audioRecordTool", "prepare");
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);//从麦克风采集声音
@@ -102,25 +99,26 @@ public class AudioRecordTool {
             if (micListener != null) {
                 micListener.update(level);
             }
-            Observable.interval(SPACE, TimeUnit.MILLISECONDS)
-                    .take(1)
-                    .observeOn(Schedulers.computation())
-                    .subscribe(new Consumer<Long>() {
-                        @Override
-                        public void accept(Long aLong) throws Exception {
-                            updateMicStatus();
-                        }
-                    });
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    updateMicStatus();
+                }
+            }, SPACE);
 
         }
     }
 
-    public void play() {
+    Handler handler = new Handler();
+
+    public void play(final String filePath, final AudioPlayListener listener) {
+        if (mediaPlayer != null && mediaPlayer.isPlaying())
+            return;
         if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
             try {
                 //        这里找不到文件会报错误
-                mediaPlayer.setDataSource(Functions.getSDCardPath() + "audio/" + curFileName);
+                mediaPlayer.setDataSource(filePath);
 //                设置流媒体
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mediaPlayer.prepareAsync();
@@ -129,21 +127,28 @@ public class AudioRecordTool {
                     public void onPrepared(MediaPlayer mp) {
                         // 装载完毕回调
                         mediaPlayer.start();
+
+                        if (listener != null) listener.start();
                     }
                 });
                 mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
                     @Override
                     public boolean onError(MediaPlayer mp, int what, int extra) {
-                        play();
+                        play(filePath, listener);
                         return false;
+                    }
+                });
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        stopPlayer();
+                        listener.stop();
                     }
                 });
             } catch (IOException e) {
                 mediaPlayer = null;
                 e.printStackTrace();
             }
-        } else {
-            mediaPlayer.start();
         }
     }
 
@@ -166,4 +171,9 @@ public class AudioRecordTool {
         this.micListener = micListener;
     }
 
+    public interface AudioPlayListener {
+        void start();
+
+        void stop();
+    }
 }

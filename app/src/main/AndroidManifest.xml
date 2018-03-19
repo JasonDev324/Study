@@ -69,6 +69,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
@@ -141,6 +142,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".knowledge.databinding.DatabindingActivity" />
         <activity android:name=".knowledge.locate.LocationActivity" />
+        <activity android:name=".knowledge.audio.AudioRecordActivity"></activity>
     </application>
 
 </manifest>

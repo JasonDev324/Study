@@ -2,7 +2,9 @@ package io.tanjundang.study.common.tools;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -31,6 +33,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.tanjundang.study.BuildConfig;
 import io.tanjundang.study.MainActivity;
@@ -121,7 +125,7 @@ public class Functions {
      * @param s
      * @return
      */
-    public static int getResourceIdByString(String s,int defaultResId) {
+    public static int getResourceIdByString(String s, int defaultResId) {
         try {
             Field field = R.drawable.class.getField(s);
             return Integer.parseInt(field.get(null).toString());
@@ -458,6 +462,21 @@ public class Functions {
         return file;
     }
 
+    public static File getSDCardFolder(String folder) {
+        String sdPath = "";
+//        获取sd卡路径,如果没有sd卡路径,就在/data/data下创建
+        if (isSDCardExist()) {
+            sdPath = Environment.getExternalStorageDirectory() + "/Study_Master/";
+        } else {
+            sdPath = Environment.getDataDirectory() + "/Study_Master/";
+        }
+        File fileDir = new File(sdPath + folder);
+        if (!fileDir.exists()) {
+            fileDir.mkdirs();
+        }
+        return fileDir;
+    }
+
     public static String getSDCardPath() {
         String sdPath = "";
 //        获取sd卡路径,如果没有sd卡路径,就在/data/data下创建
@@ -598,5 +617,105 @@ public class Functions {
         appContext.startActivity(intent);
     }
 
+    /**
+     * 根据url获取文件名
+     *
+     * @param url
+     * @return
+     */
+    public static String getFileNameFromUrlNoTail(String url) {
+        String fileName = url.substring(url.lastIndexOf('/') + 1);
+        String result = removeFileTail(fileName);
+        return result;
+    }
+
+
+    public static String getFileNameFromUrl(String url) {
+        String result = url.substring(url.lastIndexOf('/') + 1);
+        return result;
+    }
+
+
+    public static String getTailFromFileName(String fileName) {
+        String suffixes = "avi|mpeg|3gp|mp3|mp4|wav|jpeg|gif|jpg|png|apk|exe|pdf|rar|zip|docx|doc";
+        Pattern pat = Pattern.compile("[\\w]+[\\.](" + suffixes + ")");//正则判断
+        Matcher mc = pat.matcher(fileName);//条件匹配
+        while (mc.find()) {
+            String substring = mc.group();//截取文件名后缀名
+            return substring;
+        }
+        return "";
+    }
+
+    public static String removeFileTail(String fileName) {
+        int index = fileName.indexOf(".");
+        String result = fileName.substring(0, index);
+        return result;
+    }
+
+//    public static File uri2File(Context context, Uri uri) {
+//        String path = null;
+//        if ("file".equals(uri.getScheme())) {
+//            path = uri.getEncodedPath();
+//            if (path != null) {
+//                path = Uri.decode(path);
+//                ContentResolver cr = context.getContentResolver();
+//                StringBuffer buff = new StringBuffer();
+//                buff.append("(").append(MediaStore.Images.ImageColumns.DATA).append("=").append("'" + path + "'").append(")");
+//                Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Images.ImageColumns._ID, MediaStore.Images.ImageColumns.DATA}, buff.toString(), null, null);
+//                int index = 0;
+//                int dataIdx = 0;
+//                for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
+//                    index = cur.getColumnIndex(MediaStore.Images.ImageColumns._ID);
+//                    index = cur.getInt(index);
+//                    dataIdx = cur.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+//                    path = cur.getString(dataIdx);
+//                }
+//                cur.close();
+//                if (index == 0) {
+//                } else {
+//                    Uri u = Uri.parse("content://media/external/images/media/" + index);
+//                    System.out.println("temp uri is :" + u);
+//                }
+//            }
+//            if (path != null) {
+//                return new File(path);
+//            }
+//        } else if ("content".equals(uri.getScheme())) {
+//            // 4.2.2以后
+//            String[] proj = {MediaStore.Images.Media.DATA};
+//            Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
+//            if (cursor.moveToFirst()) {
+//                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//                path = cursor.getString(columnIndex);
+//            }
+//            cursor.close();
+//
+//            return new File(path);
+//        } else {
+//            //Log.i(TAG, "Uri Scheme:" + uri.getScheme());
+//        }
+//        return null;
+//    }
+//
+//    public static Uri file2Uri(Context context, File imageFile) {
+//        String filePath = imageFile.getAbsolutePath();
+//        Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                new String[]{MediaStore.Images.Media._ID}, MediaStore.Images.Media.DATA + "=? ",
+//                new String[]{filePath}, null);
+//        if (cursor != null && cursor.moveToFirst()) {
+//            int id = cursor.getInt(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
+//            Uri baseUri = Uri.parse("content://media/external/images/media");
+//            return Uri.withAppendedPath(baseUri, "" + id);
+//        } else {
+//            if (imageFile.exists()) {
+//                ContentValues values = new ContentValues();
+//                values.put(MediaStore.Images.Media.DATA, filePath);
+//                return context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+//            } else {
+//                return null;
+//            }
+//        }
+//    }
 
 }

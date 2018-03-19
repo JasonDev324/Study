@@ -1,5 +1,6 @@
 package io.tanjundang.study.common.tools;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,6 +42,18 @@ public class DateFormatTool {
      */
     public static String getDefaultDate(long date) {
         return dateFormat.format(new Date(date));
+    }
+
+
+    public static long getDateFromStr(String format, String text) {
+        dateFormat.applyPattern(format);
+        long date = 0;
+        try {
+            date = dateFormat.parse(text).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 
     /**

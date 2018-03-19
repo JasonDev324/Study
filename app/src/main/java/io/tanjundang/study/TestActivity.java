@@ -26,6 +26,7 @@ import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.LogTool;
 import io.tanjundang.study.common.tools.PermissionTool;
+import io.tanjundang.study.knowledge.audio.AudioRecordActivity;
 
 public class TestActivity extends BaseActivity {
 
@@ -74,6 +75,8 @@ public class TestActivity extends BaseActivity {
     }
 
     public void voice(View v) {
+        Intent intent = new Intent(this, AudioRecordActivity.class);
+        startActivity(intent);
     }
 
 
@@ -87,7 +90,6 @@ public class TestActivity extends BaseActivity {
 
 
     public void play(View v) {
-        AudioRecordTool.getInstance().play();
     }
 
     public void stopPlayer(View v) {
