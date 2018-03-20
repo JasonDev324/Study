@@ -34,8 +34,8 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
 
     //    录音最短时间
     private static final int AUDIO_RECORD_MINIMUM_TIME = 1000;
-    Context mContext;
     long currentDate;
+    AudioDialogManager dialogManager;
 
     public AudioRecordButton(Context context) {
         this(context, null);
@@ -47,8 +47,8 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
 
     public AudioRecordButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
         AudioRecordTool.getInstance().setMicStatusListener(this);
+        dialogManager = new AudioDialogManager(context);
     }
 
     @Override
@@ -64,7 +64,8 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
                 currentDate = System.currentTimeMillis();
                 isRecording = true;
                 changeState(STATE_RECORDING);
-                AudioDialogManager.getInstance(mContext).showRecordingDialog();
+
+                dialogManager.showRecordingDialog();
                 AudioRecordTool.getInstance().start();
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -79,20 +80,20 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
             case MotionEvent.ACTION_UP:
 //                录音时间过短
                 if (System.currentTimeMillis() - currentDate < AUDIO_RECORD_MINIMUM_TIME) {
-                    AudioDialogManager.getInstance(mContext).modifyText(R.string.str_audio_time_short);
+                    dialogManager.modifyText(R.string.str_audio_time_short);
                     Observable.interval(500, TimeUnit.MILLISECONDS)
                             .take(1)
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Consumer<Long>() {
                                 @Override
                                 public void accept(Long aLong) throws Exception {
-                                    AudioDialogManager.getInstance(mContext).dismiss();
+                                    dialogManager.dismiss();
                                     reset();
                                 }
                             });
                     break;
                 }
-                AudioDialogManager.getInstance(mContext).dismiss();
+                dialogManager.dismiss();
                 if (mCurState == STATE_RECORDING) {
 // TODO: 2018/3/9 release
                     AudioRecordTool.getInstance().stop();
@@ -129,17 +130,17 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
                 case STATE_NORMAL:
                     setBackgroundColor(Color.WHITE);
                     setText(R.string.str_audio_btn_normal);
-                    AudioDialogManager.getInstance(mContext).modifyText(R.string.str_audio_btn_normal);
+                    dialogManager.modifyText(R.string.str_audio_btn_normal);
                     break;
                 case STATE_RECORDING:
                     setBackgroundColor(Color.GRAY);
                     setText(R.string.str_audio_btn_recording);
-                    AudioDialogManager.getInstance(mContext).modifyText(R.string.str_audio_btn_recording);
+                    dialogManager.modifyText(R.string.str_audio_btn_recording);
                     break;
                 case STATE_WANT_TO_CANCEL:
                     setBackgroundColor(Color.GRAY);
                     setText(R.string.str_audio_btn_want_to_cancel);
-                    AudioDialogManager.getInstance(mContext).modifyText(R.string.str_audio_btn_want_to_cancel);
+                    dialogManager.modifyText(R.string.str_audio_btn_want_to_cancel);
                     break;
             }
 
@@ -166,9 +167,11 @@ public class AudioRecordButton extends android.support.v7.widget.AppCompatButton
                     .subscribe(new Consumer<Long>() {
                         @Override
                         public void accept(Long aLong) throws Exception {
-                            AudioDialogManager.getInstance(mContext).updateVoiceLevel(level);
+                            dialogManager.updateVoiceLevel(level);
                         }
                     });
         }
     }
+
+
 }

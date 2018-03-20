@@ -4,7 +4,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Handler;
-import android.os.Message;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +23,12 @@ public class AudioRecordTool {
     private String curFileName;
     boolean isRecording = false;
     private MediaPlayer mediaPlayer;
+
+    private int BASE = 1;
+    private int SPACE = 100;// 间隔取样时间
+
+    private Handler handler = new Handler();
+    private AudioPlayListener lastListener;
 
     public static AudioRecordTool getInstance() {
         if (recordTool == null) {
@@ -85,9 +90,6 @@ public class AudioRecordTool {
         }
     }
 
-    private int BASE = 1;
-    private int SPACE = 100;// 间隔取样时间
-
     private void updateMicStatus() {
         if (mediaRecorder != null) {
             double ratio = (double) mediaRecorder.getMaxAmplitude() / BASE;
@@ -109,12 +111,23 @@ public class AudioRecordTool {
         }
     }
 
-    Handler handler = new Handler();
 
+    /**
+     * 传入 录音位置即可播放
+     *
+     * @param filePath
+     * @param listener
+     */
     public void play(final String filePath, final AudioPlayListener listener) {
-        if (mediaPlayer != null && mediaPlayer.isPlaying())
-            return;
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+//            关闭上一个点击的语音的动画
+            if (lastListener != null)
+                lastListener.stop();
+            stopPlayer();
+        }
+
         if (mediaPlayer == null) {
+            lastListener = listener;
             mediaPlayer = new MediaPlayer();
             try {
                 //        这里找不到文件会报错误
@@ -159,7 +172,6 @@ public class AudioRecordTool {
             mediaPlayer = null;
         }
     }
-
 
     public interface MicStatusListener {
         void update(int level);

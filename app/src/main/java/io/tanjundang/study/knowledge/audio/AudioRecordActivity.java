@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.AudioRecordTool;
 import io.tanjundang.study.R;
+import io.tanjundang.study.common.view.AudioRecordButton;
 import io.tanjundang.study.databinding.ActivityAudioRecordBinding;
 
 /**
@@ -21,6 +22,7 @@ public class AudioRecordActivity extends AppCompatActivity {
     ActivityAudioRecordBinding mBinding;
     AudioAdapter mAdapter;
     AudioModel model = new AudioModel();
+    AudioRecordButton btnAudio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class AudioRecordActivity extends AppCompatActivity {
         mAdapter = new AudioAdapter(model.getList());
         mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mBinding.recyclerView.setAdapter(mAdapter);
+        btnAudio = mBinding.btnRecord;
     }
 
     @Override
