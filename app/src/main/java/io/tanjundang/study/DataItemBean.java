@@ -31,7 +31,8 @@ public class DataItemBean {
         SCROLLCONFLICT,
         SOCKET,
         DATABINDING,
-        GAODE_MAP
+        GAODE_MAP,
+        VIEWSTUB
     }
 
     public DataItemBean(int title, Type type) {

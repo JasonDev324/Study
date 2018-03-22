@@ -142,7 +142,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".knowledge.databinding.DatabindingActivity" />
         <activity android:name=".knowledge.locate.LocationActivity" />
-        <activity android:name=".knowledge.audio.AudioRecordActivity"></activity>
+        <activity android:name=".knowledge.audio.AudioRecordActivity" />
+        <activity android:name=".knowledge.ViewStubActivity"></activity>
     </application>
 
 </manifest>

@@ -35,6 +35,7 @@ import io.tanjundang.study.common.tools.ShareTool;
 import io.tanjundang.study.common.view.photopick.ImageInfo;
 import io.tanjundang.study.common.view.photopick.PhotoPickActivity;
 import io.tanjundang.study.common.view.photopick.PhotoPickDetailActivity;
+import io.tanjundang.study.knowledge.ViewStubActivity;
 import io.tanjundang.study.knowledge.actionbar.ActionBarStudyActivity;
 import io.tanjundang.study.knowledge.broadcast.NotifyReceiver;
 import io.tanjundang.study.knowledge.camera.CameraActivity;
@@ -129,6 +130,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         data.add(new DataItemBean(R.string.main_text_study_socket, DataItemBean.Type.SOCKET));
         data.add(new DataItemBean(R.string.main_text_study_databinding, DataItemBean.Type.DATABINDING));
         data.add(new DataItemBean(R.string.main_text_study_gaode_map, DataItemBean.Type.GAODE_MAP));
+        data.add(new DataItemBean(R.string.main_text_study_viewstub, DataItemBean.Type.VIEWSTUB));
         mAdapter.notifyDataSetChanged();
 
         mPickPhotos.add(new ImageInfo("http://a.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=36db4d32cb1349547e1eef626e75f565/63d9f2d3572c11dfc1e84a90632762d0f703c24c.jpg"));
@@ -263,6 +265,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         StartActivity(DatabindingActivity.class);
                     } else if (item.getType().equals(DataItemBean.Type.GAODE_MAP)) {
                         StartActivity(LocationActivity.class);
+                    }else if (item.getType().equals(DataItemBean.Type.VIEWSTUB)) {
+                        StartActivity(ViewStubActivity.class);
                     }
                 }
             });
