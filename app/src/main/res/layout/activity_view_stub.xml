@@ -4,21 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
     tools:context=".knowledge.ViewStubActivity">
 
-    <Button
-        android:id="@+id/btnMsg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="inflate"
-        android:text="TITLE" />
+    <RelativeLayout
+        android:id="@+id/rlTitle"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@color/green">
+
+        <Button
+            android:id="@+id/btnMsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_shape_white_stroke"
+            android:gravity="center"
+            android:text="新闻"
+            android:textColor="@color/white"
+            android:textSize="15dp" />
+
+        <Button
+            android:id="@+id/btnModify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnMsg"
+            android:layout_centerHorizontal="true"
+            android:background="@color/transparent"
+            android:onClick="inflate"
+            android:text="展开"
+            android:textColor="@color/white"
+            android:textSize="13dp" />
+
+    </RelativeLayout>
 
     <ViewStub
         android:id="@+id/viewStub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnMsg"
+        android:layout_below="@+id/rlTitle"
         android:layout="@layout/viewstub_layout" />
 
 </RelativeLayout>
