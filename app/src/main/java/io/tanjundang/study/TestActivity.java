@@ -2,12 +2,9 @@ package io.tanjundang.study;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -18,13 +15,11 @@ import android.widget.TextView;
 
 import com.umeng.socialize.UMShareAPI;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
+import io.tanjundang.study.common.tools.CommonDialog;
 import io.tanjundang.study.common.tools.Functions;
-import io.tanjundang.study.common.tools.LogTool;
 import io.tanjundang.study.common.tools.PermissionTool;
 import io.tanjundang.study.knowledge.audio.AudioRecordActivity;
 
@@ -32,7 +27,7 @@ public class TestActivity extends BaseActivity {
 
     TextView tvMsg;
     ImageView ivVoice;
-    private ArrayList permissionList = new ArrayList();
+    ArrayList permissionList = new ArrayList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,29 +66,41 @@ public class TestActivity extends BaseActivity {
     }
 
     public void start(View v) {
-        AudioRecordTool.getInstance().start();
+    }
+
+
+    public void TEST1(View v) {
+        showDiaglog();
+    }
+
+    public void showDiaglog() {
+        CommonDialog.Builder dialog = new CommonDialog.Builder(this);
+        dialog.setTitle("666")
+                .setContent("abc")
+                .setPositiveListener(new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Functions.toast("FUCK");
+                    }
+                }).build().show();
+
+
+    }
+
+
+    public void TEST2(View v) {
+    }
+
+
+    public void TEST3(View v) {
+    }
+
+    public void TEST4(View v) {
     }
 
     public void voice(View v) {
         Intent intent = new Intent(this, AudioRecordActivity.class);
         startActivity(intent);
-    }
-
-
-    public void stop(View v) {
-        AudioRecordTool.getInstance().stop();
-    }
-
-    public void cancel(View v) {
-        AudioRecordTool.getInstance().cancel();
-    }
-
-
-    public void play(View v) {
-    }
-
-    public void stopPlayer(View v) {
-        AudioRecordTool.getInstance().stopPlayer();
     }
 
     @Override

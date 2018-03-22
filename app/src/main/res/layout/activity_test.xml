@@ -47,17 +47,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <io.tanjundang.study.common.view.AudioRecordButton
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="60dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="@string/str_audio_btn_normal" />
-
     </FrameLayout>
 
 
@@ -70,27 +59,27 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:onClick="stop"
-        android:text="stop" />
+        android:onClick="TEST1"
+        android:text="TEST1" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:onClick="cancel"
-        android:text="cancel" />
+        android:onClick="TEST2"
+        android:text="TEST2" />
 
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:onClick="play"
-        android:text="play" />
+        android:onClick="TEST3"
+        android:text="TEST3" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:onClick="stopPlayer"
-        android:text="stopPlayer" />
+        android:onClick="TEST4"
+        android:text="TEST4" />
 
     <ImageView
         android:id="@+id/ivVoice"
