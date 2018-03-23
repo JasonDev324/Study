@@ -27,6 +27,7 @@
     <string name="main_text_study_databinding">Databinding</string>
     <string name="main_text_study_gaode_map">GaoDe_Map</string>
     <string name="main_text_study_viewstub">ViewStub</string>
+    <string name="main_text_study_threadpool">ThreadPool</string>
 
     <string name="action_send">Send Msg</string>
     <string name="text_enter_test">进入测试页面</string>

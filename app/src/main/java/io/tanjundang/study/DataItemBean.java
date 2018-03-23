@@ -32,7 +32,8 @@ public class DataItemBean {
         SOCKET,
         DATABINDING,
         GAODE_MAP,
-        VIEWSTUB
+        VIEWSTUB,
+        THREAD_POOL
     }
 
     public DataItemBean(int title, Type type) {
