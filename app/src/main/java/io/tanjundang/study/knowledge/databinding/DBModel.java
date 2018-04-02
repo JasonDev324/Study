@@ -20,7 +20,7 @@ import io.tanjundang.study.common.tools.ImageLoaderTool;
 public class DBModel {
     @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView imageView, String url) {
-        ImageLoaderTool.getInstance().loadImage(url, imageView);
+        ImageLoaderTool.getInstance().loadImage(imageView, url);
     }
 
     @BindingConversion

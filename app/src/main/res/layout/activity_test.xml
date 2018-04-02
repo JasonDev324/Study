@@ -81,10 +81,16 @@
         android:onClick="TEST4"
         android:text="TEST4" />
 
-    <ImageView
+    <Button
         android:id="@+id/ivVoice"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@color/colorPrimary"
-        android:onClick="voice" />
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:onClick="voice"
+        android:text="录音" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutAnimation="@anim/layout_anim_start" />
 </LinearLayout>

@@ -2,6 +2,7 @@ package io.tanjundang.study;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,7 +10,15 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
+import android.view.animation.LayoutAnimationController;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +34,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import io.tanjundang.study.base.BaseActivity;
+import io.tanjundang.study.base.CommonHolder;
+import io.tanjundang.study.base.CommonRecyclerViewAdapter;
 import io.tanjundang.study.common.tools.CommonDialog;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.LogTool;
@@ -36,8 +47,11 @@ import rx.internal.util.RxThreadFactory;
 public class TestActivity extends BaseActivity {
 
     TextView tvMsg;
-    ImageView ivVoice;
+    Button ivVoice;
+    RecyclerView recyclerView;
     ArrayList permissionList = new ArrayList();
+    ArrayList<TestInfo> list = new ArrayList<>();
+    TestAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,26 +62,18 @@ public class TestActivity extends BaseActivity {
     protected void initView() {
         setContentView(R.layout.activity_test);
         tvMsg = (TextView) findViewById(R.id.tvMsg);
-        ivVoice = (ImageView) findViewById(R.id.ivVoice);
+        ivVoice = (Button) findViewById(R.id.ivVoice);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new TestAdapter(this, R.layout.recyle_item_test, list);
+        recyclerView.setAdapter(mAdapter);
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale_from_point);
+        LayoutAnimationController lac = new LayoutAnimationController(anim);
+        lac.setDelay(0.5f);
+        lac.setInterpolator(new AccelerateInterpolator());
+        recyclerView.setLayoutAnimation(lac);
+        recyclerView.scheduleLayoutAnimation();
     }
-
-    int number_of_cores = Runtime.getRuntime().availableProcessors();
-    int keep_alive_time = 1;
-    TimeUnit keep_alive_time_unit = TimeUnit.SECONDS;
-    BlockingQueue<Runnable> taskQueue = new LinkedBlockingQueue<>();
-
-    ExecutorService executorService = new ThreadPoolExecutor(
-            number_of_cores,
-            number_of_cores * 2,
-            keep_alive_time,
-            keep_alive_time_unit,
-            taskQueue,
-            Executors.defaultThreadFactory(), new RejectedExecutionHandler() {
-        @Override
-        public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-            LogTool.v(TAG, "task was rejected");
-        }
-    });
 
     @Override
     protected void initData() {
@@ -75,38 +81,22 @@ public class TestActivity extends BaseActivity {
         permissionList.add(Manifest.permission.RECORD_AUDIO);
         permissionList.add(Manifest.permission.INTERNET);
         permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+
     }
 
     public void start() {
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 100; i++) {
-                    long id = Thread.currentThread().getId();
-                    LogTool.v(TAG, "\nThreadName:" + Thread.currentThread().getName() + "\nThreadId:" + id + "\nCount:" + Thread.activeCount() + "\nnum:" + i);
-                }
-            }
-        });
+
     }
 
     public void startThread() {
-        ThreadManageTool.getInstance().execute(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 100; i++) {
-                    long id = Thread.currentThread().getId();
-                    LogTool.v(TAG, "\nThreadName:" + Thread.currentThread().getName() + "\nThreadId:" + id + "\nCount:" + Thread.activeCount() + "\nnum:" + i);
-                }
-            }
-        });
+
     }
 
     public void checkPermission(final View view) {
         PermissionTool.getInstance(this).requestPermissions(permissionList, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                dothing();
-                start(view);
+                dothing();
             }
         });
     }
@@ -118,13 +108,12 @@ public class TestActivity extends BaseActivity {
     }
 
     public void start(View v) {
-
         showDiaglog();
     }
 
 
     public void TEST1(View v) {
-        start();
+        checkPermission(v);
     }
 
     public void showDiaglog() {
@@ -137,7 +126,6 @@ public class TestActivity extends BaseActivity {
                         Functions.toast("FUCK");
                     }
                 }).build().show();
-
 
     }
 
@@ -176,18 +164,34 @@ public class TestActivity extends BaseActivity {
             String name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
             String phone = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
             sb.append("名字：" + name + "手机：" + phone + "\n");
-            if (i == 10) {
+            list.add(new TestInfo(name));
+            if (i == 40) {
                 break;
             }
         }
 
         tvMsg.setText(sb.toString());
         Functions.toast("Success");
+        mAdapter.notifyDataSetChanged();
+        recyclerView.scheduleLayoutAnimation();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         PermissionTool.getInstance(this).onRequestPermissionsResult(permissionList, requestCode, permissions, grantResults);
     }
+
+
+    public class TestAdapter extends CommonRecyclerViewAdapter<TestInfo> {
+        public TestAdapter(Context context, int layoutId, ArrayList<TestInfo> list) {
+            super(context, layoutId, list);
+        }
+
+        @Override
+        public void convert(CommonHolder holder, TestInfo data, int pos) {
+            holder.setText(R.id.tvName, data.getName(), null);
+        }
+    }
+
 }
 

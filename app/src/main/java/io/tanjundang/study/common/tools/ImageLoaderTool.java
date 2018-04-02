@@ -108,7 +108,7 @@ public class ImageLoaderTool {
      * @param url
      * @param imageView
      */
-    public void loadImage(String url, ImageView imageView) {
+    public void loadImage(ImageView imageView, String url) {
         imageLoader.displayImage(url, imageView, defaultOptions);
     }
 
@@ -118,7 +118,7 @@ public class ImageLoaderTool {
      * @param resid
      * @param imageView
      */
-    public void loadImageFromDrawable(int resid, ImageView imageView) {
+    public void loadImageFromDrawable(ImageView imageView, int resid) {
         imageLoader.displayImage(DRAWABLE_PREFIX + resid, imageView);
     }
 
