@@ -4,9 +4,12 @@ import android.animation.Animator;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Path;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.Animation;
@@ -67,6 +70,12 @@ public class AnimationActivity extends BaseActivity implements View.OnClickListe
     protected void initData() {
         frameDrawable = (AnimationDrawable) ivAnimation.getBackground();
 
+    }
+
+    //    使用ActivityOptionsCompat进行View的动画过度
+    public void skip(View v) {
+        ActivityOptionsCompat compact = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, "tanjundang");
+        ActivityCompat.startActivity(this, new Intent(this, SceneActivity.class), compact.toBundle());
     }
 
     @Override

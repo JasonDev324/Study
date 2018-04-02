@@ -144,7 +144,8 @@
         <activity android:name=".knowledge.locate.LocationActivity" />
         <activity android:name=".knowledge.audio.AudioRecordActivity" />
         <activity android:name=".knowledge.ViewStubActivity" />
-        <activity android:name=".knowledge.threadpool.ThreadPoolActivity"></activity>
+        <activity android:name=".knowledge.threadpool.ThreadPoolActivity" />
+        <activity android:name=".knowledge.animation.SceneActivity"></activity>
     </application>
 
 </manifest>

@@ -148,7 +148,6 @@ public class TestActivity extends BaseActivity {
 
 
     public void TEST3(View v) {
-
     }
 
     public void TEST4(View v) {
