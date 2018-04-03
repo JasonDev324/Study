@@ -33,7 +33,8 @@ public class DataItemBean {
         DATABINDING,
         GAODE_MAP,
         VIEWSTUB,
-        THREAD_POOL
+        THREAD_POOL,
+        LRUCACHE
     }
 
     public DataItemBean(int title, Type type) {

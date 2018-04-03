@@ -45,6 +45,7 @@ import io.tanjundang.study.knowledge.datepicker.DatePickerActivity;
 import io.tanjundang.study.knowledge.intent.IntentActivity;
 import io.tanjundang.study.knowledge.launchmode.LaunchModeActivity;
 import io.tanjundang.study.knowledge.locate.LocationActivity;
+import io.tanjundang.study.knowledge.lrucache.LruCacheActivity;
 import io.tanjundang.study.knowledge.preference.PreSettingActivity;
 import io.tanjundang.study.knowledge.scrollconflict.ScrollConflictActivity;
 import io.tanjundang.study.knowledge.selector.SelectorActivity;
@@ -133,6 +134,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         data.add(new DataItemBean(R.string.main_text_study_gaode_map, DataItemBean.Type.GAODE_MAP));
         data.add(new DataItemBean(R.string.main_text_study_viewstub, DataItemBean.Type.VIEWSTUB));
         data.add(new DataItemBean(R.string.main_text_study_threadpool, DataItemBean.Type.THREAD_POOL));
+        data.add(new DataItemBean(R.string.main_text_study_lrucache, DataItemBean.Type.LRUCACHE));
         mAdapter.notifyDataSetChanged();
 
         mPickPhotos.add(new ImageInfo("http://a.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=36db4d32cb1349547e1eef626e75f565/63d9f2d3572c11dfc1e84a90632762d0f703c24c.jpg"));
@@ -267,10 +269,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         StartActivity(DatabindingActivity.class);
                     } else if (item.getType().equals(DataItemBean.Type.GAODE_MAP)) {
                         StartActivity(LocationActivity.class);
-                    }else if (item.getType().equals(DataItemBean.Type.VIEWSTUB)) {
+                    } else if (item.getType().equals(DataItemBean.Type.VIEWSTUB)) {
                         StartActivity(ViewStubActivity.class);
-                    }else if (item.getType().equals(DataItemBean.Type.THREAD_POOL)) {
+                    } else if (item.getType().equals(DataItemBean.Type.THREAD_POOL)) {
                         StartActivity(ThreadPoolActivity.class);
+                    } else if (item.getType().equals(DataItemBean.Type.LRUCACHE)) {
+                        StartActivity(LruCacheActivity.class);
                     }
                 }
             });
