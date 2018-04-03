@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -16,7 +18,6 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.Interpolator;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,29 +26,23 @@ import android.widget.TextView;
 import com.umeng.socialize.UMShareAPI;
 
 import java.util.ArrayList;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.base.CommonHolder;
 import io.tanjundang.study.base.CommonRecyclerViewAdapter;
+import io.tanjundang.study.common.tools.BitmapCacheUtil;
 import io.tanjundang.study.common.tools.CommonDialog;
 import io.tanjundang.study.common.tools.Functions;
-import io.tanjundang.study.common.tools.LogTool;
 import io.tanjundang.study.common.tools.PermissionTool;
-import io.tanjundang.study.common.tools.ThreadManageTool;
+import io.tanjundang.study.common.tools.PhotoTool;
 import io.tanjundang.study.knowledge.audio.AudioRecordActivity;
-import rx.internal.util.RxThreadFactory;
+import io.tanjundang.study.knowledge.lrucache.LruCacheActivity;
 
 public class TestActivity extends BaseActivity {
 
     TextView tvMsg;
     Button ivVoice;
+    ImageView ivImage;
     RecyclerView recyclerView;
     ArrayList permissionList = new ArrayList();
     ArrayList<TestInfo> list = new ArrayList<>();
@@ -62,6 +57,7 @@ public class TestActivity extends BaseActivity {
     protected void initView() {
         setContentView(R.layout.activity_test);
         tvMsg = (TextView) findViewById(R.id.tvMsg);
+        ivImage = (ImageView) findViewById(R.id.ivImage);
         ivVoice = (Button) findViewById(R.id.ivVoice);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -81,10 +77,6 @@ public class TestActivity extends BaseActivity {
         permissionList.add(Manifest.permission.RECORD_AUDIO);
         permissionList.add(Manifest.permission.INTERNET);
         permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-
-    }
-
-    public void start() {
 
     }
 
@@ -134,15 +126,19 @@ public class TestActivity extends BaseActivity {
         startThread();
     }
 
+    String url = "http://pics.sc.chinaz.com/files/pic/pic9/201803/wpic176.jpg";
+    BitmapCacheUtil tool = new BitmapCacheUtil(this);
 
     public void TEST3(View v) {
+        tool.display(ivImage, url);
     }
+
 
     public void TEST4(View v) {
     }
 
     public void voice(View v) {
-        Intent intent = new Intent(this, AudioRecordActivity.class);
+        Intent intent = new Intent(this, LruCacheActivity.class);
         startActivity(intent);
     }
 
