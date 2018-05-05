@@ -109,6 +109,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void initData() {
         permissionList.add(Manifest.permission.CAMERA);
+        permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
         permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         data.add(new DataItemBean(R.string.main_text_study_animation, DataItemBean.Type.ANIMATION));

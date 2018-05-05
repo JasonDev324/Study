@@ -2,6 +2,7 @@ package io.tanjundang.study.base;
 
 import android.app.Application;
 
+import com.liulishuo.filedownloader.FileDownloader;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -34,5 +35,6 @@ public class BaseApplication extends Application {
         PlatformConfig.setSinaWeibo(WEIBO_ID, WEIBO_KEY);
         PlatformConfig.setQQZone(QQ_ID, QQ_KEY);
         PlatformConfig.setWeixin(WEIXIN_ID, WEIXIN_KEY);
+        FileDownloader.setup(this);
     }
 }
