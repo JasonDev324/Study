@@ -1,4 +1,4 @@
-package io.tanjundang.study;
+package io.tanjundang.study.test;
 
 import android.Manifest;
 import android.content.ContentResolver;
@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
@@ -27,6 +25,7 @@ import com.umeng.socialize.UMShareAPI;
 
 import java.util.ArrayList;
 
+import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.base.CommonHolder;
 import io.tanjundang.study.base.CommonRecyclerViewAdapter;
@@ -34,8 +33,6 @@ import io.tanjundang.study.common.tools.BitmapCacheUtil;
 import io.tanjundang.study.common.tools.CommonDialog;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.PermissionTool;
-import io.tanjundang.study.common.tools.PhotoTool;
-import io.tanjundang.study.knowledge.audio.AudioRecordActivity;
 import io.tanjundang.study.knowledge.lrucache.LruCacheActivity;
 
 public class TestActivity extends BaseActivity {

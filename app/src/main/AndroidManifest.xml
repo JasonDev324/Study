@@ -110,7 +110,7 @@
             android:name=".knowledge.launchmode.SingleTopActivity"
             android:label="SingleTop测试" />
         <activity android:name=".GuideActivity" />
-        <activity android:name=".TestActivity" />
+        <activity android:name=".test.TestActivity" />
         <activity android:name=".knowledge.service.ServiceActivity" />
         <activity android:name=".knowledge.service.BindActivity" />
         <activity android:name=".knowledge.customview.CustomViewActivity" />

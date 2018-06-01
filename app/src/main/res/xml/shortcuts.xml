@@ -11,7 +11,7 @@
         android:shortcutShortLabel="@string/text_enter_test">
         <intent
             android:action="android.intent.action.VIEW"
-            android:targetClass="io.tanjundang.study.TestActivity"
+            android:targetClass="io.tanjundang.study.test.TestActivity"
             android:targetPackage="io.tanjundang.study" />
     </shortcut>
 </shortcuts>

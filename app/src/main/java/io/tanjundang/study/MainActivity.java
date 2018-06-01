@@ -57,6 +57,7 @@ import io.tanjundang.study.knowledge.socket.SocketStudyActivity;
 import io.tanjundang.study.knowledge.threadpool.ThreadPoolActivity;
 import io.tanjundang.study.knowledge.viewpager.TabActivity;
 import io.tanjundang.study.knowledge.webview.WebViewActivity;
+import io.tanjundang.study.test.TestActivity;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, NotifyReceiver.NotifyCallback {
 

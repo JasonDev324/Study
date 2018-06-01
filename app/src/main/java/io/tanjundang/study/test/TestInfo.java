@@ -1,4 +1,4 @@
-package io.tanjundang.study;
+package io.tanjundang.study.test;
 
 /**
  * @Author: TanJunDang
