@@ -31,6 +31,7 @@ import io.tanjundang.study.base.CommonHolder;
 import io.tanjundang.study.base.CommonRecyclerViewAdapter;
 import io.tanjundang.study.common.tools.BitmapCacheUtil;
 import io.tanjundang.study.common.tools.CommonDialog;
+import io.tanjundang.study.common.tools.MoneyFormatTool;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.PermissionTool;
 import io.tanjundang.study.knowledge.lrucache.LruCacheActivity;
@@ -132,6 +133,8 @@ public class TestActivity extends BaseActivity {
 
 
     public void TEST4(View v) {
+        String str = MoneyFormatTool.getPointMoney(1110000000.1253423);
+        Functions.toast(str);
     }
 
     public void voice(View v) {
