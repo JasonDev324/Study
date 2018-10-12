@@ -46,6 +46,7 @@ import io.tanjundang.study.knowledge.intent.IntentActivity;
 import io.tanjundang.study.knowledge.launchmode.LaunchModeActivity;
 import io.tanjundang.study.knowledge.locate.LocationActivity;
 import io.tanjundang.study.knowledge.lrucache.LruCacheActivity;
+import io.tanjundang.study.knowledge.mvc.MVCActivity;
 import io.tanjundang.study.knowledge.preference.PreSettingActivity;
 import io.tanjundang.study.knowledge.scrollconflict.ScrollConflictActivity;
 import io.tanjundang.study.knowledge.selector.SelectorActivity;
@@ -137,6 +138,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         data.add(new DataItemBean(R.string.main_text_study_viewstub, DataItemBean.Type.VIEWSTUB));
         data.add(new DataItemBean(R.string.main_text_study_threadpool, DataItemBean.Type.THREAD_POOL));
         data.add(new DataItemBean(R.string.main_text_study_lrucache, DataItemBean.Type.LRUCACHE));
+        data.add(new DataItemBean(R.string.main_text_study_mvc, DataItemBean.Type.MVC));
         mAdapter.notifyDataSetChanged();
 
         mPickPhotos.add(new ImageInfo("http://a.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=36db4d32cb1349547e1eef626e75f565/63d9f2d3572c11dfc1e84a90632762d0f703c24c.jpg"));
@@ -277,6 +279,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                         StartActivity(ThreadPoolActivity.class);
                     } else if (item.getType().equals(DataItemBean.Type.LRUCACHE)) {
                         StartActivity(LruCacheActivity.class);
+                    } else if (item.getType().equals(DataItemBean.Type.MVC)) {
+                        StartActivity(MVCActivity.class);
                     }
                 }
             });

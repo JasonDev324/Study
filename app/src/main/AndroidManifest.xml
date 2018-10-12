@@ -146,7 +146,8 @@
         <activity android:name=".knowledge.ViewStubActivity" />
         <activity android:name=".knowledge.threadpool.ThreadPoolActivity" />
         <activity android:name=".knowledge.animation.SceneActivity" />
-        <activity android:name=".knowledge.lrucache.LruCacheActivity"></activity>
+        <activity android:name=".knowledge.lrucache.LruCacheActivity" />
+        <activity android:name=".knowledge.mvc.MVCActivity"></activity>
     </application>
 
 </manifest>

@@ -34,7 +34,8 @@ public class DataItemBean {
         GAODE_MAP,
         VIEWSTUB,
         THREAD_POOL,
-        LRUCACHE
+        LRUCACHE,
+        MVC
     }
 
     public DataItemBean(int title, Type type) {
