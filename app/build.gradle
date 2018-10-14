@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.aliyun.ams.emas-services'
 
 android {
     compileSdkVersion 26
@@ -12,17 +13,29 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         ndk {
             //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
             abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "arm64-v8a", "x86_64"
         }
-
+    }
+    signingConfigs {
+        release {
+            keyAlias 'TanJunDang'
+            keyPassword '123456'
+            storeFile file('E:/Workspace/Study-master/Study-Master.jks')
+            storePassword '123456'
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 
@@ -46,11 +59,10 @@ dependencies {
     compile 'com.prolificinteractive:parallaxpager:2.2.1'
     testCompile 'junit:junit:4.12'
     compile project(':umsocialshare')
-//PhotoPick
+    //PhotoPick
     compile 'com.github.lzyzsd:circleprogress:1.1.0@aar'
     compile 'com.github.chrisbanes.photoview:library:1.2.2'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
-
     //3D地图so及jar
     compile 'com.amap.api:3dmap:latest.integration'
     //定位功能
@@ -61,6 +73,8 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     compile 'com.liulishuo.filedownloader:library:1.7.2'
+    //热修复
+    compile 'com.aliyun.ams:alicloud-android-hotfix:3.2.3'
 
     implementation 'me.jessyan:autosize:1.0.6'
 
