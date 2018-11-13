@@ -8,7 +8,7 @@ android {
     }
     defaultConfig {
         applicationId "io.tanjundang.study"
-        minSdkVersion 25
+        minSdkVersion 26
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -35,12 +35,12 @@ dependencies {
     //ImageLoader
     //加载进度条
     //RecyclerView
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.jpardogo.googleprogressbar:library:1.2.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
+    compile 'com.android.support:support-v4:26.1.0'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'com.prolificinteractive:parallaxpager:2.2.1'
@@ -61,4 +61,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
     compile 'com.liulishuo.filedownloader:library:1.7.2'
+
+    implementation 'me.jessyan:autosize:1.0.6'
+
 }
