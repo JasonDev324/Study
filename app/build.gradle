@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.aliyun.ams.emas-services'
 
 android {
     compileSdkVersion 26
@@ -74,7 +73,7 @@ dependencies {
 
     compile 'com.liulishuo.filedownloader:library:1.7.2'
     //热修复
-    compile 'com.aliyun.ams:alicloud-android-hotfix:3.2.3'
+//    compile 'com.aliyun.ams:alicloud-android-hotfix:3.2.3'
 
     implementation 'me.jessyan:autosize:1.0.6'
 
