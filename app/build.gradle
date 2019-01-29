@@ -20,14 +20,15 @@ android {
     }
     signingConfigs {
         release {
-            keyAlias 'TanJunDang'
-            keyPassword '123456'
-            storeFile file('E:/Workspace/Study-master/Study-Master.jks')
-            storePassword '123456'
+            storeFile file("$rootDir/Study.jks")
+            keyAlias 'Study'
+            keyPassword '75770206'
+            storePassword '75770206'
         }
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
