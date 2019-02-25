@@ -35,7 +35,8 @@ public class DataItemBean {
         VIEWSTUB,
         THREAD_POOL,
         LRUCACHE,
-        MVC
+        MVC,
+        GREENDAO
     }
 
     public DataItemBean(int title, Type type) {

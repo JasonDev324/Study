@@ -30,6 +30,7 @@
     <string name="main_text_study_threadpool">ThreadPool</string>
     <string name="main_text_study_lrucache">LruCache</string>
     <string name="main_text_study_mvc">MVC</string>
+    <string name="main_text_study_greendao">GreenDao</string>
 
     <string name="action_send">Send Msg</string>
     <string name="text_enter_test">进入测试页面</string>

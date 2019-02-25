@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion 26
@@ -6,6 +8,12 @@ android {
     dataBinding {
         enabled true
     }
+    greendao {
+        schemaVersion 1
+        daoPackage 'io.tanjundang.study.knowledge.greendao'
+        targetGenDir 'src/main/java'
+    }
+
     defaultConfig {
         applicationId "io.tanjundang.study"
         minSdkVersion 26
@@ -69,13 +77,17 @@ dependencies {
     compile 'com.amap.api:location:latest.integration'
     //搜索功能
     compile 'com.amap.api:search:latest.integration'
-
+    //Gilde图片加载
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
+    //文件下载
     compile 'com.liulishuo.filedownloader:library:1.7.2'
     //热修复
 //    compile 'com.aliyun.ams:alicloud-android-hotfix:3.2.3'
-
+    //屏幕适配
     implementation 'me.jessyan:autosize:1.0.6'
+    //数据库
+    compile 'org.greenrobot:greendao:3.2.2'
 
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }

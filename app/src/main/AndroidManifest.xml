@@ -43,15 +43,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--今日头条适配-->
+
+        <!-- 今日头条适配 -->
         <meta-data
             android:name="design_width_in_dp"
             android:value="360" />
-
         <meta-data
             android:name="design_height_in_dp"
             android:value="640" />
-
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="6c7a521fe6310d4900dd31b60f028e36" />
@@ -156,7 +155,8 @@
         <activity android:name=".knowledge.threadpool.ThreadPoolActivity" />
         <activity android:name=".knowledge.animation.SceneActivity" />
         <activity android:name=".knowledge.lrucache.LruCacheActivity" />
-        <activity android:name=".knowledge.mvc.MVCActivity"></activity>
+        <activity android:name=".knowledge.mvc.MVCActivity" />
+        <activity android:name=".knowledge.greendao.DaoActivity"></activity>
     </application>
 
 </manifest>
