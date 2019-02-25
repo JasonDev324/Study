@@ -52,13 +52,12 @@ public class DaoActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btnInsert:
                 Person person = new Person(count, "TJD" + count);
-                QueryBuilder qb = DaoManager.getInstance(this).getDaoSession().getPersonDao().queryBuilder();
-                List<Person> list = qb.list();
-                if (!list.contains(person)) {
+                try {
                     DaoManager.getInstance(this).getDaoSession().getPersonDao().insert(person);
                     Snackbar.make(view, "插入数据成功", Snackbar.LENGTH_LONG).show();
-                } else {
+                } catch (Exception e) {
                     Snackbar.make(view, "插入数据失败，数据已存在", Snackbar.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
                 count++;
                 break;

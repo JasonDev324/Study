@@ -7,6 +7,7 @@ import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 
+import cn.jpush.android.api.JPushInterface;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.ImageLoaderTool;
 
@@ -36,5 +37,11 @@ public class BaseApplication extends Application {
         PlatformConfig.setQQZone(QQ_ID, QQ_KEY);
         PlatformConfig.setWeixin(WEIXIN_ID, WEIXIN_KEY);
         FileDownloader.setup(this);
+        initJPush();
+    }
+
+    private void initJPush() {
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 }
