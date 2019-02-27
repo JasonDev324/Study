@@ -27,9 +27,9 @@ android {
         }
 
         manifestPlaceholders = [
-                JPUSH_PKGNAME : "io.tanjundang.study",
+                JPUSH_PKGNAME: "io.tanjundang.study",
                 JPUSH_APPKEY : "84e80255f5a03815666edbbc", //JPush 上注册的包名对应的 Appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
 
