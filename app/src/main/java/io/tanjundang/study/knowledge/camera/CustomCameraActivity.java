@@ -107,6 +107,7 @@ public class CustomCameraActivity extends AppCompatActivity {
     }
 
     private void setUpCameraOutputs(int width, int height) {
+            // 摄像头管理器，用来获取CameraDevice对象，获取Camera属性,操作CameraCaptureSession
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
             // 获取指定摄像头的特性
@@ -132,7 +133,7 @@ public class CustomCameraActivity extends AppCompatActivity {
                             ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                             byte[] bytes = new byte[buffer.remaining()];
                             // 使用IO流将照片写入指定文件
-                            File file = new File(getExternalFilesDir(null), "pic.jpg");
+                            File file = new File(getExternalFilesDir(null), "study_camera2.jpg");
                             buffer.get(bytes);
                             try (
                                     FileOutputStream output = new FileOutputStream(file)) {

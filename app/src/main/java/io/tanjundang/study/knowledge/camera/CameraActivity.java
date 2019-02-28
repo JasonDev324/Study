@@ -28,7 +28,6 @@ import io.tanjundang.study.common.tools.PermissionTool;
  */
 public class CameraActivity extends BaseActivity {
 
-    SurfaceView surfaceView;
     private final int CAMERA_REQ = 0XFF;
     private ArrayList<String> permissionList = new ArrayList<>();
 
@@ -40,17 +39,32 @@ public class CameraActivity extends BaseActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_camera);
-        surfaceView = (SurfaceView) findViewById(R.id.surfaceView);
     }
 
     @Override
     protected void initData() {
         permissionList.add(Manifest.permission.CAMERA);
+        permissionList.add(Manifest.permission.RECORD_AUDIO);
         permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
     public void customCamera(View v) {
         Functions.startActivity(CustomCameraActivity.class);
+    }
+
+    /**
+     * 必须有三个权限CAMERA、RECORD_AUDIO、WRITE_EXTERNAL_STORAGE
+     * 没有动态获取RECORD_AUDIO权限会报错误setAudioSource failed.
+     *
+     * @param v
+     */
+    public void customVideo(View v) {
+        PermissionTool.getInstance(this).requestPermissions(permissionList, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Functions.startActivity(VideoRecordActivity.class);
+            }
+        });
     }
 
     public void Camera(View view) {
