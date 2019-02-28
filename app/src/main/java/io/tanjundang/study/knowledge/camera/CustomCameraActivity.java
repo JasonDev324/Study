@@ -195,11 +195,11 @@ public class CustomCameraActivity extends AppCompatActivity {
                                 // 设置自动曝光模式
                                 previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
                                         CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
-                                // 开始显示相机预览
+                                // 创建捕获请求
                                 previewRequest = previewRequestBuilder.build();
-                                // 设置预览时连续捕获图像数据
-                                captureSession.setRepeatingRequest(previewRequest,
-                                        null, null);  // ④
+                                // 开始显示相机预览,设置预览时连续捕获图像数据,这样预览界面就会一直有数据显示
+                                captureSession.setRepeatingRequest(previewRequest, null, null);  // ④
+
                             } catch (CameraAccessException e) {
                                 e.printStackTrace();
                             }
@@ -258,49 +258,6 @@ public class CustomCameraActivity extends AppCompatActivity {
             }
             //打开相机，第一个参数指示打开哪个摄像头，第二个参数stateCallback为相机的状态回调接口，第三个参数用来确定Callback在哪个线程执行，为null的话就在当前线程执行
             manager.openCamera(mCameraId, stateCallback, null);
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void startPreview() {
-        SurfaceTexture mSurfaceTexture = textureView.getSurfaceTexture();
-        //设置TextureView的缓冲区大小
-        mSurfaceTexture.setDefaultBufferSize(mPreviewSize.getWidth(), mPreviewSize.getHeight());
-        //获取Surface显示预览数据
-        Surface mSurface = new Surface(mSurfaceTexture);
-        try {
-            //创建CaptureRequestBuilder，TEMPLATE_PREVIEW比表示预览请求
-            previewRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-            //设置Surface作为预览数据的显示界面
-            previewRequestBuilder.addTarget(mSurface);
-            //创建相机捕获会话，第一个参数是捕获数据的输出Surface列表，第二个参数是CameraCaptureSession的状态回调接口，当它创建好后会回调onConfigured方法，第三个参数用来确定Callback在哪个线程执行，为null的话就在当前线程执行
-            mCameraDevice.createCaptureSession(Arrays.asList(mSurface), new CameraCaptureSession.StateCallback() {
-                @Override
-                public void onConfigured(CameraCaptureSession session) {
-                    captureSession = session;
-                    try {
-                        // 设置自动对焦模式
-                        previewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE,
-                                CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-                        // 设置自动曝光模式
-                        previewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE,
-                                CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
-                        //创建捕获请求
-                        previewRequest = previewRequestBuilder.build();
-
-                        //设置反复捕获数据的请求，这样预览界面就会一直有数据显示
-                        captureSession.setRepeatingRequest(previewRequest, null, null);
-                    } catch (CameraAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onConfigureFailed(CameraCaptureSession session) {
-
-                }
-            }, null);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
