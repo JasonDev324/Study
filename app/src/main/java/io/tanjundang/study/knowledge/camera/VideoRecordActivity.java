@@ -16,6 +16,7 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
@@ -28,6 +29,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.File;
@@ -35,6 +37,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Timer;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
@@ -42,6 +45,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.tanjundang.study.R;
+import io.tanjundang.study.common.tools.LogTool;
 
 /**
  * @Author: TanJunDang
@@ -56,6 +60,8 @@ public class VideoRecordActivity extends AppCompatActivity {
     Button mButtonVideo;
     @BindView(R.id.info)
     ImageButton info;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     private static final int SENSOR_ORIENTATION_DEFAULT_DEGREES = 90;
     private static final int SENSOR_ORIENTATION_INVERSE_DEGREES = 270;
@@ -129,62 +135,34 @@ public class VideoRecordActivity extends AppCompatActivity {
     };
 
     /**
-     * In this sample, we choose a video size with 3x4 aspect ratio. Also, we don't use sizes
-     * larger than 1080p, since MediaRecorder cannot handle such a high-resolution video.
-     * 在此示例中，我们选择宽高比为3x4的视频大小。 另外，我们不使用尺寸大于1080p，
-     * 因为MediaRecorder无法处理如此高分辨率的视频。
-     *
-     * @param choices The list of available sizes
-     * @return The video size
+     * 计时器
      */
-    private static Size chooseVideoSize(Size[] choices) {
-        for (Size size : choices) {
-            if (size.getWidth() == size.getHeight() * 4 / 3 && size.getWidth() <= 1080) {
-                return size;
-            }
-        }
-        Log.e(TAG, "Couldn't find any suitable video size");
-        return choices[choices.length - 1];
-    }
-
-    /**
-     * Given {@code choices} of {@code Size}s supported by a camera, chooses the smallest one whose
-     * width and height are at least as large as the respective requested values, and whose aspect
-     * ratio matches with the specified value.
-     *
-     * @param choices     The list of sizes that the camera supports for the intended output class
-     * @param width       The minimum desired width
-     * @param height      The minimum desired height
-     * @param aspectRatio The aspect ratio
-     * @return The optimal {@code Size}, or an arbitrary one if none were big enough
-     */
-    private static Size chooseOptimalSize(Size[] choices, int width, int height, Size aspectRatio) {
-        // Collect the supported resolutions that are at least as big as the preview Surface
-        List<Size> bigEnough = new ArrayList<>();
-        int w = aspectRatio.getWidth();
-        int h = aspectRatio.getHeight();
-        for (Size option : choices) {
-            if (option.getHeight() == option.getWidth() * h / w &&
-                    option.getWidth() >= width && option.getHeight() >= height) {
-                bigEnough.add(option);
-            }
-        }
-
-        // Pick the smallest of those, assuming we found any
-        if (bigEnough.size() > 0) {
-            return Collections.min(bigEnough, new CustomCameraActivity.CompareSizesByArea());
-        } else {
-            Log.e(TAG, "Couldn't find any suitable preview size");
-            return choices[0];
-        }
-    }
+    private CountDownTimer timer;
+    private static final long INTERVAL = 1000;
+    private static final int MAX_PROGRESS = 60;
+    private static final long TOTAL_TIME = MAX_PROGRESS * INTERVAL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_record);
         ButterKnife.bind(this);
+        progressBar.setMax(MAX_PROGRESS);
+        timer = new CountDownTimer(TOTAL_TIME, INTERVAL) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                if (progressBar == null) return;
+                long time = (TOTAL_TIME - millisUntilFinished) / 1000;
+                progressBar.setProgress((int) time);
+                LogTool.d("CountDownTimer", "time:" + time + "\nprogress:" + time);
+            }
 
+            @Override
+            public void onFinish() {
+                progressBar.setProgress(progressBar.getMax());
+                stopRecordingVideo();
+            }
+        };
     }
 
     private void startBackgroundThread() {
@@ -294,9 +272,9 @@ public class VideoRecordActivity extends AppCompatActivity {
                 throw new RuntimeException("Cannot get available preview/video sizes");
             }
 
-            mVideoSize = chooseVideoSize(map.getOutputSizes(MediaRecorder.class));
+            mVideoSize = Camera2Utils.chooseVideoSize(map.getOutputSizes(MediaRecorder.class));
             // 获取最佳的预览尺寸
-            mPreviewSize = chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
+            mPreviewSize = Camera2Utils.chooseOptimalSize(map.getOutputSizes(SurfaceTexture.class),
                     width, height, mVideoSize);
 
             //获取屏幕方向
@@ -506,6 +484,9 @@ public class VideoRecordActivity extends AppCompatActivity {
         if (mIsRecordingVideo) {
             stopRecordingVideo();
         } else {
+            if (timer != null) {
+                timer.start();
+            }
             startRecordingVideo();
         }
     }
