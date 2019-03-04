@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public class DaoManager {
 
-    private static DaoManager instance;
+    private volatile static DaoManager instance;
     private static DaoSession daoSession;
     private static Context mContext;
 
@@ -20,14 +20,20 @@ public class DaoManager {
             synchronized (DaoManager.class) {
                 if (instance == null) {
                     instance = new DaoManager();
-                    dbInit();
                 }
             }
         }
         return instance;
     }
 
-    private static void dbInit() {
+    public DaoManager() {
+        dbInit();
+    }
+
+    /**
+     * 初始化放在构造函数里
+     */
+    private void dbInit() {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(mContext, "study.db", null);
         SQLiteDatabase db = helper.getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(db);
