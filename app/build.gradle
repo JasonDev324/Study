@@ -31,6 +31,13 @@ android {
                 JPUSH_APPKEY : "84e80255f5a03815666edbbc", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+        javaCompileOptions {
+            annotationProcessorOptions {
+                //room的数据库概要、记录
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     signingConfigs {
@@ -55,7 +62,15 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
+    sourceSets {
+        //数据库概要、记录存放位置
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+
 }
+
+
 
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -104,4 +119,9 @@ dependencies {
     compile 'cn.jiguang.sdk:jpush:3.1.7'  // 此处以JPush 3.1.6 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.2.6'  // 此处以JCore 1.2.5 版本为例。
 
+//    Room
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
+//添加测试支持，我们可以对数据库进行androidTest（后面会介绍）
+    implementation 'android.arch.persistence.room:testing:1.0.0'
 }
