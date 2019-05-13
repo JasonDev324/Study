@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'//这里添加
+apply plugin: 'kotlin-android-extensions'//这里添加
+
 
 android {
     compileSdkVersion 26
@@ -16,7 +19,7 @@ android {
 
     defaultConfig {
         applicationId "io.tanjundang.study"
-        minSdkVersion 26
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -71,7 +74,6 @@ android {
 }
 
 
-
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -124,4 +126,7 @@ dependencies {
     annotationProcessor 'android.arch.persistence.room:compiler:1.0.0'
 //添加测试支持，我们可以对数据库进行androidTest（后面会介绍）
     implementation 'android.arch.persistence.room:testing:1.0.0'
+
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"//主要是这两个依赖
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
