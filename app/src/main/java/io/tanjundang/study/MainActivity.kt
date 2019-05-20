@@ -4,11 +4,9 @@ import android.Manifest
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -31,8 +29,6 @@ import io.tanjundang.study.common.tools.Functions
 import io.tanjundang.study.common.tools.PermissionTool
 import io.tanjundang.study.common.tools.ShareTool
 import io.tanjundang.study.common.view.photopick.ImageInfo
-import io.tanjundang.study.common.view.photopick.PhotoPickActivity
-import io.tanjundang.study.common.view.photopick.PhotoPickDetailActivity
 import io.tanjundang.study.knowledge.ViewStubActivity
 import io.tanjundang.study.knowledge.actionbar.ActionBarStudyActivity
 import io.tanjundang.study.knowledge.broadcast.NotifyReceiver
@@ -47,7 +43,6 @@ import io.tanjundang.study.knowledge.locate.LocationActivity
 import io.tanjundang.study.knowledge.lrucache.LruCacheActivity
 import io.tanjundang.study.knowledge.mvc.MVCActivity
 import io.tanjundang.study.knowledge.preference.PreSettingActivity
-import io.tanjundang.study.knowledge.room.RoomActivity
 import io.tanjundang.study.knowledge.scrollconflict.ScrollConflictActivity
 import io.tanjundang.study.knowledge.selector.SelectorActivity
 import io.tanjundang.study.knowledge.animation.AnimationActivity
