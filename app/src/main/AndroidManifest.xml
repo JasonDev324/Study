@@ -178,6 +178,8 @@
         <activity android:name=".knowledge.camera.VideoRecordActivity" />
         <activity android:name=".knowledge.room.RoomActivity" />
         <activity android:name=".knowledge.kotlin.KotlinActivity" />
+        <activity android:name=".knowledge.jetpack.JetPackActivity" />
+        <activity android:name=".knowledge.jetpack.LifecycleActivity" />
     </application>
 
 </manifest>

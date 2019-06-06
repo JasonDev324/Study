@@ -48,7 +48,7 @@ import io.tanjundang.study.knowledge.selector.SelectorActivity
 import io.tanjundang.study.knowledge.animation.AnimationActivity
 import io.tanjundang.study.knowledge.drawerlayout.DrawerLayoutActivity
 import io.tanjundang.study.knowledge.kotlin.KotlinActivity
-import io.tanjundang.study.knowledge.room.RoomActivity
+import io.tanjundang.study.knowledge.jetpack.JetPackActivity
 import io.tanjundang.study.knowledge.service.ServiceActivity
 import io.tanjundang.study.knowledge.shape.ShapeActivity
 import io.tanjundang.study.knowledge.socket.SocketStudyActivity
@@ -131,6 +131,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         data.add(DataItemBean(R.string.main_text_study_greendao, DataItemBean.Type.GREENDAO))
         data.add(DataItemBean(R.string.main_text_study_room, DataItemBean.Type.ROOM))
         data.add(DataItemBean(R.string.main_text_study_kotlin, DataItemBean.Type.KOTLIN))
+        data.add(DataItemBean(R.string.main_text_study_jetpack, DataItemBean.Type.JETPACK))
         mAdapter!!.notifyDataSetChanged()
 
         mPickPhotos.add(ImageInfo("http://a.hiphotos.baidu.com/baike/w%3D268%3Bg%3D0/sign=36db4d32cb1349547e1eef626e75f565/63d9f2d3572c11dfc1e84a90632762d0f703c24c.jpg"))
@@ -258,10 +259,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     StartActivity(MVCActivity::class.java)
                 } else if (item.getType() == DataItemBean.Type.GREENDAO) {
                     StartActivity(DaoActivity::class.java)
-                } else if (item.getType() == DataItemBean.Type.ROOM) {
-                    StartActivity(RoomActivity::class.java)
                 } else if (item.getType() == DataItemBean.Type.KOTLIN) {
                     StartActivity(KotlinActivity::class.java)
+                } else if (item.getType() == DataItemBean.Type.JETPACK) {
+                    StartActivity(JetPackActivity::class.java)
                 }
             }
             return ContentHolder(view)

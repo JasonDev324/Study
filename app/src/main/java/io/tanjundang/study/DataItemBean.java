@@ -38,7 +38,8 @@ public class DataItemBean {
         MVC,
         GREENDAO,
         ROOM,
-        KOTLIN
+        KOTLIN,
+        JETPACK
     }
 
     public DataItemBean(int title, Type type) {
