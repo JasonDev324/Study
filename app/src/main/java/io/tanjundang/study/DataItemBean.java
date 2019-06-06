@@ -37,7 +37,8 @@ public class DataItemBean {
         LRUCACHE,
         MVC,
         GREENDAO,
-        ROOM
+        ROOM,
+        KOTLIN
     }
 
     public DataItemBean(int title, Type type) {

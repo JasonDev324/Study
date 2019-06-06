@@ -176,7 +176,8 @@
         <activity android:name=".knowledge.greendao.DaoActivity" />
         <activity android:name=".knowledge.jpush.JpushActivity" />
         <activity android:name=".knowledge.camera.VideoRecordActivity" />
-        <activity android:name=".knowledge.room.RoomActivity"></activity>
+        <activity android:name=".knowledge.room.RoomActivity" />
+        <activity android:name=".knowledge.kotlin.KotlinActivity" />
     </application>
 
 </manifest>

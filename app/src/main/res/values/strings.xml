@@ -32,6 +32,7 @@
     <string name="main_text_study_mvc">MVC</string>
     <string name="main_text_study_greendao">GreenDao</string>
     <string name="main_text_study_room">Room</string>
+    <string name="main_text_study_kotlin">Kotlin</string>
 
     <string name="action_send">Send Msg</string>
     <string name="text_enter_test">进入测试页面</string>
