@@ -69,6 +69,9 @@ android {
     sourceSets {
         //数据库概要、记录存放位置
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
 
 }
@@ -118,8 +121,11 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     //极光推送
-    compile 'cn.jiguang.sdk:jpush:3.1.7'  // 此处以JPush 3.1.6 版本为例。
-    compile 'cn.jiguang.sdk:jcore:1.2.6'  // 此处以JCore 1.2.5 版本为例。
+//    compile 'cn.jiguang.sdk:jpush:3.1.7'  // 此处以JPush 3.1.6 版本为例。
+//    compile 'cn.jiguang.sdk:jcore:1.2.6'  // 此处以JCore 1.2.5 版本为例。
+    compile 'cn.jiguang.sdk:jpush:3.3.2'  // 此处以JPush 3.3.2 版本为例。
+    compile 'cn.jiguang.sdk:jcore:2.1.0'  // 此处以JCore 2.1.0 版本为例。
+
 
 //    Room
     implementation 'android.arch.persistence.room:runtime:1.0.0'
@@ -134,5 +140,7 @@ dependencies {
     // ViewModel和LiveData依赖
     implementation "android.arch.lifecycle:extensions:1.1.0"
     annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
+
+
 
 }

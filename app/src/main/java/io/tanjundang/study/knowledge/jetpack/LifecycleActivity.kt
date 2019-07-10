@@ -20,13 +20,13 @@ import io.tanjundang.study.R
 
 class LifecycleActivity : AppCompatActivity() {
 
-    var observer: MyLifeObserver? = null
+    var myObserver: MyLifeObserver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jetpack)
-        observer = MyLifeObserver(lifecycle)
-        lifecycle.addObserver(observer)
+        myObserver = MyLifeObserver(lifecycle)
+        lifecycle.addObserver(myObserver!!)
     }
 
 
