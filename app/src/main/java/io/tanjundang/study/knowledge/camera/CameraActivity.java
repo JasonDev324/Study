@@ -49,7 +49,8 @@ public class CameraActivity extends BaseActivity {
     }
 
     public void customCamera(View v) {
-        Functions.startActivity(CustomCameraActivity.class);
+//        Functions.startActivity(CustomCameraActivity.class);
+        Functions.startActivity(TakePictureActivity.class);
     }
 
     /**
