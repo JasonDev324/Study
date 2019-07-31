@@ -46,6 +46,10 @@
             android:text="自定义录像"
             android:textColor="@color/white" />
 
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </ScrollView>

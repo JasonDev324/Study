@@ -3,10 +3,12 @@ package io.tanjundang.study.knowledge.camera;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,13 +19,17 @@ import io.tanjundang.study.base.BaseActivity;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.LogTool;
 import io.tanjundang.study.common.tools.PermissionTool;
-import kwantang324.github.io.camera2.CaptureActivity;
+import kwantang324.github.io.camera2.PhotoCaptureActivity;
+import kwantang324.github.io.camera2.PhotoConfig;
+
+import static kwantang324.github.io.camera2.PhotoConfig.PHOTO_DATA;
 
 /**
  *
  */
 public class CameraActivity extends BaseActivity {
 
+    ImageView ivImage;
     private final int CAMERA_REQ = 0XFF;
     private ArrayList<String> permissionList = new ArrayList<>();
 
@@ -35,6 +41,7 @@ public class CameraActivity extends BaseActivity {
     @Override
     protected void initView() {
         setContentView(R.layout.activity_camera);
+        ivImage = findViewById(R.id.ivImage);
     }
 
     @Override
@@ -45,7 +52,7 @@ public class CameraActivity extends BaseActivity {
     }
 
     public void customCamera(View v) {
-        Functions.startActivity(CaptureActivity.class);
+        PhotoCaptureActivity.Start(this);
     }
 
     /**
@@ -80,6 +87,10 @@ public class CameraActivity extends BaseActivity {
         if (requestCode == CAMERA_REQ) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             savePic(bitmap, "DICM", AUTHOR);
+        } else if (requestCode == PhotoConfig.REQ_CAPTURE_PHOTO && resultCode == RESULT_OK) {
+            byte[] photo = data.getByteArrayExtra(PHOTO_DATA);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
+            ivImage.setImageBitmap(bitmap);
         }
     }
 

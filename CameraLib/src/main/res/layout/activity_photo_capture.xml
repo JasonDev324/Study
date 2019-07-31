@@ -36,4 +36,24 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:text="拍照" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:text="取消"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnFinish"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:text="完成"
+        android:visibility="gone" />
 </RelativeLayout>

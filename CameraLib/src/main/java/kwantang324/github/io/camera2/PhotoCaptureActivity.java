@@ -1,7 +1,9 @@
 package kwantang324.github.io.camera2;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -47,12 +49,20 @@ import java.util.List;
 
 import kwantang324.github.io.R;
 
-public class CaptureActivity extends AppCompatActivity implements View.OnClickListener {
+/**
+ * @Author: TanJunDang
+ * @Date: 2019/7/31
+ * @Description: camera2自定义相机
+ */
+
+public class PhotoCaptureActivity extends AppCompatActivity implements View.OnClickListener {
 
     AutoFitTextureView mTextureView;
     ImageView ivImage;
     Button btnCapture;
     Button btnSwitch;
+    Button btnCancel;
+    Button btnFinish;
 
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
@@ -67,26 +77,39 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
     private Handler childHandler;
     private Handler mainHandler;
     private String mCameraId;
+    private CameraManager mCameraManager;
     private ImageReader mImageReader;
-    CameraManager mCameraManager;
-    CameraDevice mCameraDevice;
-    CameraCaptureSession mCaptureSession;
+    private CameraDevice mCameraDevice;
+    private CameraCaptureSession mCaptureSession;
 
-    Size mCaptureSize;
-    Size mPreviewSize;
+    private Size mCaptureSize;
+    private Size mPreviewSize;
     private int mSensorOrientation;
+
+    private byte[] photoData;
+
+    public static void Start(Context conetxt) {
+        Intent intent = new Intent(conetxt, PhotoCaptureActivity.class);
+        ((Activity) conetxt).startActivityForResult(intent, PhotoConfig.REQ_CAPTURE_PHOTO);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_capture);
+        setContentView(R.layout.activity_photo_capture);
         mTextureView = findViewById(R.id.textureView);
         ivImage = findViewById(R.id.ivImage);
         btnCapture = findViewById(R.id.btnCapture);
         btnSwitch = findViewById(R.id.btnSwitch);
+        btnCancel = findViewById(R.id.btnCancel);
+        btnFinish = findViewById(R.id.btnFinish);
         mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         btnCapture.setOnClickListener(this);
         btnSwitch.setOnClickListener(this);
+        btnCancel.setOnClickListener(this);
+        btnFinish.setOnClickListener(this);
+
     }
 
     TextureView.SurfaceTextureListener mSurfaceTextureListener = new TextureView.SurfaceTextureListener() {
@@ -133,6 +156,7 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
                 buffer.get(bytes);//由缓冲区存入字节数组
                 final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 File file = new File(Environment.getExternalStorageDirectory(), "photo.jpg");
+                photoData = bytes;
                 try {
                     if (file.exists() && file.isDirectory()) {
                         file.delete();
@@ -153,13 +177,15 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 ivImage.setVisibility(View.VISIBLE);
+                btnFinish.setVisibility(View.VISIBLE);
+                btnCancel.setVisibility(View.VISIBLE);
                 mTextureView.setVisibility(View.GONE);
                 if (bitmap != null)
                     ivImage.setImageBitmap(bitmap);
             }
         }, mainHandler);
         try {
-            if (ActivityCompat.checkSelfPermission(CaptureActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(PhotoCaptureActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
             mCameraManager.openCamera("" + mCameraId, stateCallback, childHandler);
@@ -309,7 +335,7 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
 
                 @Override
                 public void onConfigureFailed(@NonNull CameraCaptureSession session) {
-                    Toast.makeText(CaptureActivity.this, "配置失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhotoCaptureActivity.this, "配置失败", Toast.LENGTH_SHORT).show();
                 }
             }, childHandler);
         } catch (CameraAccessException e) {
@@ -327,7 +353,10 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
 
     public void closeCamera() {
         ivImage.setVisibility(View.GONE);
+        btnFinish.setVisibility(View.GONE);
+        btnCancel.setVisibility(View.GONE);
         mTextureView.setVisibility(View.VISIBLE);
+        btnCapture.setVisibility(View.VISIBLE);
         if (null != mCaptureSession) {
             mCaptureSession.close();
             mCaptureSession = null;
@@ -425,7 +454,20 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
             }
             reopenCamera();
         } else if (v.equals(btnCapture)) {
+            btnCapture.setVisibility(View.GONE);
             takePicture();
+        } else if (v.equals(btnCancel)) {
+            ivImage.setVisibility(View.GONE);
+            btnFinish.setVisibility(View.GONE);
+            btnCancel.setVisibility(View.GONE);
+            mTextureView.setVisibility(View.VISIBLE);
+            btnCapture.setVisibility(View.VISIBLE);
+            reopenCamera();
+        } else if (v.equals(btnFinish)) {
+            Intent intent = new Intent();
+            intent.putExtra(PhotoConfig.PHOTO_DATA, photoData);
+            setResult(RESULT_OK, intent);
+            finish();
         }
 
     }

@@ -12,7 +12,7 @@
         android:label="camera">
 
         <activity
-            android:name=".camera2.CaptureActivity"
+            android:name=".camera2.PhotoCaptureActivity"
             android:theme="@style/NoActionBar_FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
