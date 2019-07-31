@@ -20,14 +20,12 @@ import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Button
 
-import com.umeng.socialize.UMShareAPI
 
 import java.util.ArrayList
 
 import io.tanjundang.study.base.BaseActivity
 import io.tanjundang.study.common.tools.Functions
 import io.tanjundang.study.common.tools.PermissionTool
-import io.tanjundang.study.common.tools.ShareTool
 import io.tanjundang.study.common.view.photopick.ImageInfo
 import io.tanjundang.study.knowledge.ViewStubActivity
 import io.tanjundang.study.knowledge.actionbar.ActionBarStudyActivity
@@ -238,7 +236,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 } else if (item.getType() == DataItemBean.Type.TABLAYOUT) {
                     StartActivity(TabActivity::class.java)
                 } else if (item.getType() == DataItemBean.Type.UM_SHARE) {
-                    ShareTool.getInstance().SendMessage(this@MainActivity)
                 } else if (item.getType() == DataItemBean.Type.WEBVIEW) {
                     StartActivity(WebViewActivity::class.java)
                 } else if (item.getType() == DataItemBean.Type.SCROLLCONFLICT) {
@@ -299,7 +296,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data)
         if (requestCode == 60) {
             val mPickData = data.getSerializableExtra("data") as ArrayList<ImageInfo>
         }

@@ -3,9 +3,6 @@ package io.tanjundang.study.base;
 import android.app.Application;
 
 import com.liulishuo.filedownloader.FileDownloader;
-import com.umeng.socialize.Config;
-import com.umeng.socialize.PlatformConfig;
-import com.umeng.socialize.UMShareAPI;
 
 import cn.jpush.android.api.JPushInterface;
 import io.tanjundang.study.common.tools.Functions;
@@ -32,10 +29,6 @@ public class BaseApplication extends Application {
         super.onCreate();
         ImageLoaderTool.initImageLoader(getApplicationContext());
         Functions.init(getApplicationContext());
-        UMShareAPI.get(this);
-        PlatformConfig.setSinaWeibo(WEIBO_ID, WEIBO_KEY);
-        PlatformConfig.setQQZone(QQ_ID, QQ_KEY);
-        PlatformConfig.setWeixin(WEIXIN_ID, WEIXIN_KEY);
         FileDownloader.setup(this);
         initJPush();
     }

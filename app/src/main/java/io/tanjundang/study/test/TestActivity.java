@@ -21,8 +21,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.umeng.socialize.UMShareAPI;
-
 import java.util.ArrayList;
 
 import io.tanjundang.study.R;
@@ -89,12 +87,6 @@ public class TestActivity extends BaseActivity {
                 dothing();
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     public void start(View v) {

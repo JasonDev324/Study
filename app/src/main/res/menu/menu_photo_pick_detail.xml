@@ -4,7 +4,7 @@
     tools:context="net.coding.program.common.photopick.PhotoPickDetailActivity">
     <item
         android:id="@+id/action_send"
-        android:title="@string/umeng_socialize_send_btn_str"
+        android:title="发送"
         android:orderInCategory="100"
         app:showAsAction="always" />
 </menu>
