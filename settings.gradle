@@ -1,1 +1,1 @@
-include ':app', ':umsocialshare'
+include ':app', ':umsocialshare', ':CameraLib'

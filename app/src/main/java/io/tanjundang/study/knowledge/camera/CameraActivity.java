@@ -4,13 +4,9 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.view.SurfaceView;
 import android.view.View;
-
-import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -18,10 +14,10 @@ import java.util.ArrayList;
 
 import io.tanjundang.study.R;
 import io.tanjundang.study.base.BaseActivity;
-import io.tanjundang.study.base.BaseApplication;
 import io.tanjundang.study.common.tools.Functions;
 import io.tanjundang.study.common.tools.LogTool;
 import io.tanjundang.study.common.tools.PermissionTool;
+import kwantang324.github.io.camera2.CaptureActivity;
 
 /**
  *
@@ -49,7 +45,7 @@ public class CameraActivity extends BaseActivity {
     }
 
     public void customCamera(View v) {
-        Functions.startActivity(TakePictureActivity.class);
+        Functions.startActivity(CaptureActivity.class);
     }
 
     /**
