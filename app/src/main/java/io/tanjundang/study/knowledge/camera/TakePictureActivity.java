@@ -30,6 +30,8 @@ import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -51,8 +53,6 @@ public class TakePictureActivity extends AppCompatActivity {
 
     AutoFitTextureView mTextureView;
     ImageView ivImage;
-    Button btnCapture;
-
 
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
 
@@ -79,10 +79,12 @@ public class TakePictureActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_take_picture);
         mTextureView = findViewById(R.id.textureView);
         ivImage = findViewById(R.id.ivImage);
-
         mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
     }
 
@@ -131,6 +133,9 @@ public class TakePictureActivity extends AppCompatActivity {
                 final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 File file = new File(Environment.getExternalStorageDirectory(), "photo.jpg");
                 try {
+                    if (file.exists() && file.isDirectory()) {
+                        file.delete();
+                    }
                     file.createNewFile();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -267,7 +272,8 @@ public class TakePictureActivity extends AppCompatActivity {
 
         @Override
         public void onError(@NonNull CameraDevice camera, int error) {
-            Toast.makeText(TakePictureActivity.this, "摄像头开启失败", Toast.LENGTH_SHORT).show();
+            camera.close();
+            mCameraDevice = null;
         }
     };
 
@@ -415,14 +421,7 @@ public class TakePictureActivity extends AppCompatActivity {
 
     @Override
     public void onDestroy() {
-        if (mCameraDevice != null) {
-            mCameraDevice.close();
-            mCameraDevice = null;
-        }
-        if (mCaptureSession != null) {
-            mCaptureSession.close();
-            mCaptureSession = null;
-        }
+        closeCamera();
         super.onDestroy();
     }
 }
