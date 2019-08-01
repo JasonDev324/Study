@@ -88,6 +88,8 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
 
     private byte[] photoData;
 
+    private static final String PHONE_SAMSUNG = "samsung";
+
     public static void Start(Context conetxt) {
         Intent intent = new Intent(conetxt, PhotoCaptureActivity.class);
         ((Activity) conetxt).startActivityForResult(intent, PhotoConfig.REQ_CAPTURE_PHOTO);
@@ -141,10 +143,9 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
         handlerThread.start();
         childHandler = new Handler(handlerThread.getLooper());
         mainHandler = new Handler(getMainLooper());
-//                mCameraId = CameraCharacteristics.LENS_FACING_FRONT + "";
         mImageReader = ImageReader.newInstance(1080, 1920, ImageFormat.JPEG, 2);
         //此ImageReader用于拍照所需
-//                mImageReader = ImageReader.newInstance(mCaptureSize.getWidth(), mCaptureSize.getHeight(), ImageFormat.JPEG, 2);
+//        mImageReader = ImageReader.newInstance(mCaptureSize.getWidth(), mCaptureSize.getHeight(), ImageFormat.JPEG, 2);
 //                可控制图片的质量
 
         mImageReader.setOnImageAvailableListener(new ImageReader.OnImageAvailableListener() {
@@ -154,7 +155,16 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
                 ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                 byte[] bytes = new byte[buffer.remaining()];
                 buffer.get(bytes);//由缓冲区存入字节数组
-                final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                Bitmap resultBitmap = null;
+
+//                前置摄像头要做镜像翻转
+                if (mSensorOrientation == 270) {
+                    resultBitmap = mirror(bitmap);
+                } else {
+                    resultBitmap = bitmap;
+                }
+
                 File file = new File(Environment.getExternalStorageDirectory(), "photo.jpg");
                 photoData = bytes;
                 try {
@@ -181,7 +191,7 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
                 btnCancel.setVisibility(View.VISIBLE);
                 mTextureView.setVisibility(View.GONE);
                 if (bitmap != null)
-                    ivImage.setImageBitmap(bitmap);
+                    ivImage.setImageBitmap(resultBitmap);
             }
         }, mainHandler);
         try {
@@ -377,26 +387,48 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
         try {
 //            创建拍照的请求
             CaptureRequest.Builder mCaptureRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
-//            ImageReader作为输出目标
+            //  ImageReader作为输出目标
             mCaptureRequestBuilder.addTarget(mImageReader.getSurface());
             // 自动对焦
             mCaptureRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE);
             // 自动曝光
             mCaptureRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH);
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
-            // 根据设备方向计算设置照片的方向,特殊处理翻转照片
-            if (mCameraId == CameraCharacteristics.LENS_FACING_FRONT + "") {
-                rotation = ORIENTATIONS.get(0);
-            } else {  // back-facing camera
-                rotation = ORIENTATIONS.get(2);
-            }
-            CameraCharacteristics cameraCharacteristics = mCameraManager.getCameraCharacteristics(CameraCharacteristics.LENS_FACING_FRONT + "");
-            mCaptureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, rotation);
+            // 根据设备方向计算设置照片的方向,特殊处理翻转照片,三星手机不适用
+            CameraCharacteristics cameraCharacteristics = mCameraManager.getCameraCharacteristics(mCameraId);
+            int cameraPos = getJpegOrientation(cameraCharacteristics, rotation);
+            mCaptureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, cameraPos);
+
             CaptureRequest mCaptureRequest = mCaptureRequestBuilder.build();
             mCaptureSession.capture(mCaptureRequest, null, childHandler);
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    private Bitmap mirror(Bitmap bitmap) {
+        Matrix matrix = new Matrix();
+        matrix.postScale(-1f, 1f);
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+    }
+
+    private int getJpegOrientation(CameraCharacteristics c, int deviceOrientation) {
+        if (deviceOrientation == android.view.OrientationEventListener.ORIENTATION_UNKNOWN)
+            return 0;
+        mSensorOrientation = c.get(CameraCharacteristics.SENSOR_ORIENTATION);
+
+        // Round device orientation to a multiple of 90
+        deviceOrientation = (deviceOrientation + 45) / 90 * 90;
+
+        // Reverse device orientation for front-facing cameras
+        boolean facingFront = c.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_FRONT;
+        if (facingFront) deviceOrientation = -deviceOrientation;
+
+        // Calculate desired JPEG orientation relative to camera orientation to make
+        // the image upright relative to the device orientation
+        int jpegOrientation = (mSensorOrientation + deviceOrientation + 360) % 360;
+
+        return jpegOrientation;
     }
 
     private int getDisplayRotation(CameraCharacteristics cameraCharacteristics) {
