@@ -20,6 +20,7 @@ import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.Image;
 import android.media.ImageReader;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -36,6 +37,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -143,9 +145,8 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
         handlerThread.start();
         childHandler = new Handler(handlerThread.getLooper());
         mainHandler = new Handler(getMainLooper());
-        mImageReader = ImageReader.newInstance(1080, 1920, ImageFormat.JPEG, 2);
+        mImageReader = ImageReader.newInstance(mPreviewSize.getWidth(), mPreviewSize.getHeight(), ImageFormat.JPEG, 2);
         //此ImageReader用于拍照所需
-//        mImageReader = ImageReader.newInstance(mCaptureSize.getWidth(), mCaptureSize.getHeight(), ImageFormat.JPEG, 2);
 //                可控制图片的质量
 
         mImageReader.setOnImageAvailableListener(new ImageReader.OnImageAvailableListener() {
@@ -160,13 +161,24 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
 
 //                前置摄像头要做镜像翻转
                 if (mSensorOrientation == 270) {
-                    resultBitmap = mirror(bitmap);
+                    if (Build.BRAND.equals(PHONE_SAMSUNG)) {
+                        resultBitmap = rotateFont(bitmap);
+                    } else {
+                        resultBitmap = mirror(bitmap);
+                    }
                 } else {
-                    resultBitmap = bitmap;
+                    if (Build.BRAND.equals(PHONE_SAMSUNG)) {
+                        resultBitmap = rotateBack(bitmap);
+                    } else {
+                        resultBitmap = bitmap;
+                    }
                 }
 
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                resultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                photoData = baos.toByteArray();
+
                 File file = new File(Environment.getExternalStorageDirectory(), "photo.jpg");
-                photoData = bytes;
                 try {
                     if (file.exists() && file.isDirectory()) {
                         file.delete();
@@ -178,7 +190,7 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
                 FileOutputStream fos = null;
                 try {
                     fos = new FileOutputStream(file);
-                    fos.write(bytes);
+                    fos.write(photoData);
                     fos.close();
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -412,6 +424,25 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
     }
 
+    //    处理三星手机图片旋转问题
+    private Bitmap rotateFont(Bitmap bitmap) {
+        Matrix matrix = new Matrix();
+        if (bitmap.getWidth() > bitmap.getHeight()) {
+            matrix.postRotate(-90);
+            matrix.postScale(-1f, 1f);
+        }
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+    }
+
+    //    处理三星手机图片旋转问题
+    private Bitmap rotateBack(Bitmap bitmap) {
+        Matrix matrix = new Matrix();
+        if (bitmap.getWidth() > bitmap.getHeight()) {
+            matrix.postRotate(90);
+        }
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+    }
+
     private int getJpegOrientation(CameraCharacteristics c, int deviceOrientation) {
         if (deviceOrientation == android.view.OrientationEventListener.ORIENTATION_UNKNOWN)
             return 0;
@@ -429,44 +460,6 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
         int jpegOrientation = (mSensorOrientation + deviceOrientation + 360) % 360;
 
         return jpegOrientation;
-    }
-
-    private int getDisplayRotation(CameraCharacteristics cameraCharacteristics) {
-        int rotation = getWindowManager().getDefaultDisplay().getRotation();
-        int degrees;
-        switch (rotation) {
-            case Surface.ROTATION_0:
-                degrees = 0;
-                break;
-            case Surface.ROTATION_90:
-                degrees = 90;
-                break;
-            case Surface.ROTATION_180:
-                degrees = 180;
-                break;
-            case Surface.ROTATION_270:
-                degrees = 270;
-                break;
-            default:
-                degrees = 0;
-                break;
-        }
-        int result;
-        int sensorOrientation = cameraCharacteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
-        if (cameraCharacteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_FRONT) {
-            result = (360 - (sensorOrientation + degrees) % 360) % 360;
-        } else {
-            result = (sensorOrientation - degrees + 360) % 360;
-        }
-        return result;
-    }
-
-    private int getOrientation(int rotation) {
-        // Sensor orientation is 90 for most devices, or 270 for some devices (eg. Nexus 5X)
-        // We have to take that into account and rotate JPEG properly.
-        // For devices with orientation of 90, we simply return our mapping from ORIENTATIONS.
-        // For devices with orientation of 270, we need to rotate the JPEG 180 degrees.
-        return (ORIENTATIONS.get(rotation) + mSensorOrientation + 270) % 360;
     }
 
     @Override
@@ -494,11 +487,14 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
             btnCancel.setVisibility(View.GONE);
             mTextureView.setVisibility(View.VISIBLE);
             btnCapture.setVisibility(View.VISIBLE);
+            photoData = null;
             reopenCamera();
         } else if (v.equals(btnFinish)) {
             Intent intent = new Intent();
-            intent.putExtra(PhotoConfig.PHOTO_DATA, photoData);
-            setResult(RESULT_OK, intent);
+            if (photoData != null) {
+                intent.putExtra(PhotoConfig.PHOTO_DATA, photoData);
+                setResult(RESULT_OK, intent);
+            }
             finish();
         }
 

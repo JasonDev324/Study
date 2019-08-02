@@ -89,6 +89,7 @@ public class CameraActivity extends BaseActivity {
             savePic(bitmap, "DICM", AUTHOR);
         } else if (requestCode == PhotoConfig.REQ_CAPTURE_PHOTO && resultCode == RESULT_OK) {
             byte[] photo = data.getByteArrayExtra(PHOTO_DATA);
+            if (photo == null) return;
             Bitmap bitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
             ivImage.setImageBitmap(bitmap);
         }
