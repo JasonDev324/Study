@@ -141,4 +141,5 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:1.1.0"
     implementation project(path: ':CameraLib')
 
+    implementation 'top.zibin:Luban:1.1.8'
 }

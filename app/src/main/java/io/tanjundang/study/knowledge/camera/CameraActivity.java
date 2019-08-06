@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,6 +24,8 @@ import io.tanjundang.study.common.tools.LogTool;
 import io.tanjundang.study.common.tools.PermissionTool;
 import kwantang324.github.io.camera2.PhotoCaptureActivity;
 import kwantang324.github.io.camera2.PhotoConfig;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
 
 import static kwantang324.github.io.camera2.PhotoConfig.PHOTO_DATA;
 
@@ -88,10 +93,22 @@ public class CameraActivity extends BaseActivity {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             savePic(bitmap, "DICM", AUTHOR);
         } else if (requestCode == PhotoConfig.REQ_CAPTURE_PHOTO && resultCode == RESULT_OK) {
-            byte[] photo = data.getByteArrayExtra(PHOTO_DATA);
-            if (photo == null) return;
-            Bitmap bitmap = BitmapFactory.decodeByteArray(photo, 0, photo.length);
-            ivImage.setImageBitmap(bitmap);
+            String photoPath = data.getStringExtra(PHOTO_DATA);
+//            if (TextUtils.isEmpty(photoJson)) return;
+//            byte[] photo = GsonTool.getServerBean(photoJson, Byte[].class);
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(photo.getBytes(), 0, photo.getBytes().length);
+            String targerPath = Environment.getExternalStorageDirectory() + "/" + "abc.jpg";
+            Luban.with(this).load(photoPath).setTargetDir(targerPath).
+                    filter(new CompressionPredicate() {
+                        @Override
+                        public boolean apply(String path) {
+                            Glide.with(CameraActivity.this)
+                                    .load(path)
+                                    .into(ivImage);
+                            return false;
+                        }
+                    }).launch();
+
         }
     }
 

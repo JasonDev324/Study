@@ -28,6 +28,7 @@ import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.Surface;
@@ -37,11 +38,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,7 +93,7 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
     private int mSensorOrientation;
 
     private byte[] photoData;
-
+    private String photoPath;
     private static final String PHONE_SAMSUNG = "samsung";
 
     public static void Start(Context conetxt) {
@@ -177,7 +181,6 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 resultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 photoData = baos.toByteArray();
-
                 File file = new File(Environment.getExternalStorageDirectory(), "photo.jpg");
                 try {
                     if (file.exists() && file.isDirectory()) {
@@ -198,6 +201,7 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
                     e.printStackTrace();
                 }
 
+                photoPath = file.getAbsolutePath();
                 ivImage.setVisibility(View.VISIBLE);
                 btnFinish.setVisibility(View.VISIBLE);
                 btnCancel.setVisibility(View.VISIBLE);
@@ -492,7 +496,7 @@ public class PhotoCaptureActivity extends AppCompatActivity implements View.OnCl
         } else if (v.equals(btnFinish)) {
             Intent intent = new Intent();
             if (photoData != null) {
-                intent.putExtra(PhotoConfig.PHOTO_DATA, photoData);
+                intent.putExtra(PhotoConfig.PHOTO_DATA, photoPath);
                 setResult(RESULT_OK, intent);
             }
             finish();
