@@ -39,7 +39,8 @@ public class DataItemBean {
         GREENDAO,
         ROOM,
         KOTLIN,
-        JETPACK
+        JETPACK,
+        DOWNLOADMANAGER
     }
 
     public DataItemBean(int title, Type type) {
