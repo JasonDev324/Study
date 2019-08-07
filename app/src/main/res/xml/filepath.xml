@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+
+    <external-path
+        name="download"
+        path="." />
+
+    <!--代表的目录即为：Environment.getExternalStorageDirectory()/Android/data/包名/-->
+    <external-path
+        name="files_root"
+        path="Android/data/包名/" />
+
+    <root-path
+        name="root"
+        path="" />
+    <!--代表设备的根目录new File("/");-->
+    <files-path
+        name="files"
+        path="." />
+    <!--context.getFilesDir()-->
+    <cache-path
+        name="cache"
+        path="." />
+    <!--context.getCacheDir()-->
+    <external-path
+        name="external"
+        path="." />
+    <!--/Environment.getExternalStorageDirectory()-->
+    <external-files-path
+        name="name"
+        path="path" />
+    <!--context.getExternalFilesDirs()-->
+    <external-cache-path
+        name="name"
+        path="path" />
+    <!--getExternalCacheDirs()-->
+
+
+    <!--FileProvider-->
+    <!--https://blog.csdn.net/u013553529/article/details/83900704-->
+    <!--root-path	根目录/-->
+    <!--files-path	/data/user/0/<package_name>/files 或者/data/data/<package_name>/files-->
+    <!--这两个目录指向相同的位置-->
+    <!--cache-path	/data/user/0/<package_name>/cache 或者 /data/data/<package_name>/cache-->
+    <!--external-path	/storage/emulated/0或者/sdcard/-->
+    <!--external-files-path	/storage/emulated/0/Android/data/<package_name>/files 或者 /sdcard/Android/data/<package_name>/files-->
+    <!--external-cache-path	/storage/emulated/0/Android/data/<package_name>/cache 或者 /sdcard/Android/data/<package_name>/cache-->
+    <!---->
+</paths>
