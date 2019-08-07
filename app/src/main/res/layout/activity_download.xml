@@ -7,11 +7,20 @@
     tools:context=".knowledge.download.DownloadActivity">
 
     <Button
+        android:id="@+id/btnDownloadManager"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:onClick="start_download"
-        android:text="开始下载"
+        android:text="DownloadManager开始下载"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:onClick="file_download"
+        android:text="FileDownload"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnDownloadManager" />
 
 </android.support.constraint.ConstraintLayout>
