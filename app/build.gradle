@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'com.jakewharton.butterknife'
 apply plugin: 'kotlin-android'//这里添加
 apply plugin: 'kotlin-android-extensions'//这里添加
@@ -10,11 +9,6 @@ android {
     buildToolsVersion '26.0.2'
     dataBinding {
         enabled true
-    }
-    greendao {
-        schemaVersion 1
-        daoPackage 'io.tanjundang.study.knowledge.greendao'
-        targetGenDir 'src/main/java'
     }
 
     defaultConfig {
@@ -114,8 +108,6 @@ dependencies {
 //    compile 'com.aliyun.ams:alicloud-android-hotfix:3.2.3'
     //屏幕适配
     implementation 'me.jessyan:autosize:1.0.6'
-    //数据库
-    implementation 'org.greenrobot:greendao:3.2.2'
     //黄油刀
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
